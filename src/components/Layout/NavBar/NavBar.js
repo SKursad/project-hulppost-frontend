@@ -1,20 +1,25 @@
 import React, { useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import {AuthContext} from '../../context/auth-context';
+import {AuthContext} from '../../../context/auth-context';
+import Button from '../../UI/Button/Button';
+
 
 function NavBar() {
     const { isAuth, logout, user } = useContext(AuthContext);
+    // const appState = useContext(StateContext)
     const navigate = useNavigate();
+    // let imageSource = logo;
 
     return (
-        <nav>
+        <body>
+        <header className="header">
+            <figure className="header__logo">
             <Link to="/">
-          <span className="logo-container">
-            {/*<img src={logo} alt="logo"/>*/}
-            <h3> Hulppost Dev-Test Fase </h3>
-          </span>
+                <div >
+                    {/*<img src={} alt="logo" className="logo"/>*/}
+                </div>
             </Link>
-
+            </figure>
             {isAuth ?
                 <div>
                     <Button type="button" onClick={() => navigate('/createRequest')}>STEL EEN HULPVRAAG</Button>
@@ -29,7 +34,8 @@ function NavBar() {
                     <Button type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</Button>
                 </div>
             }
-        </nav>
+        </header>
+        </body>
     );
 }
 

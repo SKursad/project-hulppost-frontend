@@ -6,21 +6,11 @@ const Footer = () => {
     return (
         <footer className='Footer'>
                 <p>
-                    <Link to="/" className="mx-1">
-                        Hoe werkt het
-                    </Link>{" "}
-                    |{" "}
-                    <Link className="mx-1" to="/about-us">
-                        Over Ons
-                    </Link>{" "}
-                    |{" "}
-                    <Link className="mx-1" to="/terms">
-                        Voorwaarden
-                    </Link>
+
                 </p>
-                <p className="m-0">
+                <p>
                     Copyright &copy; {today.getFullYear()}{" "}
-                    <a href="/Users/kursh/WebstormProjects/hulppost-frontend/public" className="text-muted">
+                    <a href="#" >
                         HulpPost
                     </a>
                     .

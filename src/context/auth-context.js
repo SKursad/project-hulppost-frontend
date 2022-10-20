@@ -1,7 +1,7 @@
 import React, {createContext, useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
-import api from '../../api/api-calls'
+import api from '../api/api-calls';
 
 export const AuthContext = createContext({});
 
