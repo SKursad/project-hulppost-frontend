@@ -7,9 +7,13 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/Input/Input';
 import './SignIn.css';
 
+let initialState = {
+    email: null,
+    username: null,
+}
+
 function SignIn() {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [formValue, setFormValue] = useState(initialState);
     const [error, toggleError] = useState(false);
     const {login} = useContext(AuthContext);
 
@@ -18,10 +22,7 @@ function SignIn() {
         toggleError(false);
 
         try {
-            const result = await api.post('/auth/login', {
-                username: username,
-                password: password,
-            });
+            const result = await api.post('/auth/login', {...formValue});
             console.log(result.data);
             login(result.data.accessToken);
 
@@ -31,42 +32,48 @@ function SignIn() {
         }
     }
 
+    const onChange = (event) => {
+        let {name, value} = event.target;
+        toggleError(false);
+        setFormValue(({...formValue, [name]: value}));
+    };
 
-    const buttonEnabled = username && password;
+
+    const buttonEnabled = formValue.username && formValue.password;
 
     return (
         <Screen title="Login" wide={true}>
             <h1>Inloggen</h1>
             <p> Voer uw gegevens in om te kunnen inloggen </p>
 
-            <form onSubmit={handleSubmit} className="formContainer">
-                <div className="loginForm">
-                    <div className="loginFormItem">
-                        E-mailadres of Gebruikersnaam:
-                        <Input
-                            label="username-field"
-                            type="username"
-                            id="username-field"
-                            name="username"
-                            placeholder="E-mailadres of Gebruikersnaam"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                        />
-                    </div>
-
-                    <div className="loginFormItem">
-                Wachtwoord:
-                <Input
-                    label="password-field"
-                    type="password"
-                    id="password-field"
-                    name="password"
-                    autoComplete="false"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                    </div>
+            <form onSubmit={handleSubmit} className="form-container">
+                <div className="form-container__input">
+                   <p className="form-container__p">
+                       E-mailadres of Gebruikersnaam:</p>
+                    <Input
+                        label="username-field"
+                        type="username"
+                        id="username-field"
+                        name="username"
+                        placeholder="E-mail/Gebruikersnaam"
+                        // value={username}
+                        autoFocus={true}
+                        onChange={onChange}
+                    />
+                    <p className="form-container__p">
+                    Wachtwoord:
+                    </p>
+                    <Input
+                        label="password-field"
+                        type="password"
+                        id="password-field"
+                        name="password"
+                        autoComplete="false"
+                        // value={password}
+                        onChange={onChange}
+                    />
                 </div>
+
 
                 {error &&
                     <p className="error">Combinatie van gebruikersnaam of E-mail en wachtwoord is onjuist</p>}
@@ -74,7 +81,7 @@ function SignIn() {
                 <Button
                     type="submit"
                     className="form-button"
-                    disabled={ !buttonEnabled }
+                    disabled={!buttonEnabled}
                 >
                     Inloggen
                 </Button>

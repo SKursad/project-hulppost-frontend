@@ -85,7 +85,7 @@ const RegistrationForm = ({source, apiUrl}) => {
 
     return (
             <>
-            <form className="formContainer">
+            <form className="form-container">
                 <Input
                     nameRegister="Email"
                     placeholder="voer een geldige E-mail"
@@ -173,7 +173,6 @@ const RegistrationForm = ({source, apiUrl}) => {
                         name="gender"
                         // value={gender}
                         onChange={onChange}
-                        error={genError}
                     >
                         <option value=""/>
                         <option value="M"> Man</option>
@@ -195,7 +194,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                 <button
                     onClick={handleSubmit}
                     className="form-button"
-                    disabled={loading }
+                    disabled={loading || !errors}
                 >
                     Registreren
                 </button>
@@ -205,8 +204,6 @@ const RegistrationForm = ({source, apiUrl}) => {
             <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
             <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
         </>
-        // </Screen>
-
     );
 }
 
