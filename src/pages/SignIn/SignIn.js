@@ -53,7 +53,8 @@ function SignIn() {
                             onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
-                </div>
+
+                    <div className="loginFormItem">
                 Wachtwoord:
                 <Input
                     label="password-field"
@@ -64,6 +65,8 @@ function SignIn() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                    </div>
+                </div>
 
                 {error &&
                     <p className="error">Combinatie van gebruikersnaam of E-mail en wachtwoord is onjuist</p>}
@@ -77,7 +80,8 @@ function SignIn() {
                 </Button>
             </form>
 
-            <p>Heb je nog geen account? <Link to="/signup">Registreer</Link> je dan eerst.</p>
+            <p>Heb je nog geen account? <Link to="/register/help-seeker">Registreer</Link> hier als je hulp zoekt.</p>
+            <p>Of <Link to="/register/volunteer">registreer</Link> hier als je hulp wilt bieden als vrijwilliger.</p>
             <p>Terug naar de <Link to="/">Hoofdpagina</Link></p>
         </Screen>
     );
