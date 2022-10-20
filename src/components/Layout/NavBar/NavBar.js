@@ -14,7 +14,6 @@ function NavBar() {
             {/*    <img src={logo} alt="logo" className="logo"/></Link></div>*/}
             {isAuth ?
                 <nav className="main-nav">
-                    <a href='/createRequest' className="btn btn--white">TEST</a>
                     <button className="main-nav__btn" type="button" onClick={() => navigate('/createRequest')}>STEL EEN HULPVRAAG</button>
                     {''}
                     <button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</button>
@@ -23,7 +22,7 @@ function NavBar() {
                 </nav>
                 :
                 <nav className="main-nav">
-                    <Button className="main-nav__btn" type="button" onClick={() => navigate('/signIn')}>AANMELDEN</Button>
+                    <Button className="main-nav__btn" type="button" onClick={() => navigate('/login')}>AANMELDEN</Button>
                     <Button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</Button>
                 </nav>
             }

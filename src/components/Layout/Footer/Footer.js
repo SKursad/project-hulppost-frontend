@@ -1,20 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import './Footer.css'
 
 const Footer = () => {
     const today = new Date();
     return (
-        <footer className='Footer'>
-                <p>
-
-                </p>
-                <p>
-                    Copyright &copy; {today.getFullYear()}{" "}
-                    <a href="#" >
-                        HulpPost
-                    </a>
-                    .
-                </p>
+        <footer className="main-footer">
+            <nav>
+                <ul className="main-footer__links">
+                    <li className= "main-footer__link">
+                       <p> Copyright &copy; {today.getFullYear()}{" "}</p>
+                        <a href="#">
+                            {" "}HulpPost
+                        </a>
+                        .
+                    </li>
+                </ul>
+            </nav>
         </footer>
     );
 };

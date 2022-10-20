@@ -15,7 +15,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route element={<LoginPrivateRoutes authenticated={isAuth}/>}>
-                        <Route path="/signIn" element={<SignIn authenticated={isAuth}/>}/>
+                        <Route path="/login" element={<SignIn authenticated={isAuth}/>}/>
                     </Route>
                     <Route element={<PrivateRoutes authenticated={isAuth}/>}>
                     </Route>
