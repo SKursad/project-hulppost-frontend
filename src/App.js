@@ -7,6 +7,7 @@ import LoginPrivateRoutes from './routes/login-private-routes';
 import SignIn from './pages/SignIn/SignIn';
 import {useContext} from 'react';
 import SignUpHelpSeeker from './pages/SignUp/HelpSeeker/SignUpHelpSeeker';
+import SignUpVolunteer from './pages/SignUp/Volunteer/SignUpVolunteer';
 
 function App() {
     const {isAuth} = useContext(AuthContext);
@@ -16,6 +17,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout/>}>
                     <Route path="/register/help-seeker" element={<SignUpHelpSeeker/>}/>
+                    <Route path="/register/volunteer" element={<SignUpVolunteer/>}/>
                     <Route element={<LoginPrivateRoutes authenticated={isAuth}/>}>
                         <Route path="/login" element={<SignIn authenticated={isAuth}/>}/>
                     </Route>
