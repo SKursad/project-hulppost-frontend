@@ -1,12 +1,12 @@
 import React from "react";
 
 
-const Input = ({label, name, placeholder, error, nameRegister, onChange, type, alt, id, value}) => {
+const Input = ({label, name, placeholder, error, nameRegister, onChange, type, alt, id, value, autoComplete}) => {
     const className = error ? "is-invalid" : "form-control";
     return (
-        <div className='form-control'>
+        <div className="form-control">
             <label htmlFor={label}>
-            <span>{nameRegister}</span>
+                <span>{nameRegister}</span>
             </label>
             <input
                 name={name}
@@ -16,7 +16,8 @@ const Input = ({label, name, placeholder, error, nameRegister, onChange, type, a
                 type={type}
                 alt={alt}
                 id={id}
-                value={value}/>
+                value={value}
+                autoComplete={autoComplete}/>
             <small className="is-invalid">{error}</small>
         </div>
     );

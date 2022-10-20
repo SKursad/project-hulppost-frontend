@@ -6,36 +6,28 @@ import Button from '../../UI/Button/Button';
 
 function NavBar() {
     const { isAuth, logout, user } = useContext(AuthContext);
-    // const appState = useContext(StateContext)
     const navigate = useNavigate();
-    // let imageSource = logo;
 
     return (
-        <body>
-        <header className="header">
-            <figure className="header__logo">
-            <Link to="/">
-                <div >
-                    {/*<img src={} alt="logo" className="logo"/>*/}
-                </div>
-            </Link>
-            </figure>
+        <header className="main-header">
+            {/*<div><Link className="main-header__logo" to="/">*/}
+            {/*    <img src={logo} alt="logo" className="logo"/></Link></div>*/}
             {isAuth ?
-                <div>
-                    <Button type="button" onClick={() => navigate('/createRequest')}>STEL EEN HULPVRAAG</Button>
+                <nav className="main-nav">
+                    <a href='/createRequest' className="btn btn--white">TEST</a>
+                    <button className="main-nav__btn" type="button" onClick={() => navigate('/createRequest')}>STEL EEN HULPVRAAG</button>
                     {''}
-                    <Button type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</Button>
-                    <Button type="button" onClick={() => navigate(`/profile/${user.id}`)}>PROFIEL</Button>
-                    <Button type="button" onClick={logout}>AFMELDEN</Button>
-                </div>
+                    <button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</button>
+                    <button className="main-nav__btn" type="button" onClick={() => navigate(`/profile/${user.id}`)}>PROFIEL</button>
+                    <button className="main-nav__btn" type="button" onClick={logout}>AFMELDEN</button>
+                </nav>
                 :
-                <div>
-                    <Button type="button" onClick={() => navigate('/signIn')}>AANMELDEN</Button>
-                    <Button type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</Button>
-                </div>
+                <nav className="main-nav">
+                    <Button className="main-nav__btn" type="button" onClick={() => navigate('/signIn')}>AANMELDEN</Button>
+                    <Button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}>HULPVRAGEN</Button>
+                </nav>
             }
         </header>
-        </body>
     );
 }
 

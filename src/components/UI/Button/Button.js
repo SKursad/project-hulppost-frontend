@@ -4,9 +4,10 @@ import React from 'react';
 const Button = (props) => {
 
     return <button
-        className={props.button || 'button'}
-        type={props.type || 'button'}
-        onClick={props.onClick}>
+        className={props.className || "button"}
+        type={props.type || "button"}
+        onClick={props.onClick}
+        disabled={props.disabled}>
         {props.children}
     </button>;
 };
