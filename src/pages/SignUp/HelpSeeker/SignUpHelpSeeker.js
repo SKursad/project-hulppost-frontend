@@ -1,29 +1,30 @@
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 import api from '../../../api/api-calls'
 import Input from '../../../components/Input/Input';
 import Screen from '../../../components/UI/Screen/Screen';
 
+
+let initialState = {
+    email: null,
+    username: null,
+    password: null,
+    passwordRepeat: null,
+    firstName: null,
+    surname: null,
+    birthday: null,
+    gender: null,
+    zipCode: null
+}
+
 const SignUpHelpSeeker = () => {
-    const [email, setEmail] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [surname, setSurname] = useState('');
-    const [birthday, setBirthday] = useState('');
-    const [gender, setGender] = useState('');
-    const [zipCode, setZipCode] = useState('');
-
-
-
+    const [formValue, setFormValue] = useState(initialState);
     const [error, toggleError] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, toggleLoading] = useState(false);
-
-
-    const source = axios.CancelToken.source();
     const navigate = useNavigate();
+    const source = axios.CancelToken.source();
 
 
     useEffect(() => {
@@ -39,16 +40,7 @@ const SignUpHelpSeeker = () => {
         toggleLoading(true);
 
         try {
-            await api.post('/auth/registration/helpSeeker', {
-                email,
-                password,
-                username,
-                firstName,
-                surname,
-                birthday,
-                gender,
-                zipCode
-            });
+            await api.post('/auth/registration/helpSeeker', {...formValue});
 
             console.log();
             navigate('/');
@@ -74,10 +66,17 @@ const SignUpHelpSeeker = () => {
         zipCode: zipCodeError
     } = errors;
 
-    // let passwordRepeatError;
-    // if (password !== passwordRepeat) {
-    //     passwordRepeatError = ('Password mismatch');
-    // }
+
+    let passwordRepeatError;
+    if (formValue.password !== formValue.passwordRepeat) {
+        passwordRepeatError = ('Wachtwoorden komen niet overeen');
+    }
+
+    const onChange = (event) => {
+        let {name, value} = event.target;
+        setErrors((previousErrors) => ({...previousErrors,  [name]: undefined}));
+        setFormValue(({...formValue, [name]: value}));
+    };
 
 
     return (
@@ -86,99 +85,113 @@ const SignUpHelpSeeker = () => {
 
             <form onSubmit={handleSubmit} className="formContainer">
                 <Input
-                    name="Email  "
+                    nameRegister="Email"
                     placeholder="voer een geldige E-mail"
                     label="E-mailadres: "
                     alt="input-email"
                     type="email"
                     id="email-field"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    // value={email}
+                    name="email"
+                    onChange={onChange}
                     error={emailError}
                 />
                 <Input
-                    name="Gebruikersnaam  "
+                    nameRegister="Gebruikersnaam  "
                     placeholder="kies een naam"
                     label="username-field"
                     alt="input-username"
                     type="text"
                     id="username-field"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    name="username"
+                    onChange={onChange}
                     error={usernameError}
                 />
                 <Input
-                    name="Wachtwoord"
+                    nameRegister="Wachtwoord"
                     placeholder="kies een wachtwoord"
                     label="Password-field"
                     alt="input-password"
+                    autoComplete="false"
                     type="password"
                     id="password-field"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    name="password"
+                    onChange={onChange}
                     error={passwordError}
                 />
                 <Input
-                    name="Voornaam"
+                    nameRegister="Herhaal wachtwoord"
+                    placeholder="herhaal uw wachtwoord"
+                    label="Password-repeat-field"
+                    alt="input-password-repeat"
+                    autoComplete="false"
+                    type="password"
+                    id="password-field-repeat"
+                    name="passwordRepeat"
+                    onChange={onChange}
+                    error={passwordRepeatError}
+                />
+                <Input
+                    nameRegister="Voornaam"
                     placeholder="voer uw naam in"
                     label="firstName-field"
                     alt="input-firstName"
                     type="text"
                     id="firstName-field"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    name="firstName"
+                    onChange={onChange}
                     error={firstNameError}
                 />
                 <Input
-                    name="Achternaam"
+                    nameRegister="Achternaam"
                     placeholder="voer uw achternaam in"
                     label="surname-field"
                     alt="input-username"
                     type="text"
                     id="surname-field"
-                    value={surname}
-                    onChange={(e) => setSurname(e.target.value)}
+                    name="surname"
+                    onChange={onChange}
                     error={surnameError}
                 />
                 <Input
-                    name="Geboortedatum"
+                    nameRegister="Geboortedatum"
                     placeholder="dd/mm/jjjj"
                     label="birthday-field"
                     alt="input-birthday"
-                    type="text"
+                    type="date"
                     id="birthday-field"
-                    value={birthday}
-                    onChange={(e) => setBirthday(e.target.value)}
+                    name="birthday"
+                    onChange={onChange}
                     error={birthdayError}
                 />
                 <label htmlFor="gender-field">
-                    <small>geslacht:</small>
+                    <small>Gender:</small>
                     <select
                         id="gender-field"
                         name="gender"
-                        value={gender}
-                        onChange={(e) => {setGender(e.target.value);}}
+                        // value={gender}
+                        onChange={onChange}
+                        error={genError}
                     >
-                        <option value=''/>
-                        <option value="M"> Man </option>
-                        <option value="V"> Vrouw </option>
+                        <option value=""/>
+                        <option value="M"> Man</option>
+                        <option value="V"> Vrouw</option>
                     </select>
                 </label>
 
                 <Input
-                    name="Postcode"
+                    nameRegister="Postcode"
                     placeholder="1000AA"
                     label="zipCode-field"
                     alt="input-zipCode"
                     type="text"
                     id="zipCode-field"
-                    value={zipCode}
-                    onChange={(e) => setZipCode(e.target.value)}
+                    name="zipCode"
+                    onChange={onChange}
                     error={zipCodeError}
                 />
-
                 <button
-                    type="submit"
+                    onClick={handleSubmit}
                     className="form-button"
                     disabled={loading }
                 >
