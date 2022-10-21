@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import {AuthContext} from '../../../context/auth-context';
 import Button from '../../UI/Button/Button';
 import './Navbar.css'
-import logo from '../../../assets/HulpPost-logo.png'
+import logo from '../../../assets/HulpPost-style.png'
 
 
 function NavBar() {
@@ -12,8 +12,10 @@ function NavBar() {
 
     return (
         <header className="main-header">
-            <div><Link className="main-header__logo" to="/">
-                <img src={logo} alt="logo" className="logo"/></Link></div>
+            <div>
+                <a href="/" className="main-header__logo" >
+                <img src={logo} alt="logo" className="logo"/></a>
+            </div>
             {isAuth ?
                 <nav className="main-nav">
                     <button className="main-nav__btn" type="button" onClick={() => navigate('/createRequest')}>STEL EEN HULPVRAAG</button>
@@ -24,8 +26,8 @@ function NavBar() {
                 </nav>
                 :
                 <nav className="main-nav">
-                    <Button className="main-nav__btn" type="button" onClick={() => navigate('/login')}> AANMELDEN </Button>
-                    <Button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}> HULPVRAGEN </Button>
+                    <Button className="main-nav__btn" type="button" onClick={() => navigate('/login')}> login </Button>
+                    <Button className="main-nav__btn" type="button" onClick={() => navigate(`/requestScreen`)}> hulpvragen </Button>
                 </nav>
             }
         </header>

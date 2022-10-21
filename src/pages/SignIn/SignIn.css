@@ -1,10 +1,10 @@
-.container {
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+/*.container {*/
+/*    min-height: 100vh;*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*}*/
 
 .form-container {
     align-items: center;
@@ -22,19 +22,10 @@
 
 .form-container__input {
     display: flex;
+    padding: 2rem;
+    margin: 1rem;
     flex-direction: column;
     justify-content: center;
+    border: 2px solid #424242;
 }
 
-.form-container__input-username {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}
-
-.form-container__input-password {
-    display: flex;
-    font-size: 5rem;
-    flex-direction: column;
-    margin-bottom: 1rem;
-}

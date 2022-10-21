@@ -7,11 +7,11 @@ const SignUpHelpSeeker = () => {
     const source = axios.CancelToken.source();
 
     return (
-        <Screen title="Registreren als Hulpvrager">
+        <Screen title="Registreren als Hulpvrager" wide={true}>
             <h2>Registreren als Hulpvrager</h2>
             <RegistrationForm source={source} apiUrl={"/auth/registration/helpSeeker"}></RegistrationForm>
         </Screen>
-    )
+    );
 };
 
 export default SignUpHelpSeeker;

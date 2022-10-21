@@ -42,8 +42,8 @@ function SignIn() {
     const buttonEnabled = formValue.username && formValue.password;
 
     return (
-        <Screen title="Login" wide={true}>
-            <h1>Inloggen</h1>
+        <Screen title="Inloggen" wide={true}>
+            <h2>Inloggen</h2>
             <p> Voer uw gegevens in om te kunnen inloggen </p>
 
             <form onSubmit={handleSubmit} className="form-container">

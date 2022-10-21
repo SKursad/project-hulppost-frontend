@@ -1,13 +1,16 @@
 .main-header {
     width: 100%;
+    height: 8rem;
     position: fixed;
     top: 0;
     left: 0;
     padding: 8px 16px;
-    z-index: 1;
+    z-index: 2;
+    background-color: rgb(106, 201, 199);
+    border-radius:  1px;
+    /*box-shadow: 2px 2px 40px 2px rgba(0, 0, 0, 0.5);*/
+
 }
-
-
 
 .main-header > div {
     display: inline-flex;
@@ -15,17 +18,22 @@
 }
 
 .main-header__logo {
+    position: absolute;
     display: inline-flex;
-    height: 2.2rem;
-    font-size: 2.2rem;
+    /*height: 2.6rem;*/
+    /*font-size: 2.2rem;*/
+    top: -10px;
+    left: -2px;
+    /*bottom: 0;*/
 }
 
 .main-header__logo img {
-    /*position: relative;*/
-    height: 8rem;
+    position: relative;
+    height: 10rem;
 }
 
 .main-nav {
+    /*position: relative;*/
     display: inline-flex;
     /*flex-direction: column;*/
     justify-content: right;
@@ -36,15 +44,22 @@
 
 .main-nav__btn {
     height: 3rem;
+    top: 3px;
+    left: 3px;
     width: auto;
     font-size: 1.6rem;
     margin: 1rem;
     border: none;
     cursor: pointer;
-    border-radius: 4rem;
+    border-radius: 2rem;
     transition: all .2s;
     position: relative;
-    /*align-content: center;*/
+    text-transform: uppercase;
+    text-align: center;
+    padding: 1rem;
+    /*bottom: 5px;*/
+    text-align-all: center;
+    align-content: center;
     /*text-align: center;*/
 }
 

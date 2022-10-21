@@ -3,11 +3,10 @@ import './Input.css'
 
 
 const Input = ({label, name,placeholder, error, nameRegister, onChange, type, alt, id, value, autoFocus,autoComplete}) => {
-    // const className = error ? "is-invalid" : "form-control";
+    const className = error ? "form-control__is-invalid" : "form-control";
     return (
         // <>
         <div className="form-control">
-
             <label htmlFor={label}>
                 <span>{nameRegister}</span>
             </label>
@@ -22,7 +21,7 @@ const Input = ({label, name,placeholder, error, nameRegister, onChange, type, al
                 autoFocus={autoFocus}
                 value={value}
                 autoComplete={autoComplete}/>
-            <small className="is-invalid">{error}</small>
+            <small className="form-control__is-invalid">{error}</small>
         </div>
     // </>
     );

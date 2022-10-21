@@ -4,6 +4,7 @@ import './Footer.css'
 const Footer = () => {
     const today = new Date();
     return (
+        <main>
         <footer className="main-footer">
             <nav>
                 <ul className="main-footer__links">
@@ -17,6 +18,7 @@ const Footer = () => {
                 </ul>
             </nav>
         </footer>
+        </main>
     );
 };
 

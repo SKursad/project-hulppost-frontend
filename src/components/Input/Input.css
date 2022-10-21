@@ -1,3 +1,13 @@
 .form-control__input {
     font-size: 1.6rem;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.form-control__is-invalid {
+    color: red;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 5px;
 }
