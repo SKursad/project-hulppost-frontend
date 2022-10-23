@@ -7,10 +7,19 @@
 }
 
 html {
-/* this defines what 1rem is (1rem = 10px = 62.5%) */
+/*-- this defines what 1rem is for easy calculation (1rem = 10px = 62.5%)
+     this makes the webapp. more dynamic for the user
+     if he/she wants to change the font size.
+     Rem goes to the root element of the webapp witch is the html element.
+     The browser default defines the size for the root element.
+     The font size always depends on the browser settings,
+     the user has the full control of the size he/she wants.
+     That's why is better to specify all the font sizes with rem.
+--*/
 font-size: 62.5%;
 }
 
 body {
     box-sizing: border-box;
 }
+

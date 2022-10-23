@@ -1,77 +1,274 @@
 .main-header {
-    width: 100%;
+    /*position: absolute;*/
+    display: flex;
+    align-items: center;
+    /*align-items: center;*/
+    justify-content: space-between;
+    width: 100vw;
     height: 8rem;
     position: fixed;
-    top: 0;
-    left: 0;
-    padding: 8px 16px;
+    padding: 0 1rem;
     z-index: 2;
     background-color: rgb(106, 201, 199);
-    border-radius:  1px;
+    /*border-radius: 1px;*/
     /*box-shadow: 2px 2px 40px 2px rgba(0, 0, 0, 0.5);*/
-
 }
 
-.main-header > div {
-    display: inline-flex;
-    vertical-align: middle;
-}
-
-.main-header__logo {
-    position: absolute;
-    display: inline-flex;
-    /*height: 2.6rem;*/
-    /*font-size: 2.2rem;*/
-    top: -10px;
-    left: -2px;
-    /*bottom: 0;*/
-}
 
 .main-header__logo img {
     position: relative;
     height: 10rem;
+    justify-content: center;
+    left: 1rem;
+    top: .5rem;
+    /*transition: all 0.1s ease-in;*/
 }
 
-.main-nav {
+.nav {
+    /*display: flex;*/
+    height: 10%;
+    /*width: 100%;*/
+    position: absolute;
     /*position: relative;*/
+    font-size: 10rem;
+    align-items: center;
     display: inline-flex;
-    /*flex-direction: column;*/
-    justify-content: right;
-    align-items: self-end;
-    width: calc(100% - 7.5rem);
+    flex-direction: row;
+    justify-content: flex-end;
+    width: calc(100% - 4rem);
     vertical-align: middle;
 }
 
-.main-nav__btn {
-    height: 3rem;
-    top: 3px;
-    left: 3px;
-    width: auto;
-    font-size: 1.6rem;
-    margin: 1rem;
-    border: none;
-    cursor: pointer;
-    border-radius: 2rem;
-    transition: all .2s;
+.nav__mobile {
+    /*position: absolute;*/
     position: relative;
-    text-transform: uppercase;
+    display: inline-flex;
+    justify-content:center;
     text-align: center;
-    padding: 1rem;
-    /*bottom: 5px;*/
-    text-align-all: center;
-    align-content: center;
-    /*text-align: center;*/
+    flex-direction: column;
+    /*list-style: none;*/
+    left: -1rem;
+    top: 7rem;
+    /*bottom: 100%;*/
+    margin: 4.5rem 4.5rem 0 0;
+    transition: all 0.1s ease;
+    width: 100vw;
+    height: 100%;
 }
 
-.main-nav__btn {
-    background-color: #53b0ae;
-    color: #fff; }
-.main-nav__btn::after {
-    background-color: rgba(83, 176, 174, 0.53); }
+.nav__mobile-logout {
+    position: absolute;
+    top: -5rem;
+    margin: 0 0 0 0;
+    width: 100vw;
+}
 
-.main-nav__btn:hover,
-.main-nav__btn:active {
+.nav__mobile-login {
+    position: absolute;
+    top: -5rem;
+    margin: 0 0 0 0;
+    width: 100vw;
+}
+
+.nav__links {
+    display: none;
+    /*position: relative;*/
+    /*display: flex;*/
+    height: 100vh;
+    width: 100vw;
+    /*left: 22rem;*/
+    margin: 3rem;
+    top: 1rem;
+    position: relative;
+    justify-content: flex-end;
+}
+
+
+.nav__login,
+.nav__request,
+.nav__feed,
+.nav__profile,
+.nav__logout  {
+    position: relative;
+    text-decoration: none;
+    list-style: none;
+    display: flex;
+    /*flex-flow: column;*/
+    /*right: 1rem;*/
+    /*top: 2rem;*/
+    align-items: center;
+    /*justify-content: end;*/
+    flex-direction: column;
+    text-align: center;
+    background-color: #53b0ae;
+    background-position: center;
+    /*height: 70%;*/
+    /*width: 100%;*/
+    color: white;
+    font-size: 1.6rem;
+    padding: 2rem 2rem 2rem;
+    margin: 0 0 0 0 ;
+    cursor: pointer;
+    text-transform: uppercase;
+    justify-content: flex-end;
+    /*flex: available;*/
+    transition: all 0.1s ease-out;
+}
+
+
+.nav__mobile-menu {
+    /*position: absolute;*/
+    display: flex;
+    margin: 1rem;
+    font-size: 2rem;
+    background-color: rgba(70, 134, 129, 0.47);
+
+}
+
+.nav__btn::after {
+    background-color: rgba(83, 176, 174, 0.53);
+}
+
+.nav__btn:hover,
+.nav__btn:active {
     color: #fff;
     background-color: rgb(53, 112, 111);
     border: none;
+}
+
+@media (min-width: 41.5rem ) {
+    .logo {
+        display: block;
+        position: absolute;
+        justify-content: flex-end;
+        top: 1rem;
+        left: 1rem;
+        vertical-align: middle;
+    }
+
+    .nav__links {
+        display: inline-flex;
+        flex-direction: row;
+        /*justify-content: center;*/
+        justify-content: flex-end;
+        /*font-size: 1rem;*/
+        flex: 50%;
+        gap: 0.5rem;
+        margin: 2rem;
+        border: none;
+        cursor: pointer;
+        list-style: none;
+        /*text-transform: uppercase;*/
+        text-align: center;
+        position: relative;
+        height: .1rem;
+        top: -3rem;
+        /*left: 6rem;*/
+        /*width: 100vw;*/
+    }
+
+    .nav__mobile-menu {
+        display: none;
+    }
+
+    .main-header__logo img {
+        position: relative;
+        justify-content: center;
+        height: 10rem;
+        left: 1rem;
+        top: .5rem;
+
+    }
+
+    .nav__mobile-logout {
+        position: relative;
+        display: inline-flex;
+        top: -5rem;
+        margin: 2rem;
+        width: 100vw;
+    }
+
+    .nav__mobile-logout,
+    .nav__request,
+    .nav__feed,
+    .nav__profile,
+    .nav__logout{
+        display: inline-flex;
+        flex-direction: row;
+        position: relative;
+        top: -2rem;
+        left: calc(100% - 53rem);
+        margin: 3.8rem 1rem 0 0;
+        /*width: 100vw;*/
+    }
+
+    .nav__mobile-login,
+    .nav__login,
+    .nav__feed {
+        display: inline-flex;
+        flex-direction: row;
+        position: relative;
+        top: -2rem;
+        left: calc(100% - 20rem);
+        margin: 4rem 2rem 0 0;
+        /*width: 100vw;*/
+    }
+
+
+    ul.nav__mobile {
+        background-color: transparent;
+        border: none;
+        display: flex;
+        position: absolute;
+        flex-direction: row;
+        margin: -3.9rem 1rem 1rem 0;
+        padding: 0 0 5rem 0;
+        left: calc(100% - 70rem);
+        transition: all 0.2s ease;
+
+    }
+
+
+
+    .nav__login,
+    .nav__request,
+    .nav__feed,
+    .nav__profile,
+    .nav__logout,
+    .nav__mobile {
+        display: inline-flex;
+        position: relative;
+        flex-direction: row;
+        text-decoration: none;
+        /*list-style: none;*/
+        /*align-items: end;*/
+        justify-content: flex-end;
+        text-align: end;
+        background-color: #53b0ae;
+        color: rgba(255, 255, 255, 0.61);
+        font-size: 1.6rem;
+        left: 2rem;
+        right: 10rem;
+        padding: 1.6rem 1rem;
+        margin: 2rem .3rem 0 0;
+        border: solid 1px;
+        cursor: pointer;
+        text-transform: uppercase;
+    }
+
+    .nav__mobile {
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        text-align: justify-all;
+        /*list-style: none;*/
+        bottom: 80%;
+        top: 1.2rem;
+        left: 82%;
+        /*transition: all 0.1s ease;*/
+        /*width: 100vw;*/
+        /*height: 10vh;*/
+    }
+
+
 }
