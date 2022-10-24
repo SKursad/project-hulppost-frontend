@@ -143,10 +143,12 @@ const RegistrationForm = ({source, apiUrl}) => {
                         name="birthday"
                         onChange={onChange}
                         error={birthdayError}
+                        required={true}
                     />
                     <label htmlFor="gender-field">
-                        <small>Gender:</small>
+                        <p id="option-box">Ik ben:</p>
                         <select
+
                             id="gender-field"
                             name="gender"
                             // value={gender}
@@ -202,10 +204,12 @@ const RegistrationForm = ({source, apiUrl}) => {
                 >
                     Registreren
                 </button>
+
+                <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
+                <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
             </form>
 
-            <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
-            <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
+
         </>
     );
 };

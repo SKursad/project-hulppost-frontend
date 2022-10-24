@@ -1,27 +1,106 @@
+
+
 .form-container {
+    /*display: flex;*/
+    /*position: relative;*/
+    padding: 18rem 2rem;
     align-items: center;
-    display: flex;
-    flex-direction: column;
     justify-content: center;
-    padding: 1rem;
-    margin: 1rem;
+    margin: 3rem;
+    /*height: 100vh;*/
+    /*text-align: center;*/
+    /*width: 100vw;*/
     /*border-color: cornflowerblue;*/
     /*border: lightgray;*/
-
 }
 
-.form-container__input {
+.form-container button,
+.form-container p {
+    margin: 2rem ;
+    font-size: 1.6rem;
+}
+
+.form-container label {
+    font-weight: bold;
+}
+
+.form-container [id*="option-box"],
+.form-container select {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    border-style: solid;
-    padding: 2rem;
-    margin: 0;
+    flex-direction: row;
+    width: auto;
+    margin: 2rem;
+    padding: -6rem 2rem;
+    vertical-align: bottom;
 }
+
+.form-container  input:focus,
+.form-container select:focus {
+    outline: none;
+    background-color: #d8f3df;
+    border-color: #2ddf5c;
+}
+
+.form-container label,
+.form-container input,
+.form-container select {
+    display: flex;
+    margin-top: 1rem;
+    width: 100%;
+}
+
+.form-container input,
+.form-container select {
+    border: 1px solid #ccc;
+    padding: .4rem .7rem;
+    font-size: 1.6rem;
+    /*font: inherit;*/
+}
+
+
+/*.form-container__input {*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    border-style: solid;*/
+/*    padding: 2rem;*/
+/*    margin: 1rem;*/
+/*}*/
+
 .gen-error {
     color: red;
     display: flex;
-    flex-direction: row;
     justify-content: center;
-    padding: 5px;
+    flex-direction: column;
+    padding: 10px;
+    font-size: 1rem;
 }
+
+@media (min-width: 40rem) {
+    .form-container {
+        /*display: inline-flex;*/
+        margin: 10rem;
+        padding: 1rem;
+        /*justify-content: center;*/
+        width: 25rem;
+        height: 150vh;
+    }
+    .form-container__input {
+        margin: 1rem;
+        width: 25rem;
+    }
+}
+
+/*@media screen and (min-width: 80rem) {*/
+/*    .form-container {*/
+/*        !*display: inline-flex;*!*/
+/*        margin: 8rem;*/
+/*        padding: 14rem;*/
+/*        !*justify-content: center;*!*/
+/*        width: 25rem;*/
+/*        height: 90vh;*/
+/*    }*/
+/*    .form-container__input {*/
+/*        margin: 1rem;*/
+/*        width: 25rem;*/
+/*    }*/
+/*}*/

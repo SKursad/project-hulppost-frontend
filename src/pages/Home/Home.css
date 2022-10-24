@@ -1,7 +1,10 @@
-main {
-    display: flex;
-    flex-direction: column;
-    z-index: 1;
+.app-overview__main {
+    /*display: flex;*/
+    /*padding: 4rem;*/
+    /*margin: 1rem;*/
+    position: relative;
+    /*flex-direction: column;*/
+    /*z-index: 5;*/
 }
 
 .background {
@@ -11,55 +14,56 @@ main {
     rgba(109, 246, 234, 0.8) 100%, transparent 100%),
     url('../../assets/jem-sahagun-O33vBPD6hAw-unsplash.jpg');
     /*background-image: cross-fade(100% url('../../assets/jem-sahagun-O33vBPD6hAw-unsplash.jpg'), blue);*/
+    height: 100%;
     width: 100vw;
     background-size: cover;
-
     background-position-y: center;
     background-position-x: center;
-    height: 100vh;
     position: fixed;
     bottom: 1px;
-    z-index: -10;
+    z-index: -101;
 }
 
-@media (min-width: 40rem) and (min-height: 30rem) {
-    #product-overview {
-        /*display: flex;*/
-        /*flex-direction: column;*/
-        /*position: absolute;*/
-        /*height: 100vh;*/
-        /*bottom: -10rem;*/
-        /*top: 20rem;*/
-        max-width: 1000px;
-        /*margin: 3rem auto;*/
-        /*bottom: 100rem;*/
-        /*background-size: auto;*/
-        /*position: fixed;*/
-        /*background-position: 100%;*/
-        /*background-position-y: center;*/
-        /*background-position-x: center;*/
-    }
-
-    /*#app-overview{*/
-    /*    max-width: 1500px;*/
-    /*    max-height: 1500px;*/
-    /*}*/
-}
-
-.app-overview__row {
-    /*flex-basis: border-box;*/
-    flex-direction: column;
+.app-overview__title-h1 {
     display: flex;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    padding: 8rem;
+}
+
+.app-overview__sub-h3 {
+    display: flex;
+    font-size: 1.6rem;
+    flex-direction: column;
+    padding: 4rem;
+}
+
+@media (min-width: 40rem) and (min-height: 40rem) {
+    #app-overview__info {
+        max-width: 15rem;
+    }
+    .background {
+        max-width: 100%;
+        background-position-y: center;
+        background-position-x: center;
+    }
+}
+
+.app-overview__h {
+    /*!*flex-basis: border-box;**/
+    display: flex;
+    margin: 1rem;
+    flex-direction: column;
     justify-content: flex-end;
 }
 
 
 
-.app-overview__info {
-    display: inline-flex;
+.app-overview__v {
+    display: flex;
     justify-content: center;
-    flex-direction: row;
-    padding: 0;
+    flex-direction: column;
+    padding: 1rem;
     margin: 0;
     font-weight: bold;
     /*position: relative;*/
@@ -67,21 +71,29 @@ main {
 }
 
 @media (min-width: 40rem) and (min-height: 40rem) {
-    .app-overview__info {
+    #app-overview__info {
         display: inline-flex;
         flex-direction: column;
-        font-size: 2rem;
-        justify-content: space-between;
-        max-height: 100rem;
-        max-width: 100rem;
+        /*font-size: 2rem;*/
+        /*justify-content: space-between;*/
+        /*!*max-height: 100rem;*!*/
+        /*!*max-width: 100rem;*!*/
     }
 
-    .app-overview__row {
+    .app-overview__v {
         display:inline-flex;
         font-size: 2rem;
-        flex-direction: column;
-
+        margin: 5rem;
+        padding: 8rem;
+        flex-direction:row;
     }
+
+    .app-overview__h {
+        display:inline-flex;
+        font-size: 2rem;
+        flex-direction: row;
+    }
+
 
 }
 

@@ -1,3 +1,9 @@
+/*--
+This global css resets the web
+presets that could be found in
+the styles/inspect.
+--*/
+
 *,
 *::after,
 *::before {
@@ -10,10 +16,10 @@ html {
 /*-- this defines what 1rem is for easy calculation (1rem = 10px = 62.5%)
      this makes the webapp. more dynamic for the user
      if he/she wants to change the font size.
-     Rem goes to the root element of the webapp witch is the html element.
+     Rem goes to the root element of the webapp which is the html element.
      The browser default defines the size for the root element.
      The font size always depends on the browser settings,
-     the user has the full control of the size he/she wants.
+     the user has the full control when he/she wants to change the page size.
      That's why is better to specify all the font sizes with rem.
 --*/
 font-size: 62.5%;
@@ -21,5 +27,31 @@ font-size: 62.5%;
 
 body {
     box-sizing: border-box;
+}
+
+ul[role="list"],
+ol[role="list"] {
+    list-style: none;
+}
+
+a:not([class]) {
+    text-decoration-skip-ink: auto;
+}
+
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
 }
 

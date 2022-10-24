@@ -6,13 +6,13 @@
 /*    align-items: center;*/
 /*}*/
 
-.form-container {
+.form-container-signIn {
     align-items: center;
-    display: flex;
-    flex-direction: column;
+    display: inline-flex;
     justify-content: center;
     padding: 1rem;
     margin: 1rem;
+    height: 100vh;
 }
 
 .error {
@@ -20,12 +20,26 @@
     color: #bb0000;
 }
 
-.form-container__input {
-    display: flex;
+.form-container__input + label {
     padding: 2rem;
-    margin: 1rem;
-    flex-direction: column;
+    margin: 5rem;
+    display: inline-flex;
     justify-content: center;
-    border: 2px solid #424242;
+    /*border: 2px solid #424242;*/
 }
+
+@media (min-width: 40rem) {
+        .form-container {
+            /*display: inline-flex;*/
+            margin: 10rem;
+            padding: 1rem;
+            /*justify-content: center;*/
+            width: 25rem;
+            height: 150vh;
+        }
+        .form-container__input {
+            margin: 1rem;
+            width: 25rem;
+        }
+    }
 

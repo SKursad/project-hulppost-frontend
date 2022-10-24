@@ -2,7 +2,7 @@ import React from "react";
 import './Input.css'
 
 
-const Input = ({label, name,placeholder, error, nameRegister, onChange, type, alt, id, value, autoFocus,autoComplete}) => {
+const Input = ({label, name,placeholder, error, nameRegister, onChange, type, alt, id, value, autoFocus,autoComplete, required}) => {
     const className = error ? "form-control__is-invalid" : "form-control";
     return (
         // <>
@@ -13,14 +13,15 @@ const Input = ({label, name,placeholder, error, nameRegister, onChange, type, al
             <input
                 name={name}
                 placeholder={placeholder}
-                className="form-control__input"
+                className={className}
                 onChange={onChange}
                 type={type}
                 alt={alt}
                 id={id}
                 autoFocus={autoFocus}
                 value={value}
-                autoComplete={autoComplete}/>
+                autoComplete={autoComplete}
+                required={required}/>
             <small className="form-control__is-invalid">{error}</small>
         </div>
     // </>

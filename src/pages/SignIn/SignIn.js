@@ -42,11 +42,12 @@ function SignIn() {
     const buttonEnabled = formValue.username && formValue.password;
 
     return (
-        <Screen title="Inloggen" wide={true}>
+        // <Screen title="Inloggen" wide={true}>
+            <>
             <h2>Inloggen</h2>
             <p> Voer uw gegevens in om te kunnen inloggen </p>
 
-            <form onSubmit={handleSubmit} className="form-container">
+            <form onSubmit={handleSubmit} className="form-container-signIn">
                 <div className="form-container__input">
                    <p className="form-container__p">
                        E-mailadres of Gebruikersnaam:</p>
@@ -90,7 +91,8 @@ function SignIn() {
             <p>Heb je nog geen account? <Link to="/register/help-seeker">Registreer</Link> hier als je hulp zoekt.</p>
             <p>Of <Link to="/register/volunteer">registreer</Link> hier als je hulp wilt bieden als vrijwilliger.</p>
             <p>Terug naar de <Link to="/">Hoofdpagina</Link></p>
-        </Screen>
+        {/*</Screen>*/}
+            </>
     );
 }
 

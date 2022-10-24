@@ -1,13 +1,36 @@
-.form-control__input {
+.form-control {
+    /*text-align: center;*/
+}
+
+.form-control__input:focus {
+    background-color: #d8f3df;
+    border-color: #2ddf5c;
     font-size: 1.6rem;
-    flex-direction: row;
     justify-content: center;
+}
+
+.form-control span {
+    font-size: 1.6rem;
+    /*text-align: center;*/
+}
+
+.form-control__is-invalid:focus {
+    outline: none;
+    background-color: rgb(215, 55, 55);
+    border-color: rgba(155, 25, 25, 0.87);
 }
 
 .form-control__is-invalid {
     color: red;
-    display: flex;
-    flex-direction: row;
     justify-content: center;
-    padding: 5px;
+    padding: 4px;
+    font-size: 1.4rem;
+    /*border-color: red;*/
+    /*background: rgb(250, 172,172);*/
+}
+
+@media (min-width: 40rem) {
+    .form-control {
+        width: 25rem;
+    }
 }

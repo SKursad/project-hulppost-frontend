@@ -4,12 +4,11 @@ import './Footer.css'
 const Footer = () => {
     const today = new Date();
     return (
-        <main>
         <footer className="main-footer">
             <nav>
                 <ul className="main-footer__links">
                     <li className= "main-footer__link">
-                       <p> Copyright &copy; {today.getFullYear()}{" "}</p>
+                       <p> Copyright &copy; {today.getFullYear()}</p>
                         <a href="#">
                             {" "}HulpPost
                         </a>
@@ -18,7 +17,6 @@ const Footer = () => {
                 </ul>
             </nav>
         </footer>
-        </main>
     );
 };
 

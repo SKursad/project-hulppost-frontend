@@ -1,14 +1,14 @@
 .main-header {
-    /*position: absolute;*/
+    position: absolute;
     display: flex;
     align-items: center;
     /*align-items: center;*/
     justify-content: space-between;
-    width: 100vw;
+    width: 100%;
     height: 8rem;
-    position: fixed;
+    /*position: fixed;*/
     padding: 0 1rem;
-    z-index: 2;
+    z-index: 200;
     background-color: rgb(106, 201, 199);
     /*border-radius: 1px;*/
     /*box-shadow: 2px 2px 40px 2px rgba(0, 0, 0, 0.5);*/
@@ -19,9 +19,9 @@
     position: relative;
     height: 10rem;
     justify-content: center;
-    left: 1rem;
-    top: .5rem;
-    /*transition: all 0.1s ease-in;*/
+    left: 2rem;
+    top: .6rem;
+    /*transition: all 0.2s ease-in;*/
 }
 
 .nav {
@@ -43,7 +43,7 @@
     /*position: absolute;*/
     position: relative;
     display: inline-flex;
-    justify-content:center;
+    justify-content: center;
     text-align: center;
     flex-direction: column;
     /*list-style: none;*/
@@ -59,24 +59,19 @@
 .nav__mobile-logout {
     position: absolute;
     top: -5rem;
-    margin: 0 0 0 0;
     width: 100vw;
 }
 
 .nav__mobile-login {
     position: absolute;
     top: -5rem;
-    margin: 0 0 0 0;
     width: 100vw;
 }
 
 .nav__links {
     display: none;
-    /*position: relative;*/
-    /*display: flex;*/
     height: 100vh;
     width: 100vw;
-    /*left: 22rem;*/
     margin: 3rem;
     top: 1rem;
     position: relative;
@@ -88,83 +83,89 @@
 .nav__request,
 .nav__feed,
 .nav__profile,
-.nav__logout  {
+.nav__logout {
     position: relative;
-    text-decoration: none;
     list-style: none;
     display: flex;
-    /*flex-flow: column;*/
-    /*right: 1rem;*/
-    /*top: 2rem;*/
     align-items: center;
-    /*justify-content: end;*/
     flex-direction: column;
     text-align: center;
     background-color: #53b0ae;
     background-position: center;
-    /*height: 70%;*/
-    /*width: 100%;*/
+    text-decoration: none;
     color: white;
     font-size: 1.6rem;
-    padding: 2rem 2rem 2rem;
-    margin: 0 0 0 0 ;
+    padding: 2.5rem 2.5rem 2.5rem 2.5rem;
     cursor: pointer;
     text-transform: uppercase;
     justify-content: flex-end;
-    /*flex: available;*/
     transition: all 0.1s ease-out;
 }
 
 
+.nav__request:hover,
+.nav__feed:hover,
+.nav__profile:hover {
+  background-color: rgb(53, 112, 111);
+    color: turquoise;
+}
+
+.nav__login:hover {
+    background-color: rgb(75, 159, 159);
+    color: rgba(126, 213, 111, 0.8);
+}
+.nav__logout:hover {
+    background-color: rgb(75, 159, 159);
+    color: rgba(203, 36, 36, 0.32);
+}
+
 .nav__mobile-menu {
-    /*position: absolute;*/
     display: flex;
     margin: 1rem;
+    padding: .4rem;
     font-size: 2rem;
-    background-color: rgba(70, 134, 129, 0.47);
+    border-radius: .5rem;
+    border-right-color: rgb(0,0,0);
+    color: rgba(238, 238, 245, 0.63);
+    background-color: rgba(70, 134, 129, 0.45);
 
 }
 
-.nav__btn::after {
-    background-color: rgba(83, 176, 174, 0.53);
-}
+/*.nav__btn::after {*/
+/*    background-color: rgba(83, 176, 174, 0.53);*/
+/*}*/
 
-.nav__btn:hover,
-.nav__btn:active {
-    color: #fff;
-    background-color: rgb(53, 112, 111);
-    border: none;
-}
+/*.nav__btn:hover,*/
+/*.nav__btn:active {*/
+/*    color: #fff;*/
+/*    background-color: rgb(53, 112, 111);*/
+/*    border: none;*/
+/*}*/
 
-@media (min-width: 41.5rem ) {
-    .logo {
-        display: block;
-        position: absolute;
-        justify-content: flex-end;
-        top: 1rem;
-        left: 1rem;
-        vertical-align: middle;
-    }
-
+@media (min-width: 43rem ) {
+    /*.logo {*/
+    /*    display: block;*/
+    /*    justify-content: flex-end;*/
+    /*    !*top: 1rem;*!*/
+    /*    !*left: 1rem;*!*/
+    /*    !*vertical-align: middle;*!*/
+    /*}*/
     .nav__links {
         display: inline-flex;
         flex-direction: row;
-        /*justify-content: center;*/
         justify-content: flex-end;
-        /*font-size: 1rem;*/
         flex: 50%;
-        gap: 0.5rem;
+        gap: 4rem;
+        padding: 1.5rem;
         margin: 2rem;
         border: none;
         cursor: pointer;
         list-style: none;
-        /*text-transform: uppercase;*/
         text-align: center;
         position: relative;
         height: .1rem;
-        top: -3rem;
-        /*left: 6rem;*/
-        /*width: 100vw;*/
+        top: -3.4rem;
+
     }
 
     .nav__mobile-menu {
@@ -175,8 +176,9 @@
         position: relative;
         justify-content: center;
         height: 10rem;
-        left: 1rem;
-        top: .5rem;
+        left: 2rem;
+        top: .6rem;
+        transition: all .2s ease-out;
 
     }
 
@@ -192,14 +194,27 @@
     .nav__request,
     .nav__feed,
     .nav__profile,
-    .nav__logout{
+    .nav__logout {
         display: inline-flex;
         flex-direction: row;
         position: relative;
         top: -2rem;
+        gap: .4rem;
         left: calc(100% - 53rem);
         margin: 3.8rem 1rem 0 0;
-        /*width: 100vw;*/
+        border-radius: .5rem;
+    }
+
+    .nav__profile:hover,
+    .nav__feed:hover,
+    .nav__request:hover {
+        background-color: rgba(53, 112, 111, 0.43);
+    }
+
+    .nav__logout:hover,
+    .nav__logout:active {
+        border: rgba(231, 148, 148, 0.44) solid;
+        color: rgba(203, 36, 36, 0.32);
     }
 
     .nav__mobile-login,
@@ -211,9 +226,15 @@
         top: -2rem;
         left: calc(100% - 20rem);
         margin: 4rem 2rem 0 0;
-        /*width: 100vw;*/
+        border-radius: .5rem;
     }
 
+    .nav__login:hover,
+    .nav__login:active {
+        border: rgba(77, 204, 68, 0.78) solid;
+        color: rgba(126, 213, 111, 0.8);
+
+    }
 
     ul.nav__mobile {
         background-color: transparent;
@@ -221,13 +242,12 @@
         display: flex;
         position: absolute;
         flex-direction: row;
-        margin: -3.9rem 1rem 1rem 0;
+        margin: -4rem 1rem 1rem 0;
         padding: 0 0 5rem 0;
-        left: calc(100% - 70rem);
-        transition: all 0.2s ease;
+        left: calc(100% - 80rem);
+        transition: all .1s ease-out;
 
     }
-
 
 
     .nav__login,
@@ -237,11 +257,9 @@
     .nav__logout,
     .nav__mobile {
         display: inline-flex;
-        position: relative;
+        /*position: relative;*/
         flex-direction: row;
         text-decoration: none;
-        /*list-style: none;*/
-        /*align-items: end;*/
         justify-content: flex-end;
         text-align: end;
         background-color: #53b0ae;
@@ -260,15 +278,10 @@
         position: relative;
         display: flex;
         flex-direction: row;
-        text-align: justify-all;
-        /*list-style: none;*/
+        /*text-align: justify-all;*/
         bottom: 80%;
         top: 1.2rem;
         left: 82%;
-        /*transition: all 0.1s ease;*/
-        /*width: 100vw;*/
-        /*height: 10vh;*/
+        transition: all 0.1s ease;
     }
-
-
 }

@@ -8,23 +8,24 @@ const Home = () => {
     return (
         <Screen title="Welkom!" wide={true}>
             <main className= "app-overview__main">
-                <section id="app-overview">
-                    <div className="background"></div>
-                    <h1>Welkom bij HulpPost!</h1>
-                    <h3> Dit is een platform om mensen bij elkaar te brengen die elkaar willen helpen</h3>
-                    <div className="app-overview__row">
-                        <div className="app-overview__info" id="volunteer">
+                <section id="app-overview__info">
+                    <div className="background"/>
+                    <h1 className= "app-overview__title-h1">Welkom bij HulpPost!</h1>
+                    <h3 className= "app-overview__sub-h3"> Dit is een platform om mensen bij elkaar te brengen die elkaar willen helpen</h3>
+                    <section className="app-overview__v">
+                        <div  id="volunteer">
                             <h3 className="app-overview__title"> Wil je helpen? </h3>
                             <p className="app-overview__sub">Maak een account aan als je iets voor iemand kan betekenen.</p>
                             <button className="btn" onClick={() => navigate(`/register/volunteer`)}>Registreer</button>
                         </div>
-
-                        <div className="app-overview__info" id="help-seeker">
+                    </section>
+                    <section className="app-overview__h">
+                        <div id="help-seeker">
                             <h3 className="app-overview__title"> Heb je een hulpvraag? </h3>
                             <p className="app-overview__sub">Maak een account aan als je hulp nodig hebt.</p>
                             <button className="btn" onClick={() => navigate(`/register/help-seeker`)}>Registreer</button>
                         </div>
-                    </div>
+                    </section>
                 </section>
             </main>
         </Screen>

@@ -1,16 +1,16 @@
 .card {
     display: flex;
-    /*position: relative;*/
+    position: relative;
     background: white;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+    /*box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);*/
     /*border-radius: 2px;*/
     /*justify-content: center;*/
-    flex-direction: column;
-    text-align: center;
+    /*flex-direction: column;*/
+    /*text-align: center;*/
     font-size: 1.6rem;
-    height: 100vh;
+    height: 100%;
     /*width: 100vw;*/
-    /*z-index: 1;*/
+    z-index: 1;
 }
 .container--narrow {
     max-width: 732px;
@@ -19,15 +19,6 @@
 @media (min-width: 40rem) {
     .card {
         display: inline-flex;
-        text-align: center;
-        justify-content: center;
-        flex-direction: row;
-        min-height: 10rem;
-        min-width: 20rem;
-        /*width: 100%;*/
-}
-    .container--narrow {
-        min-width: 200px;
-        min-height: 200px;
+        width: 110%;
     }
 }

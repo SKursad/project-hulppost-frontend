@@ -39,8 +39,8 @@ function NavBar() {
                     <ul className={isMobile ? "nav__mobile" : "nav__links"}
                         onClick={() => setIsMobile(false)}>
                         <div className="nav__mobile-login">
-                        <Link to={`/login`} className="nav__login">login</Link>
                         <Link to={`/requestFeed`} className="nav__feed">hulpvragen</Link>
+                        <Link to={`/login`} className="nav__login">login</Link>
                         </div>
                     </ul>
                     <button className="nav__mobile-menu"
