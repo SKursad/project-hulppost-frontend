@@ -1,10 +1,59 @@
-.form-control {
-    /*text-align: center;*/
+input#email-field.form-control,
+input#username-field.form-control,
+input#firstName-field.form-control,
+input#surname-field.form-control,
+input#birthday-field.form-control,
+/*select#gender-field,*/
+input#zipCode-field.form-control,
+input#posCode-field.form-control,
+input#password-field.form-control,
+input#password-field-repeat.form-control {
+    color: rgba(0, 0, 0, 0.44);
+    border-color: #2ddf5c;
 }
 
-.form-control__input:focus {
+input#email-field.form-control__is-invalid,
+input#username-field.form-control__is-invalid,
+input#firstName-field.form-control__is-invalid,
+input#surname-field.form-control__is-invalid,
+input#birthday-field.form-control__is-invalid,
+input#zipCode-field.form-control__is-invalid,
+input#posCode-field.form-control__is-invalid,
+input#password-field.form-control__is-invalid,
+input#password-field-repeat.form-control__is-invalid {
+    color: rgba(0, 0, 0, 0.44);
+    border-color: #ff0000;
+}
+
+input#email-field.form-control__is-invalid:focus,
+input#username-field.form-control__is-invalid:focus,
+input#firstName-field.form-control__is-invalid:focus,
+input#surname-field.form-control__is-invalid:focus,
+input#birthday-field.form-control__is-invalid:focus,
+input#zipCode-field.form-control__is-invalid:focus,
+input#posCode-field.form-control__is-invalid:focus,
+input#password-field.form-control__is-invalid:focus,
+input#password-field-repeat.form-control__is-invalid:focus {
+    background-color: rgba(255, 0, 0, 0.18);
+    border: 2px solid red;
+}
+
+input#email-field.form-control:focus,
+input#username-field.form-control:focus,
+input#firstName-field.form-control:focus,
+input#surname-field.form-control:focus,
+input#birthday-field.form-control:focus,
+input#zipCode-field.form-control:focus,
+input#posCode-field.form-control:focus,
+input#password-field.form-control:focus,
+input#password-field-repeat.form-control:focus {
+    border: 2px solid #2ddf5c;
+}
+
+.form-control__input:focus,
+select#gender-field:focus {
     background-color: #d8f3df;
-    border-color: #2ddf5c;
+    border: solid #2ddf5c;
     font-size: 1.6rem;
     justify-content: center;
 }
@@ -16,8 +65,7 @@
 
 .form-control__is-invalid:focus {
     outline: none;
-    background-color: rgb(215, 55, 55);
-    border-color: rgba(155, 25, 25, 0.87);
+    background-color: rgb(0, 0, 0);
 }
 
 .form-control__is-invalid {
@@ -25,8 +73,30 @@
     justify-content: center;
     padding: 4px;
     font-size: 1.4rem;
-    /*border-color: red;*/
-    /*background: rgb(250, 172,172);*/
+}
+
+a {
+    color: mediumturquoise;
+}
+
+p {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+p.error {
+    color: red;
+}
+
+.gen-error {
+    color: red;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0.3rem;
+    margin-top: 0.2rem;
+    font-size: 1rem;
+    text-align: match-parent;
 }
 
 @media (min-width: 40rem) {

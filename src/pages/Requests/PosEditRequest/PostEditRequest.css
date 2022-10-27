@@ -1,0 +1,11 @@
+.main-editPost {
+    display: flex;
+    flex-direction: column;
+    /*margin: 10rem;*/
+    padding: 10rem;
+    margin: auto;
+}
+
+.main-editPost__form {
+    margin: 10rem
+}

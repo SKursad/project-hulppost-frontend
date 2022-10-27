@@ -1,0 +1,6 @@
+.main-replyForm {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 10rem;
+}

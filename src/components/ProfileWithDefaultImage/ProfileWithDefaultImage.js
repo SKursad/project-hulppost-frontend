@@ -1,5 +1,6 @@
 import React from 'react';
 import defaultPicture from '../../assets/defaultProfilePic.png'
+import './ProfileWithDefaultPicture.css'
 
 const ProfileWithDefaultImage = props => {
     const { image, tempImage } = props;
@@ -10,6 +11,7 @@ const ProfileWithDefaultImage = props => {
     }
     return (
         <img
+            className={props.className || "defPicture"}
             alt={`Profile`}
             src={tempImage || imageSource}
             {...props}

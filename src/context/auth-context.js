@@ -59,20 +59,20 @@ function AuthContextProvider ({ children }) {
 
             });
             console.log(result.data)
+
             toggleIsAuth({
                 ...isAuth,
                 isAuth: true,
                 user: {
-                    id: result.data.id,
-                    username: result.data.username,
-                    email: result.data.email,
-                    roles: result.data.roles?.[0]?.name
+                    id: result.data?.id,
+                    username: result.data?.username,
+                    email: result.data?.email,
+                    // roles: result.data?.roles?.[0]?.name
+                    roles: result.data?.roles?.[0]?.name
                 },
                 status: 'done',
             });
-            if (redirectUrl) {
-                navigate(redirectUrl);
-            }
+                console.log(result.data?.id)
 
         } catch (e) {
             console.error(e);

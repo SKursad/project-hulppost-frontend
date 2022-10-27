@@ -8,8 +8,10 @@ const SignUpVolunteer = () => {
 
     return (
         <Screen title="Registreren als Vrijwilliger" wide={true}>
-            <h2>Registreren als Vrijwilliger</h2>
-            <RegistrationForm source={source} apiUrl={"/auth/registration/volunteer"}/>
+            <form className="form-container">
+                <h2 className="form-container__title">Registreren als Vrijwilliger</h2>
+                <RegistrationForm source={source} apiUrl={"/auth/registration/volunteer"}/>
+            </form>
         </Screen>
     );
 };

@@ -2,7 +2,8 @@ import Input from '../Input/Input';
 import React, {useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import api from '../../api/api-calls';
-import './RegistrationForm.css';
+import '../Input/InputForm.css';
+import Button from '../UI/Button/Button';
 
 
 let initialState = {
@@ -84,133 +85,130 @@ const RegistrationForm = ({source, apiUrl}) => {
     };
 
     return (
-        <>
-            <form className="form-container">
-                <div className="form-container__input">
-                    <Input
-                        nameRegister="Email"
-                        placeholder="voer een geldige E-mail"
-                        label="E-mailadres: "
-                        alt="input-email"
-                        type="email"
-                        id="email-field"
-                        // value={email}
-                        name="email"
-                        autoFocus={true}
-                        onChange={onChange}
-                        error={emailError}
-                    />
-                    <Input
-                        nameRegister="Gebruikersnaam"
-                        placeholder="kies een naam"
-                        label="username-field"
-                        alt="input-username"
-                        type="text"
-                        id="username-field"
-                        name="username"
-                        onChange={onChange}
-                        error={usernameError}
-                    />
-                    <Input
-                        nameRegister="Voornaam"
-                        placeholder="voer uw naam in"
-                        label="firstName-field"
-                        alt="input-firstName"
-                        type="text"
-                        id="firstName-field"
-                        name="firstName"
-                        onChange={onChange}
-                        error={firstNameError}
-                    />
-                    <Input
-                        nameRegister="Achternaam"
-                        placeholder="voer uw achternaam in"
-                        label="surname-field"
-                        alt="input-username"
-                        type="text"
-                        id="surname-field"
-                        name="surname"
-                        onChange={onChange}
-                        error={surnameError}
-                    />
-                    <Input
-                        nameRegister="Geboortedatum"
-                        placeholder="dd/mm/jjjj"
-                        label="birthday-field"
-                        alt="input-birthday"
-                        type="date"
-                        id="birthday-field"
-                        name="birthday"
-                        onChange={onChange}
-                        error={birthdayError}
-                        required={true}
-                    />
-                    <label htmlFor="gender-field">
-                        <p id="option-box">Ik ben:</p>
-                        <select
+        <main>
+            <div className="form-container__input">
+                <Input
+                    nameRegister="Email"
+                    placeholder="voer een geldige E-mail"
+                    label="E-mail"
+                    alt="input-email"
+                    type="email"
+                    id="email-field"
+                    // value={email}
+                    name="email"
+                    autoFocus={true}
+                    onChange={onChange}
+                    error={emailError}
+                />
+                <Input
+                    nameRegister="Gebruikersnaam"
+                    placeholder="kies een naam"
+                    label="username-field"
+                    alt="input-username"
+                    type="text"
+                    id="username-field"
+                    name="username"
+                    onChange={onChange}
+                    error={usernameError}
+                />
+                <Input
+                    nameRegister="Voornaam"
+                    placeholder="voer uw naam in"
+                    label="firstName-field"
+                    alt="input-firstName"
+                    type="text"
+                    id="firstName-field"
+                    name="firstName"
+                    onChange={onChange}
+                    error={firstNameError}
+                />
+                <Input
+                    nameRegister="Achternaam"
+                    placeholder="voer uw achternaam in"
+                    label="surname-field"
+                    alt="input-username"
+                    type="text"
+                    id="surname-field"
+                    name="surname"
+                    onChange={onChange}
+                    error={surnameError}
+                />
+                <Input
+                    nameRegister="Geboortedatum"
+                    placeholder="dd/mm/jjjj"
+                    label="birthday-field"
+                    alt="input-birthday"
+                    type="date"
+                    id="birthday-field"
+                    name="birthday"
+                    onChange={onChange}
+                    error={birthdayError}
+                    required={true}
+                />
+                <label htmlFor="gender-field">
+                    <p id="option-box">Ik ben:</p>
+                    <select
 
-                            id="gender-field"
-                            name="gender"
-                            // value={gender}
-                            onChange={onChange}
-                        >
-                            <option value=""/>
-                            <option value="M"> Man</option>
-                            <option value="V"> Vrouw</option>
-                        </select>
-                        {genError &&
-                            <small className="gen-error">{genError}</small>}
-                    </label>
-                    <Input
-                        nameRegister="Postcode"
-                        placeholder="1000AA"
-                        label="zipCode-field"
-                        alt="input-zipCode"
-                        type="text"
-                        id="zipCode-field"
-                        name="zipCode"
+                        id="gender-field"
+                        name="gender"
+                        // value={gender}
                         onChange={onChange}
-                        error={zipCodeError}
-                    />
-                    <Input
-                        nameRegister="Wachtwoord"
-                        placeholder="kies een wachtwoord"
-                        label="Password-field"
-                        alt="input-password"
-                        autoComplete="false"
-                        type="password"
-                        id="password-field"
-                        name="password"
-                        onChange={onChange}
-                        error={passwordError}
-                    />
-                    <Input
-                        nameRegister="Herhaal wachtwoord"
-                        placeholder="herhaal uw wachtwoord"
-                        label="Password-repeat-field"
-                        alt="input-password-repeat"
-                        autoComplete="false"
-                        type="password"
-                        id="password-field-repeat"
-                        name="passwordRepeat"
-                        onChange={onChange}
-                        error={passwordRepeatError}
-                    />
-                </div>
-                <button
+                    >
+                        <option value=""/>
+                        <option value="M"> Man</option>
+                        <option value="V"> Vrouw</option>
+                    </select>
+                    {genError &&
+                        <small className="gen-error">{genError}</small>}
+                </label>
+                <Input
+                    nameRegister="Postcode"
+                    placeholder="1000AA"
+                    label="zipCode-field"
+                    alt="input-zipCode"
+                    type="text"
+                    id="zipCode-field"
+                    name="zipCode"
+                    onChange={onChange}
+                    error={zipCodeError}
+                />
+                <Input
+                    nameRegister="Wachtwoord"
+                    placeholder="kies een wachtwoord"
+                    label="Password-field"
+                    alt="input-password"
+                    autoComplete="false"
+                    type="password"
+                    id="password-field"
+                    name="password"
+                    onChange={onChange}
+                    error={passwordError}
+                />
+                <Input
+                    nameRegister="Herhaal wachtwoord"
+                    placeholder="herhaal uw wachtwoord"
+                    label="Password-repeat-field"
+                    alt="input-password-repeat"
+                    autoComplete="false"
+                    type="password"
+                    id="password-field-repeat"
+                    name="passwordRepeat"
+                    onChange={onChange}
+                    error={passwordRepeatError}
+                />
+            </div>
+            <div className="form-container__button">
+                <Button
+                    title="register-button"
                     onClick={handleSubmit}
-                    className="form-button"
                     disabled={loading || !errors}
                 >
                     Registreren
-                </button>
-
-                <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
-                <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
-            </form>
-
-
-        </>
+                </Button>
+            </div>
+            <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
+            <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
+        </main>
     );
 };
 

@@ -1,0 +1,109 @@
+.form-upload {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /*align-items: center;*/
+    /*align-content: center;*/
+    /*position: relative;*/
+    /*justify-content: center;*/
+    margin:auto;
+    padding: 18.5rem 9rem;
+    width: 100%;
+    height: 100%;
+}
+
+.form-upload__h4 {
+    padding: 2rem;
+    text-align: center;
+}
+
+.form-upload__page-container {
+    display: flex;
+    text-align: center;
+    /*height: 10%;*/
+    position: relative;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /*align-content: center;*/
+    margin: auto;
+    /*padding: -20rem;*/
+   /*max-width: 100%;*/
+}
+
+
+.form-upload__image {
+    display: flex;
+    flex-direction: column;
+    height: 15%;
+    position: relative;
+    /*padding: 2rem;*/
+    margin: 1rem 0 2rem -14rem;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+.form-upload__label {
+    /*display: none;*/
+    position: relative;
+    height: 20rem;
+    text-transform: uppercase;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    /*justify-content: center;*/
+    /*justify-items: center;*/
+    /*align-items: center;*/
+    /*left: 1rem;*/
+    /*top: .6rem;*/
+}
+
+.form-upload__p {
+    margin: -1rem -10.6rem -2rem 1rem;
+    justify-content: center;
+    color: #000000;
+    text-transform: uppercase;
+    font-weight: bold;
+    align-items: center;
+    align-content: center;
+}
+
+.form-upload__preview {
+    /*display: flex;*/
+    padding: -4rem;
+    margin: -3rem;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+input#Id.form-control {
+    display: flex;
+    flex-direction: column;
+    margin: 3rem -1rem 1rem 4rem;
+    padding: 1rem 0 2rem 4rem;
+    color: cadetblue;
+
+    /*background-color: cornflowerblue;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*align-content: center;*/
+
+}
+
+
+
+/*.form-upload__label {*/
+/*    width: 3rem;*/
+/*    !*display: flex;*!*/
+/*    !*flex-direction: column;*!*/
+/*    !*margin: 3rem;*!*/
+/*    !*height: 30%;*!*/
+/*}*/
+
+/*.form-upload__button {*/
+/*    margin: auto;*/
+/*    height: 10%;*/
+/*}*/

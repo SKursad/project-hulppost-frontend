@@ -1,0 +1,12 @@
+.main-request {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 6rem 4rem 4rem 4rem;
+    left: 1rem;
+}
+
+.main-request__info {
+    margin: 4rem;
+
+}
