@@ -5,6 +5,10 @@ import Screen from '../../../components/UI/Screen/Screen';
 import Button from '../../../components/UI/Button/Button';
 import './UploadImage.css';
 import Input from '../../../components/Input/Input';
+import {FaImages} from 'react-icons/fa';
+import {FcCancel} from 'react-icons/fc';
+import {TiCancel} from 'react-icons/ti';
+import {MdCancel} from 'react-icons/md';
 
 
 function ImageRequestPage() {
@@ -59,7 +63,7 @@ function ImageRequestPage() {
                         <Input
                             type="file"
                             name="image-field"
-                            id="Id"
+                            id="form-upload__id"
                             accept="image/jpeg,image/png,image/webp,image/gif"
                             required={true}
                             onChange={handleImageChange}/>
@@ -77,12 +81,12 @@ function ImageRequestPage() {
                     <Button
                         type="submit"
                         disabled={error}>
-                        UPLOADEN
+                        UPLOADEN<FaImages/>
                     </Button>
                     <Button
                         type="button"
                         onClick={() => navigate(`/request/${id}`)}>
-                        ANNULEREN
+                        ANNULEREN<MdCancel/>
                     </Button>
                 </div>
             </form>

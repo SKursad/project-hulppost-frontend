@@ -8,6 +8,7 @@ import './Navbar.css';
 function NavBar(props) {
     const {isAuth, logout, user} = useContext(AuthContext);
     const navigate = useNavigate();
+    const context = useContext(AuthContext)
     const [isMobile, setIsMobile] = useState(false);
 
 
@@ -18,14 +19,21 @@ function NavBar(props) {
                         <ul className={isMobile ? "nav__mobile" : "nav__links"}
                             onClick={() => setIsMobile(false)}>
                             <li className="nav__mobile-logout">
+
+
+                                {context.user.roles === 'ROLE_HELP-SEEKER' &&
+                                    <Link aria-label="profile-page" title="profile-page" to={`/profile/${user.id}`}
+                                          className="nav__profile">PROFIEL </Link>}
+                                {context.user.roles === 'ROLE_HELP-SEEKER' &&
                                 <Link aria-label="create-request" title="create-request" to={`/post-request`}
-                                      className="nav__request">STEL EEN HULPVRAAG</Link>
-                                <Link aria-label="request-feed" title="request-feed" to={`/request-search`}
-                                      className="nav__feed">HULPVRAGEN </Link>
-                                <Link aria-label="profile-page" title="profile-page" to={`/profile/${user.id}`}
-                                      className="nav__profile">PROFIEL </Link>
-                                <Link aria-label="logout" title="profile-page" to={logout} onClick={logout}
-                                      className="nav__logout">AFMELDEN</Link>
+                                      className="nav__request">STEL EEN HULPVRAAG</Link>}
+                                {context.user.roles === 'ROLE_VOLUNTEER' &&
+                                <Link aria-label="profile-page" title="profile-page" to={`/profile-volunteer/${user.id}`}
+                                      className="nav__profile">PROFIEL </Link>}
+                                    <Link aria-label="request-feed" title="request-feed" to={`/request-search`}
+                                          className="nav__feed">ALLE HULPAANVRAGEN </Link>
+                                    <Link aria-label="logout" title="logout" to={`/request-search`} onClick={logout}
+                                          className="nav__logout">AFMELDEN</Link>
                             </li>
                         </ul>
                         <button className="nav__mobile-menu" title="nav-button"

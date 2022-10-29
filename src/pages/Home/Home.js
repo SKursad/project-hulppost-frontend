@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import Screen from '../../components/UI/Screen/Screen';
+import {VscAccount} from 'react-icons/vsc';
 import './Home.css';
 
 const Home = () => {
@@ -16,14 +17,14 @@ const Home = () => {
                         {/*<div  id="volunteer">*/}
                             <h2 className="app-overview__title"> Wil je helpen? </h2>
                             <p className="app-overview__sub">Maak een account aan als je iets voor iemand kan betekenen.</p>
-                            <button title="register-helpSeeker" className="btn" onClick={() => navigate(`/register/volunteer`)}>Registreer</button>
+                            <button title="register-helpSeeker" className="btn" onClick={() => navigate(`/register/volunteer`)}><VscAccount/>Registreer</button>
                         {/*</div>*/}
                     </section>
                     <section className="app-overview__register" id="help-seeker">
                         {/*<div id="help-seeker">*/}
                             <h2 className="app-overview__title"> Heb je een hulpvraag? </h2>
                             <p className="app-overview__sub">Maak een account aan als je hulp nodig hebt.</p>
-                            <button title="register-volunteer" className="btn" onClick={() => navigate(`/register/help-seeker`)}>Registreer</button>
+                            <button title="register-volunteer" className="btn" onClick={() => navigate(`/register/help-seeker`)}><VscAccount/>Registreer</button>
                         {/*</div>*/}
 
                     </section>

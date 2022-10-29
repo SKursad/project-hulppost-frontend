@@ -1,3 +1,23 @@
 .defPicture {
-    margin: 4rem;
+    margin: 5rem 1rem 1rem;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.29);
+    height: 15rem;
+    width: 15rem;
+}
+
+.defPicture:hover {
+    border: 2px solid turquoise;
+}
+
+@media (min-width: 40rem) {
+    .defPicture {
+        display: inline-flex;
+        flex-direction: unset;
+        margin: 5rem 1rem 1rem;
+        /*flex-direction: row;*/
+        justify-items: start;
+        align-items: start;
+    }
+
 }

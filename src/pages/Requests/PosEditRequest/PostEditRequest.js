@@ -16,12 +16,12 @@ let initialState = {
 
 const options = ["", "Praktisch", "Sociaal"];
 
-const PostEditRequest = ({apiUrlGet, apiUrlPost, apiUrlPut}) => {
+const PostEditRequest = (props) => {
 
+    const {id} = useParams();
     const [formValue, setFormValue] = useState(initialState);
     const [editMode, setEditMode] = useState(false);
     const {title, content, typeRequest} = formValue;
-    const {id} = useParams();
     const navigate = useNavigate();
 
 
@@ -127,7 +127,7 @@ const PostEditRequest = ({apiUrlGet, apiUrlPost, apiUrlPut}) => {
                 </label>
                 {/*</div>*/}
                 <Button type="submit">{editMode ? "UPDATE" : "VERZENDEN"}</Button>
-                <Button type="button" onClick={() => navigate(`/request`)}>ANNULEREN</Button>
+                <Button type="button" onClick={() => navigate(`/request/${id}`)}>ANNULEREN</Button>
                 </div>
             </form>
 

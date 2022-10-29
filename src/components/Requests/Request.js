@@ -1,8 +1,9 @@
 import React, {useContext} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useParams} from 'react-router-dom';
 import {AuthContext} from '../../context/auth-context';
 
 const Request = (props) => {
+    const {id} = useParams();
     const request = props.request;
     const date = new Date(request.timestamp);
     const context = useContext(AuthContext);

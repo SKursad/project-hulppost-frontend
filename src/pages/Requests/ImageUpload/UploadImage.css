@@ -17,6 +17,12 @@
     text-align: center;
 }
 
+
+button.button:nth-child(2) > svg:nth-child(1),
+button.button:nth-child(3) > svg:nth-child(1) {
+    margin: 0 0 0 .5rem;
+}
+
 .form-upload__page-container {
     display: flex;
     text-align: center;
@@ -43,6 +49,7 @@
     align-items: center;
     align-content: center;
 }
+
 .form-upload__label {
     /*display: none;*/
     position: relative;
@@ -79,19 +86,21 @@
     align-content: center;
 }
 
-input#Id.form-control {
-    display: flex;
-    flex-direction: column;
-    margin: 3rem -1rem 1rem 4rem;
-    padding: 1rem 0 2rem 4rem;
-    color: cadetblue;
+    #form-upload__id {
+        display: flex;
+        flex-direction: row;
+        margin: 3rem -1rem 1rem 4rem;
+        padding: 1rem 1rem 2rem 4rem;
+        color: cadetblue;
+        font-weight: bold;
+    }
 
     /*background-color: cornflowerblue;*/
     /*justify-content: center;*/
     /*align-items: center;*/
     /*align-content: center;*/
 
-}
+/*}*/
 
 
 

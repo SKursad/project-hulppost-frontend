@@ -6,13 +6,17 @@ import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage
 import Button from '../../../components/UI/Button/Button';
 import Screen from '../../../components/UI/Screen/Screen';
 import {getToken} from '../../../helper/AccesToken/GetToken';
-import Reply from '../../Reply/Reply';
+import Reply from '../../../components/Replies/Reply';
 import './RequestWithReplies.css';
 import {AuthContext} from '../../../context/auth-context';
+import {FaCommentDots, FaHandsHelping, FaTrashAlt} from 'react-icons/fa';
+import {MdUpdate} from 'react-icons/md';
+import {VscAccount} from 'react-icons/vsc';
 
 
 const RequestWithReplies = () => {
     const {id} = useParams();
+    const replyId = id;
     const [requestData, setRequestData] = useState({});
     const [replyData, setReplyData] = useState({});
     const [userData, setUserData] = useState({});
@@ -33,8 +37,8 @@ const RequestWithReplies = () => {
             setRequestData({...requestData.data});
             setReplyData(replyData.data);
             // const { } = replyData.data[0];
-            console.log(requestData);
-            console.log(replyData);
+            // console.log(requestData);
+            // console.log(replyData);
         } else {
         }
     };
@@ -43,7 +47,7 @@ const RequestWithReplies = () => {
         const userData = await api.get(`/hulppost/users?requestId=${id}`, getToken());
         if (userData.status === 200) {
             setUserData(userData.data[0]);
-            console.log(userData);
+            // console.log(userData);
         } else {
         }
     };
@@ -75,13 +79,14 @@ const RequestWithReplies = () => {
     return (
         <Screen title="Hulpvraag & Reacties">
             <main className="main-request">
-                <p>Geplaatst door:</p>
-                <ProfileWithDefaultImage
-                    width="200"
-                    height="200"
-                    alt={`${context.username} profile`}
-                    image={userData.image}
-                />
+                <div className="main-request__div-img">
+                    <p className="main-request__p">Geplaatst door</p>
+                    <Link to={`/profile/${userData.id}`}>
+                    <ProfileWithDefaultImage
+                        alt={`${userData.username} profile`}
+                        image={userData.image}
+                    /> </Link>
+                </div>
                 {Object.keys(requestData).length > 0 ? (
                     <section className="main-request__info">
                         {/*<p>{replyData.text}</p>*/}
@@ -101,7 +106,7 @@ const RequestWithReplies = () => {
                             />
                         )}
                     </section>
-                ) : (<p>Er zijn nog geen hulpvragen</p>)}
+                ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
                 <div>
                     {replyData.length > 0 ? (
                         replyData.map(reply => {
@@ -111,24 +116,28 @@ const RequestWithReplies = () => {
 
                 {!context.user ? (<>
                     Wil je helpen ? {""}
-                    <Button type="button" onClick={() => navigate(`/register/help-seeker`)}>
-                        MAAK DAN EEN ACCOUNT AAN</Button>
+                    <Button id="main-request__button" type="button" onClick={() => navigate(`/register/help-seeker`)}>
+                        MAAK DAN EEN ACCOUNT AAN<VscAccount/></Button>
                 </>) : (<>
                         {context.user.roles === 'ROLE_HELP-SEEKER' ? (<>
                             {context.user.id === requestData.userId ? (<>
-                                <Button type="button" onClick={() => navigate(`/createReply/${id}`)}>REAGEER
-                                    TERUG</Button>
-                                <Button type="button"
-                                        onClick={() => navigate(`/edit-request/${id}`)}>UPDATEN </Button>
-                                <Button onClick={deleteHandler}>VERWIJDEREN</Button>
+                                <div className="main-request__div-button">
+                                    {replyData.length > 0 ? (
+                                    <Button id="main-request__button" type="button"
+                                            onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG
+                                        <FaCommentDots/> </Button>) : ("")}
+                                    <Button id="main-request__button" type="button"
+                                            onClick={() => navigate(`/edit-request/${id}`)}>UPDATEN<MdUpdate/></Button>
+                                    <Button id="main-request__button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
+                                </div>
                             </>) : ('')}
                         </>) : ('')}
                         {context.user.roles === 'ROLE_VOLUNTEER' ? (<>
-                            <Button type="button" onClick={() => navigate(`/post-reply/${id}`)}>HELPEN</Button>
-                            <Button type="button" onClick={() => navigate(`/edit-Reply/${id}`)}>UPDATEN</Button>
-                        </>) : (<>{context.user.id === replyData.userId ?
-                            <Button type="button" onClick={() => navigate(`/edit-Reply/${id}`)}>UPDATEN</Button> : ('')}
-                        </>)}
+                                <div className="main-request__div-button">
+                            <Button id="main-request__button" type="button"
+                                    onClick={() => navigate(`/post-reply/${id}`)}>HELPEN<FaHandsHelping/></Button>
+                                </div>
+                        </>) : ("")}
                     </>
                 )}
             </main>

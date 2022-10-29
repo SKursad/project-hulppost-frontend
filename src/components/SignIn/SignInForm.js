@@ -28,7 +28,6 @@ function SignInForm({apiUrl}) {
 
         try {
             const result = await api.post(apiUrl, {...formValue});
-            // const result = await api.post('/auth/login', {...formValue});
             console.log(result.data);
             login(result.data.accessToken);
 

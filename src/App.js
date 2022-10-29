@@ -14,6 +14,10 @@ import UploadImage from './pages/Requests/ImageUpload/UploadImage';
 import RequestWithReplies from './pages/Requests/RequestWithReplies/RequestWithReplies';
 import SearchRequests from './pages/Requests/RequestsFeed/SearchRequests';
 import PostReply from './pages/Reply/PostReply';
+import Profile from './pages/Profiles/HelpSeekerProfile/Profile';
+import VolunteerProfile from './pages/Profiles/VolunteerProfile/VolunteerProfile';
+import EditReply from './pages/Reply/EditReply';
+import SingleReply from './pages/Reply/SingleReply';
 
 function App(props) {
     const {isAuth} = useContext(AuthContext);
@@ -31,7 +35,10 @@ function App(props) {
                     <Route path="/post-request" element={<PostEditRequest/>}/>
                     <Route path="/edit-request/:id" element={<PostEditRequest/>}/>
                     <Route path="/post-reply/:id" element={<PostReply/>}/>
-                    <Route path="/edit-reply/:id" element={<PostReply/>}/>
+                    <Route path="/edit-reply/:id" element={<EditReply/>}/>
+                    <Route path="/reply/:id" element={<SingleReply/>}/>
+                    <Route path="/profile/:id/*" element={<Profile/>}/>
+                    <Route path="/profile-volunteer/:id/*" element={<VolunteerProfile/>}/>
                     <Route path="/image/:id" element={<UploadImage/>}/>
                     <Route element={<LoginPrivateRoutes authenticated={isAuth}/>}>
                         <Route path="/login" element={<SignIn authenticated={isAuth}/>}/>

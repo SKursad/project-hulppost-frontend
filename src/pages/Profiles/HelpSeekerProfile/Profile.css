@@ -1,0 +1,11 @@
+.main-profile__replies {
+    margin: 10rem;
+    padding: 10rem;
+}
+
+.main-profile {
+    display: flex;
+    flex-direction: column;
+    margin: 10rem;
+    padding: 10rem;
+}

@@ -10,12 +10,11 @@ const RequestsFeed = ({request}) => {
 
 
     return (
-        <Screen>
+        <Screen title="Alle Hulpaanvragen" wide={true}>
         <article className="feed-article">
             <div className="feed-article__block">
             <Link to={`/request/${request.id}`}>
-                <h2>{request.title}</h2>
-                <p >{request.datetime}</p>
+                <h2 className='feed-article__h2'>{request.title}</h2>
             </Link>
             <p className="feed-article__type-request" >
                 {(request.typeRequest)} </p>
@@ -25,8 +24,9 @@ const RequestsFeed = ({request}) => {
                     : `${(request.content).slice(0, 40)}...`}
             </p>
             {attachmentImageVisible && (
-                <div>
+                <div className="feed-article__div-img">
                     <img
+                        className="feed-article__img"
                         alt="attachment"
                         src={`http://localhost:8080/images/attachments/${request.fileAttachment.name}`}
                     />
