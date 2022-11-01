@@ -10,17 +10,17 @@ let initialState = {
     username: null,
 };
 
-function SignInForm({apiUrl}) {
+function SignInForm({apiUrl, source}) {
     const [formValue, setFormValue] = useState(initialState);
     const [error, toggleError] = useState(false);
     const {login} = useContext(AuthContext);
 
 
-    // useEffect(() => {
-    //     return function cleanup() {
-    //         source.cancel();
-    //     };
-    // }, [source]);
+    useEffect(() => {
+        return function cleanup() {
+            source.cancel();
+        };
+    }, [source]);
 
     async function handleSubmit(e) {
         e.preventDefault();

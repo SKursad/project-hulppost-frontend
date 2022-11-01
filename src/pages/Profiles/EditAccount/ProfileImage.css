@@ -1,0 +1,11 @@
+.div-profileImage {
+    display: flex;
+    flex-direction: column;
+    max-height: 100vh;
+    margin: 30rem;
+}
+
+#form-upload__preview {
+    margin: 10rem;
+
+}

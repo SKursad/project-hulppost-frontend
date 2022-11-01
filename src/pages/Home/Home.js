@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import Screen from '../../components/UI/Screen/Screen';
 import {VscAccount} from 'react-icons/vsc';
 import './Home.css';

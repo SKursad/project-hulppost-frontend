@@ -34,6 +34,15 @@
     text-align: center;
 }
 
+.main-reply__div-button {
+    display: inline-flex;
+    flex-direction: column;
+    position: relative;
+    padding: .5rem;
+    text-align: center;
+    margin: 2rem;
+}
+
 #main-request__button {
     display: inline-flex;
     flex-direction: row;
@@ -41,6 +50,16 @@
     padding: .6rem;
     text-align: center;
     align-self: center;
+}
+
+#main-reply__button {
+    display: inline-flex;
+    flex-direction: row;
+    position: relative;
+    padding: .6rem;
+    text-align: center;
+    align-content: center;
+   margin: 0 19rem;
 }
 
 button.button:nth-child(3) > svg:nth-child(1),

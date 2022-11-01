@@ -1,7 +1,7 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
 import Screen from '../UI/Screen/Screen';
-import './RequestFeed.css'
+import './RequestFeed.css';
 
 const RequestsFeed = ({request}) => {
 

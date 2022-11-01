@@ -1,0 +1,8 @@
+.main-profiles {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    position: relative;
+    padding: 10rem;
+    max-height: 100%;
+}

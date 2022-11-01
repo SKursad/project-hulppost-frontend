@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import Input from '../../../components/Input/Input';
 import Feed from '../../../components/Requests/Feed';
 import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
@@ -8,12 +7,11 @@ import {Link} from 'react-router-dom';
 import './SearchRequests.css';
 
 
-const SearchRequests = (props) => {
+const SearchRequests = () => {
 
     const [requests, setRequests] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [search, setSearch] = useState('');
-    const [error, setError] = useState();
     const context = useContext(AuthContext);
     const attachmentImageVisible =
         requests.fileAttachment && requests.fileAttachment.fileType.startsWith('image');
@@ -22,7 +20,7 @@ const SearchRequests = (props) => {
     useEffect(() => {
         const fetchRequests = async () => {
             try {
-                const response = await api.get('/hulppost/requests');
+                const response = await api.get('/api/v1/requests');
                 setRequests(response.data);
                 console.log(response);
 

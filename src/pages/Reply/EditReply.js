@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import Screen from '../../components/UI/Screen/Screen';
-import classes from '../../components/UI/Card/Card.css';
 import InputFormTextarea from '../../components/Input/InputFormTextarea';
 import Button from '../../components/UI/Button/Button';
 import api from '../../api/api-calls';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
-import reply from '../../components/Replies/Reply';
-import request from '../../components/Requests/Request';
 
 let initialState = {
     text: '',
@@ -27,8 +24,8 @@ const EditReply = () => {
 
     }, [id]);
 
-    const getSingleReply = async (replyId) => {
-        const singleReply = await api.get(`/hulppost/replies/${id}`);
+    const getSingleReply = async () => {
+        const singleReply = await api.get(`/api/v1/replies/${id}`);
         if (singleReply.status === 200) {
             setFormValue({...singleReply.data});
         } else {
@@ -39,20 +36,18 @@ const EditReply = () => {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        const updateReplyData = {...formValue, timestamp: new Date()};
-        const response = await api.put(`/hulppost/replies/${id}`,
-            updateReplyData, getToken());
-        console.log(response.data);
-        if (response.status === 200) {
-        setFormValue({text: '', timestamp: new Date()});
-        navigate(`/reply/${id}`);
+        try {
+            const updateReplyData = {...formValue, timestamp: new Date()};
+            const response = await api.put(`/api/v1/replies/${id}`,
+                updateReplyData, getToken());
+            console.log(response.data);
+            if (response.status === 200)
+                setFormValue({text: '', timestamp: new Date()});
+            navigate(`/reply/${id}`);
             // x
-        } else {
+        } catch (e) {
             // x
         }
-
-
-
     }
 
     const onInputChange = (e) => {

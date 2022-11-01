@@ -1,6 +1,6 @@
 import Input from '../Input/Input';
 import React, {useEffect, useState} from 'react';
-import {Link, useNavigate, useParams} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import api from '../../api/api-calls';
 import '../Input/InputForm.css';
 import Button from '../UI/Button/Button';
@@ -20,11 +20,9 @@ let initialState = {
 
 const RegistrationForm = ({source, apiUrl}) => {
     const [formValue, setFormValue] = useState(initialState);
-    const [error, toggleError] = useState(false);
+    // const [error, toggleError] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, toggleLoading] = useState(false);
-    const {id} = useParams();
-    // const source = axios.CancelToken.source();
     const navigate = useNavigate();
 
 
@@ -37,25 +35,25 @@ const RegistrationForm = ({source, apiUrl}) => {
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
-        toggleError(false);
+        // toggleError(false);
         toggleLoading(true);
 
         try {
-            // const [username, email, ] = form
             const response = await api.post(apiUrl, {...formValue});
 
             console.log(response.data);
             // navigate(`/profileEdit/${id}`);
+            navigate(`/login`)
         } catch (e) {
-            toggleError(false);
+            // toggleError(false);
             console.error(e);
             console.log(e.response.data);
             if (e.response.data) {
-                toggleError(true);
+                // toggleError(true);
                 setErrors(e.response.data);
 
             }
-            toggleError(false);
+            // toggleError(false);
         }
         toggleLoading(false);
     }
@@ -135,7 +133,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                 />
                 <Input
                     nameRegister="Geboortedatum"
-                    placeholder="dd/mm/jjjj"
+                    placeholder="dd/mm/yyyy"
                     label="birthday-field"
                     alt="input-birthday"
                     type="date"
@@ -201,7 +199,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                 <Button
                     title="register-button"
                     onClick={handleSubmit}
-                    disabled={loading || !errors}
+                    disabled={loading}
                 >
                     Registreren
                 </Button>

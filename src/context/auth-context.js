@@ -51,7 +51,7 @@ function AuthContextProvider ({ children }) {
 
     async function fetchUserData(userId, token, redirectUrl) {
         try {
-            const result = await api.get(`/auth/${userId}`, {
+            const result = await api.get(`/api/v1/auth/${userId}`, {
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: `Bearer ${token}`,

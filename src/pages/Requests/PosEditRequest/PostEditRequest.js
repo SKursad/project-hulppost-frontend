@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import api from '../../../api/api-calls'
+import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
 import InputFormTextarea from '../../../components/Input/InputFormTextarea';
 import Button from '../../../components/UI/Button/Button';
 import {getToken} from '../../../helper/AccesToken/GetToken';
-import './PostEditRequest.css'
+import './PostEditRequest.css';
 
 let initialState = {
     title: "",
@@ -16,7 +16,7 @@ let initialState = {
 
 const options = ["", "Praktisch", "Sociaal"];
 
-const PostEditRequest = (props) => {
+const PostEditRequest = () => {
 
     const {id} = useParams();
     const [formValue, setFormValue] = useState(initialState);
@@ -36,7 +36,7 @@ const PostEditRequest = (props) => {
     }, [id]);
 
     const getSingleRequest = async (id) => {
-        const singleRequest = await api.get(`/hulppost/requests/${id}`);
+        const singleRequest = await api.get(`/api/v1/requests/${id}`);
         if (singleRequest.status === 200) {
             setFormValue({...singleRequest.data});
             console.log(singleRequest.data)
@@ -51,7 +51,7 @@ const PostEditRequest = (props) => {
         if (!editMode) {
             // const createdRequest = { id, title, datetime, content, typeRequest};
             const createdRequestData = {...formValue, timestamp: new Date()};
-            const response = await api.post(`/hulppost/requests`,
+            const response = await api.post(`/api/v1/requests`,
                 createdRequestData, getToken());
             console.log(response.data)
            // x
@@ -59,7 +59,7 @@ const PostEditRequest = (props) => {
         } else {
 
             const updatedRequestData = {...formValue, timestamp: new Date()};
-            const response = await api.put(`/hulppost/requests/${id}`,
+            const response = await api.put(`/api/v1/requests/${id}`,
                 updatedRequestData, getToken());
             console.log(response.data)
             if (response.status === 200) {
@@ -127,7 +127,7 @@ const PostEditRequest = (props) => {
                 </label>
                 {/*</div>*/}
                 <Button type="submit">{editMode ? "UPDATE" : "VERZENDEN"}</Button>
-                <Button type="button" onClick={() => navigate(`/request/${id}`)}>ANNULEREN</Button>
+                <Button type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN</Button>
                 </div>
             </form>
 

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 import {useNavigate, useParams} from 'react-router-dom';
 import Screen from '../../../components/UI/Screen/Screen';
@@ -6,16 +6,16 @@ import Button from '../../../components/UI/Button/Button';
 import './UploadImage.css';
 import Input from '../../../components/Input/Input';
 import {FaImages} from 'react-icons/fa';
-import {FcCancel} from 'react-icons/fc';
-import {TiCancel} from 'react-icons/ti';
 import {MdCancel} from 'react-icons/md';
+import api from '../../../api/api-calls'
+import {getToken} from '../../../helper/AccesToken/GetToken';
+import header from '../../../components/Layout/Header/Header';
 
 
 function ImageRequestPage() {
     const [file, setFile] = useState([]);
     const [previewUrl, setPreviewUrl] = useState('');
     const {id} = useParams();
-    const token = localStorage.getItem("token");
     const [error, setError] = useState(false);
     const navigate = useNavigate();
 
@@ -41,11 +41,13 @@ function ImageRequestPage() {
 
         e.preventDefault();
         const formData = new FormData();
+
         formData.append("file", file);
 
         try {
-            const response = await axios.post(`http://localhost:8080/hulppost/requests/${id}/image`, formData);
-
+            let tokenConfig = getToken();
+            delete tokenConfig.headers['Content-Type'];
+            const response = await api.post(`/api/v1/requests/${id}/image`, formData, tokenConfig);
             navigate(`/request/${id}`);
             console.log(response.data);
         } catch (e) {
@@ -92,8 +94,7 @@ function ImageRequestPage() {
             </form>
         </Screen>
 
-    )
-        ;
+    );
 }
 
 export default ImageRequestPage;

@@ -14,13 +14,18 @@ import UploadImage from './pages/Requests/ImageUpload/UploadImage';
 import RequestWithReplies from './pages/Requests/RequestWithReplies/RequestWithReplies';
 import SearchRequests from './pages/Requests/RequestsFeed/SearchRequests';
 import PostReply from './pages/Reply/PostReply';
-import Profile from './pages/Profiles/HelpSeekerProfile/Profile';
 import VolunteerProfile from './pages/Profiles/VolunteerProfile/VolunteerProfile';
 import EditReply from './pages/Reply/EditReply';
 import SingleReply from './pages/Reply/SingleReply';
+import HelpSeekerProfile from './pages/Profiles/HelpSeekerProfile/HelpSeekerProfile';
+import EditPersonalData from './pages/Profiles/EditAccount/EditPersonalData';
+import EditProfileData from './pages/Profiles/EditAccount/EditProfileData';
+import ChangePassword from './pages/Profiles/EditAccount/ChangePassword';
+import ProfileImage from './pages/Profiles/EditAccount/ProfileImage';
+import Profiles from './pages/Profiles/Profiles';
 
 function App(props) {
-    const {isAuth} = useContext(AuthContext);
+    const {isAuth, logout} = useContext(AuthContext);
 
     return (
         // <>
@@ -37,8 +42,13 @@ function App(props) {
                     <Route path="/post-reply/:id" element={<PostReply/>}/>
                     <Route path="/edit-reply/:id" element={<EditReply/>}/>
                     <Route path="/reply/:id" element={<SingleReply/>}/>
-                    <Route path="/profile/:id/*" element={<Profile/>}/>
-                    <Route path="/profile-volunteer/:id/*" element={<VolunteerProfile/>}/>
+                    <Route path="/profile/:id/*" element={<HelpSeekerProfile/>}/>
+                    <Route path="/profile-volunteer/:id/*" logOut={logout} element={<VolunteerProfile/>}/>
+                    <Route path="/edit-personalData/:id/*" element={<EditPersonalData/>}/>
+                    <Route path="/edit-profileData/:id/*" element={<EditProfileData/>}/>
+                    <Route path="/change-password/:id/*" element={<ChangePassword/>}/>
+                    <Route path="/put-profileImage/:id/*" element={<ProfileImage/>}/>
+                    <Route path="/profiles" element={<Profiles/>}/>
                     <Route path="/image/:id" element={<UploadImage/>}/>
                     <Route element={<LoginPrivateRoutes authenticated={isAuth}/>}>
                         <Route path="/login" element={<SignIn authenticated={isAuth}/>}/>

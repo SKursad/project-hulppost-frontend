@@ -1,18 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useContext} from 'react';
 import {AuthContext} from '../../context/auth-context';
-import {Link, useParams} from 'react-router-dom';
-import request from '../Requests/Request';
-import api from '../../api/api-calls';
-import {getToken} from '../../helper/AccesToken/GetToken';
+import {Link} from 'react-router-dom';
 
 const Reply = (props) => {
-    const {id} = useParams();
     const reply = props.reply;
-    const date = new Date(reply.timestamp);
     const context = useContext(AuthContext);
-    const [replyData, setReplyData] = useState([]);
-    const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`;
-
+    const date = new Date(reply.timestamp);
+    const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
 
     return (
         <div>

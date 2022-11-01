@@ -10,7 +10,7 @@ const SignUpVolunteer = () => {
         <Screen title="Registreren als Vrijwilliger" wide={true}>
             <form className="form-container">
                 <h2 className="form-container__title">Registreren als Vrijwilliger</h2>
-                <RegistrationForm source={source} apiUrl={"/auth/registration/volunteer"}/>
+                <RegistrationForm source={source} apiUrl={"/api/v1/auth/registration/volunteer"}/>
             </form>
         </Screen>
     );

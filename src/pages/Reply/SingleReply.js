@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import api from '../../api/api-calls';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
 import ProfileWithDefaultImage from '../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 import Screen from '../../components/UI/Screen/Screen';
 import Button from '../../components/UI/Button/Button';
-import {FaCommentDots, FaHandsHelping, FaTrashAlt} from 'react-icons/fa';
+import {FaTrashAlt} from 'react-icons/fa';
 import {MdUpdate} from 'react-icons/md';
 import {AuthContext} from '../../context/auth-context';
 
@@ -16,11 +16,12 @@ const SingleReply = () => {
     const [userData, setUserData] = useState([]);
     const navigate = useNavigate();
     const date = new Date(replyData.timestamp);
-    const dateFormatted = `${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
+    const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
+
 
 
     const getReplyById = async (id) => {
-        const replyData = await api.get(`hulppost/replies/${id}`);
+        const replyData = await api.get(`/api/v1/replies/${id}`);
         // const replyData = await api.get(`hulppost/requests?replyId=${id}`);
         if (replyData.status === 200 || replyData.status === 200) {
             // setRequestData({...requestData.data});
@@ -33,7 +34,7 @@ const SingleReply = () => {
     };
 
     const getUserById = async () => {
-        const userData = await api.get(`/hulppost/users?replyId=${id}`, getToken());
+        const userData = await api.get(`/api/v1/users?replyId=${id}`, getToken());
         if (userData.status === 200) {
             setUserData(userData.data[0]);
             // console.log(userData);
@@ -48,10 +49,10 @@ const SingleReply = () => {
 
 
     async function deleteHandler() {
-        const areYouSure = window.confirm("Do you really want to delete this post?");
+        const areYouSure = window.confirm("De bericht zal worden verwijderd? ");
         if (areYouSure) {
             try {
-                const response = await api.delete(`/hulppost/replies/${id}`, getToken());
+                const response = await api.delete(`/api/v1/replies/${id}`, getToken());
                 if (response.status === 200) {
                     // navigate(`/profile/${user.id}`)
                     const repliesList = replyData.filter(reply => reply.id !== id);
@@ -84,11 +85,12 @@ const SingleReply = () => {
                 {Object.keys(replyData).length > 0 ? (
                     <section className="main-request__info">
                         <p>Geplaatst door</p>
-                        <h5>naam</h5>
+                        <h5>Gebruikersnaam</h5>
                         <p>{userData.username}</p>
                         <small>{dateFormatted}</small>
-                        <h5>REACTIE</h5>
-                        <p>{replyData.text}</p>
+                        <p>REACTIE</p>
+                        <Link to={`/request/${replyData.requestId}`}><p>{replyData.text}</p></Link>
+                        <h4>KLIK OP DE REACTIE OM NAAR DE HULPAANVRAAG TE NAVIGEREN</h4>
                     </section>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 

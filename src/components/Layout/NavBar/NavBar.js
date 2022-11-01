@@ -1,13 +1,12 @@
 import React, {useContext, useState} from 'react';
-import {Link, useNavigate} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import {AuthContext} from '../../../context/auth-context';
 import {FaBars, FaTimes} from 'react-icons/fa';
 import './Navbar.css';
 
 
-function NavBar(props) {
+function NavBar() {
     const {isAuth, logout, user} = useContext(AuthContext);
-    const navigate = useNavigate();
     const context = useContext(AuthContext)
     const [isMobile, setIsMobile] = useState(false);
 
@@ -22,14 +21,14 @@ function NavBar(props) {
 
 
                                 {context.user.roles === 'ROLE_HELP-SEEKER' &&
-                                    <Link aria-label="profile-page" title="profile-page" to={`/profile/${user.id}`}
-                                          className="nav__profile">PROFIEL </Link>}
+                                    <a aria-label="profile-page" title="profile-page" href={`/profile/${user.id}`}
+                                          className="nav__profile">PROFIEL </a>}
                                 {context.user.roles === 'ROLE_HELP-SEEKER' &&
                                 <Link aria-label="create-request" title="create-request" to={`/post-request`}
                                       className="nav__request">STEL EEN HULPVRAAG</Link>}
                                 {context.user.roles === 'ROLE_VOLUNTEER' &&
-                                <Link aria-label="profile-page" title="profile-page" to={`/profile-volunteer/${user.id}`}
-                                      className="nav__profile">PROFIEL </Link>}
+                                <a aria-label="profile-page" title="profile-page" href={`/profile-volunteer/${user.id}`}
+                                      className="nav__profile">PROFIEL </a>}
                                     <Link aria-label="request-feed" title="request-feed" to={`/request-search`}
                                           className="nav__feed">ALLE HULPAANVRAGEN </Link>
                                     <Link aria-label="logout" title="logout" to={`/request-search`} onClick={logout}
