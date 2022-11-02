@@ -15,14 +15,16 @@ const RequestsFeed = ({request}) => {
             <div className="feed-article__block">
             <Link to={`/request/${request.id}`}>
                 <h2 className='feed-article__h2'>{request.title}</h2>
-            </Link>
-            <p className="feed-article__type-request" >
-                {(request.typeRequest)} </p>
-            <p className="feed-article__type-content">
+
+            <h4 className="feed-article__type-request" >
+                <p className="feed-article__p">Type aanvraag</p>
+                {(request.typeRequest)}</h4>
+            <h4 className="feed-article__type-content">
+                <p className="feed-article__p">Hulpvraag</p>
                 {(request.content).length <= 40
                     ? request.content
                     : `${(request.content).slice(0, 40)}...`}
-            </p>
+            </h4> </Link>
             {attachmentImageVisible && (
                 <div className="feed-article__div-img">
                     <img

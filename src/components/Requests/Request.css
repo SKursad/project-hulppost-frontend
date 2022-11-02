@@ -1,0 +1,41 @@
+.article-request {
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    text-align: left;
+    margin: 1rem 2rem 2rem;
+    max-width: 60rem;
+    padding: 1rem 1rem 1rem 2rem;
+    border: 1px solid black;
+    border-radius: 1rem;
+    background-color: rgba(35, 76, 83, 0.17);
+}
+
+.article-request__div-title,
+.article-request__div-type,
+.article-request__div-content {
+    margin: 1rem;
+}
+
+.article-request__h4-title,
+.article-request__h4-type,
+.article-request__h4-content {
+    color: black;
+    color: rgba(35, 77, 84, 0.49);
+}
+
+.article-request__p-title,
+.article-request__p-content,
+.article-request__p-type {
+    font-size: 1.6rem;
+    color: black;
+}
+
+.article-request__date {
+    font-size: 1.2rem;
+    color: black;
+}
+
+.article-request__p-content:hover {
+    color: rgba(35, 77, 84, 0.44);
+}

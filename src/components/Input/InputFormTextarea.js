@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const RequestFormTitle = ({ label, value, onChange, nameRequest, nameReply,id, name, placeholder}) => {
+const RequestFormTitle = ({ label, nameRequest, nameReply, id, className, name, value,  placeholder, onChange, autoFocus }) => {
     return (
         <div>
             <label htmlFor={label}>
@@ -10,10 +9,12 @@ const RequestFormTitle = ({ label, value, onChange, nameRequest, nameReply,id, n
             </label>
             <textarea
                 id={id}
+                className={className}
                 name={name}
                 value={value}
                 placeholder={placeholder}
                 onChange={onChange}
+                autoFocus={autoFocus}
                 required
             />
         </div>

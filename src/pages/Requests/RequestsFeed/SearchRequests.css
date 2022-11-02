@@ -1,67 +1,102 @@
 .main-searchbar {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    flex-grow: 1;
     align-content: center;
     position: relative;
     margin: auto;
-    min-height: 100vh;
-    /*width: 100%;*/
-    padding: 6rem 1rem 1rem 1rem;
+    max-height: 100%;
+    width: 100%;
+    padding: 7rem 5rem 1rem 1rem;
+    z-index: 20;
 }
 
-.main-searchbar__form {
-    /*display: flex;*/
+.main-searchbar__form:focus,
+.main-searchbar__search:focus {
+    outline: none;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+   background-color: rgba(0, 0, 0, 0.1);
+}
+
+.main-searchbar_background {
+    background-image: radial-gradient(circle, rgba(238, 238, 245, 0.28) 2%,
+    rgb(238, 238, 245) 70%),
+    url('../../../assets/robert-svebeck-unsplash.jpg');
+    height: 100%;
+    width: 100%;
+    margin: -1rem;
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+    position: fixed;
+    bottom: 1px;
+    z-index: -1;
+}
+
+
+form.main-searchbar__form {
     alignment: center;
     justify-content: center;
-    align-content: center;
-
+    align-items: center;
     flex-direction: column;
-    margin: -.5rem 1rem;
-    /*height: 100%;*/
-    width: 50%;
-    padding: 1rem;
+    margin: -.5rem 1rem 1rem 1rem;
+    width: 65%;
+    padding: 2rem 1rem;
     z-index: 40;
 }
 
 .main-searchbar__search {
     display: flex;
     flex-direction: column;
-    /*position: relative;*/
-    margin: 4rem 0 0 16rem;
-    padding: 0.4rem;
+    justify-self: center;
+    margin: 4rem 0 0 10rem;
+    padding: .4rem .5rem .5rem .5rem ;
+    font-size: 1.6rem;
+
     border-radius: 2rem;
+    background-color: rgba(116, 199, 199, 0.29);
+    border: 1px solid rgba(0, 0, 0, 0.29);
 }
 
-@media (min-width: 40rem) {
+.main-searchbar__search::placeholder {
+    color: rgba(0, 0, 0, 0.4);
+    text-align: center;
+}
+
+
+@media (min-width: 40rem) and (min-height: 40rem) {
 
     .main-searchbar {
+        display: flex;
         margin: auto;
+        flex-direction: row;
         align-content: center;
-        /*height: 100vh;*/
         height: 100%;
         padding: 6rem 1rem 1rem 1rem;
+    }
+
+    .main-searchbar_background {
+        max-width: 100%;
+        background-position-y: center;
+        background-position-x: center;
     }
 
 
     .main-searchbar__search {
         display: flex;
-        flex-direction: column;
+        flex-direction:column;
+        position: relative;
+        align-self: center;
         max-height: 100vh;
-        margin: 4rem 0 0 18rem;
+        margin: 4rem 0 0 11rem;
+        max-width: 30rem;
     }
 
     .main-searchbar__form {
-        /*display: flex;*/
         alignment: center;
-        justify-content: center;
-        align-content: center;
-
-        flex-direction: column;
-        margin: -.5rem 1rem;
-        height: 100%;
-        width: 50%;
+        position: relative;
+        margin: 10rem 20rem;
         padding: 1rem;
-        z-index: 40;
     }
 
 }

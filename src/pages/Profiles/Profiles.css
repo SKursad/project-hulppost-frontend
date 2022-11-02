@@ -3,6 +3,8 @@
     flex-direction: column;
     margin: auto;
     position: relative;
-    padding: 10rem;
-    max-height: 100%;
+    padding: 4rem;
+    height: 100%;
+    width: 100%;
+    list-style: none;
 }

@@ -93,22 +93,20 @@ const RequestWithReplies = () => {
     }
 
     return (
-        <Screen title="Hulpvraag & Reacties">
+        <Screen title="Hulpvraag & Reacties" wide={false}>
             <main className="main-request">
                 {!context.user ?
                     (<div className="main-request__div-img">
                         <p className="main-request__p"></p>
-                        {/*{context.user && (*/}
                         <Link to={`/login`}>
-                        <ProfileWithDefaultImage
-                            alt={`${userData.username} profile`}
-                            image={userData.image}
-                        /></Link>
+                            <ProfileWithDefaultImage
+                                alt={`${userData.username} profile`}
+                                image={userData.image}
+                            /></Link>
                     </div>)
                     :
                     (<div className="main-request__div-img">
                         <p className="main-request__p">NAAR DE PROFIEL VAN DE GEBRUIKER</p>
-                        {/*{context.user && (*/}
                         <Link to={`/profile/${userData.id}`}>
                             <ProfileWithDefaultImage
                                 alt={`${userData.username} profile`}
@@ -119,52 +117,69 @@ const RequestWithReplies = () => {
 
                 {Object.keys(requestData).length > 0 ? (
                     <section className="main-request__info">
-                        {/*<p>{replyData.text}</p>*/}
-                        <h5>Titel</h5>
-                        <p>{requestData.title}</p>
-                        <h5>naam</h5>
-                        <p>{userData.username}</p>
-                        <h5>Type aanvraag</h5>
-                        <p>{requestData.typeRequest}</p>
-                        <h5>Hulpvraag</h5>
-                        <small>{dateFormatted}</small>
-                        <p>{requestData.content}</p>
+                        <h4 className="main-request__h4-title">Titel</h4>
+                        <p className="main-request__title">{requestData.title}</p>
+                        <div className="main-request__div-username">
+                        <h4 className="main-request__h4-username">Gebruikersnaam</h4>
+                        <p className="main-request__username">{userData.username}</p>
+                        </div>
+                        <div className="main-request__div-type">
+                        <h4 className="main-request__h4-type">Type aanvraag</h4>
+                        <p className="main-request__typeRequest">{requestData.typeRequest}</p>
+                        </div>
+                        <div className="main-request__div-content">
+                        <h4 className="main-request__h4-content">Hulpvraag</h4>
+                            <small className="main-request__date">{dateFormatted}</small>
+                            <p className="main-request__content">{requestData.content}</p>
+                        </div>
+
+
+                        <div className="main-request__img-div">
                         {attachmentImageVisible && (
-                            <img
+                            // <figure className="main-request__fig">
+                                <img
+                                className="main-request__img"
                                 alt="attachment"
                                 src={`http://localhost:8080/images/attachments/${requestData.fileAttachment.name}`}
                             />
-
+                            // </figure>
                         )}
+                        </div>
+
+
+                        {context.user &&
+                            (<div className="main-request__div-align-1">
+                                <p className="request-replies">REACTIES OP DE AANVRAAG</p>
+                                {replyData.length > 0 ? (
+                                    replyData.map(reply => {
+                                        return <Reply noAuthor={false} key={reply.id} reply={reply}/>;
+                                    })) : (<p className="request-replies" >je hebt nog geen reacties</p>)}
+                            </div>)}
                     </section>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
-
-                {context.user &&
-                    (<div>
-                        {replyData.length > 0 ? (
-                            replyData.map(reply => {
-                                return <Reply noAuthor={true} key={reply.id} reply={reply}/>;
-                            })) : (<p>je hebt nog geen reacties</p>)}
-                    </div>)}
 
                 {!context.user ? (<div>
                     Wil je helpen ? {""}
                     <Button id="main-request__button" type="button" onClick={() => navigate(`/register/volunteer`)}>
                         Registreer<VscAccount/></Button>
-                </div>) : (<div>
-                    {context.user.roles === 'ROLE_HELP-SEEKER' && <div>
+                </div>) : (
+
+                    <div>
+                    {context.user.roles === 'ROLE_HELP-SEEKER' &&
+
+                        <div className="main-request__div-align-2" >
                         {context.user.id === requestData.userId && (
                             <div className="main-request__div-button">
                                 {replyData.length > 0 ? (
-                                    <Button id="main-request__button" type="button"
+                                    <Button id="main-request__button-react" type="button"
                                             onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG
                                         <FaCommentDots/> </Button>) : ("")}
-                                <Button id="main-request__button" type="button"
+                                <Button id="main-request__button-update" type="button"
                                         onClick={() => navigate(`/edit-request/${id}`)}>UPDATEN<MdUpdate/></Button>
-                                <Button id="main-request__button"
+                                <Button id="main-request__button-delete"
                                         onClick={deleteHandler}>VERWIJDEREN<FaRegFileExcel/></Button>
                                 {requestData.fileAttachment && (
-                                    <Button id="main-request__button" onClick={deleteImageHandler}>FOTO
+                                    <Button id="main-request__button-deletePic" onClick={deleteImageHandler}>FOTO
                                         VERWIJDEREN<BiImageAlt/></Button>)}
                             </div>)}
                     </div>}

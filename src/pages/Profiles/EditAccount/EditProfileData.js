@@ -6,6 +6,7 @@ import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import RefreshPage from '../../../helper/RefreshPage/RefreshPage';
+import '../../../components/Input/InputForm.css'
 
 
 let initialState = {
@@ -79,8 +80,9 @@ const EditProfileData = () => {
 
     return (
         <Screen title="Account aanpassen">
-            <form className="main-replyForm" onSubmit={handleSubmit}>
-                <div>
+            <form className="form-container" onSubmit={handleSubmit}>
+                <div className="form-container__input">
+                    <p className="form-__p">Profiel gegevens wijzigen</p>
                     <Input
                         nameRegister="Gebruikersnaam"
                         // placeholder="voer uw gebruikersnaam in"

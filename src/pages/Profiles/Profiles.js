@@ -5,17 +5,17 @@ import {getToken} from '../../helper/AccesToken/GetToken';
 import './Profiles.css';
 import Screen from '../../components/UI/Screen/Screen';
 import {AuthContext} from '../../context/auth-context';
+import ProfileWithDefaultImage from '../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 
 const Profiles = () => {
     const {id} = useParams();
     const context = useContext(AuthContext);
-    // const [accountData, setAccountData] = useState([]);
     const [accountsData, setAccountsData] = useState({});
     const [usersData, setUsersData] = useState([]);
     // const [usersData, setUsersData] = useState({});
 
 
-    const getAccounts = async (id) => {
+    const getAccounts = async () => {
         const accountsData = await api.get(`/api/v1/accounts`, getToken());
         if (accountsData.status === 200) {
             setAccountsData({...accountsData.data});
@@ -36,34 +36,6 @@ const Profiles = () => {
         }
     };
 
-    // const getAccountsById = async (id) => {
-    //
-    //     await api.get(`/hulppost/accounts/${id}`,getToken());
-    //
-    //     if (accountData.status === 200) {
-    //         setAccountData(accountData.data);
-    //         console.log(accountData.data)
-    //     } else {
-    //         // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     const filterRolesVolunteer = () => usersData.filter((usersData) => usersData.roles[0] === "ROLE_VOLUNTEER")
-    //     console.log(filterRolesVolunteer.data)
-    // }, [usersData.data]);
-
-
-    // useEffect(() => {
-    // let filterRolesVolunteer = usersData.filter((usersData) => usersData.roles[0].name === "ROLE_VOLUNTEER")
-    // console.log(filterRolesVolunteer)
-    // }, [usersData.data]);
-
-    // useEffect(() => {
-    //     {Object.values(usersData).filter((usersData) => (usersData.data === "ROLE_HELP-SEEKER"))}
-    //
-    // }, [usersData]);
-
 
     useEffect(() => {
         // if (id) {
@@ -80,61 +52,40 @@ const Profiles = () => {
         <Screen title={"Profielen"}>
 
         <main className="main-profiles">
-            <p>test 1 2 3 4</p>
             <div className="main-profiles">
-
-                {/*{usersData.data === 'ROLE_HELP-SEEKER' ? (*/}
-                    <div>
-
-                {Object.values(accountsData).map((accountsData) => (
-                    <li key={accountsData.id}>{accountsData.data} :
-
-                            <Link to={`/profile/${accountsData.id}`}> <p >{accountsData.id}</p></Link>
-
-
-                        <p >{accountsData.firstName}</p>
-                        <p >{accountsData.surname}</p>
-                    </li> ))}
-
-                    </div>) : ("")}
-
-                {/*{usersData.roles?.[0]?.name === 'ROLE_HELP-SEEKER' ? (*/}
-                {/*    <div>*/}
-                {/*        -------------------------------------HELP SEEKR*/}
                 {Object.values(usersData).map((currentUserData) => (
                     <>
                         {currentUserData.roles?.[0]?.name === 'ROLE_HELP-SEEKER' ? (
                             <li key={currentUserData.id}>{currentUserData.data}
-                                <Link to={`/profile/${currentUserData.id}`}><p>{currentUserData.id}</p></Link>
-
-                                <p>{currentUserData.roles[0].name.toString()}</p>
-                                <p>{currentUserData.username}</p>
+                                <Link to={`/profile/${currentUserData.id}`}>
+                                    <ProfileWithDefaultImage
+                                        width="150"
+                                        height="150"
+                                        alt={`${currentUserData.username} profile`}
+                                        image={currentUserData.image}
+                                    />
+                                    <p>{currentUserData.username}</p></Link>
+                                {/*<p>{currentUserData.roles[0].name.toString()}</p>*/}
+                                <p>{currentUserData.image}</p>
+                                <p>{currentUserData.email}</p>
                             </li>
                         ) : (
                             <li key={currentUserData.id}>{currentUserData.data}
-                                <Link to={`/mooooo/${currentUserData.id}`}><p>{currentUserData.id}</p></Link>
+                                <Link to={`/profile-volunteer/${currentUserData.id}`}>
+                                    <ProfileWithDefaultImage
+                                        width="150"
+                                        height="150"
+                                        alt={`${currentUserData.username} profile`}
+                                        image={currentUserData.image}
+                                    />
+                                    <p>{currentUserData.id}</p></Link>
 
-                                <p>{currentUserData.roles[0].name.toString()}</p>
+                                {/*<p>{currentUserData.roles[0].name.toString()}</p>*/}
                                 <p>{currentUserData.username}</p>
                             </li>
                         )}
                     </>
                 ))}
-                {/*{usersData.map((user) => <div><p>{user.id}</p></div>)}*/}
-
-
-                {/*{accountsData.length > 0 ? (*/}
-                {/*    accountsData.map(key => {*/}
-                {/*        return <p  key={key.id}> {accountsData.surname}</p>;*/}
-                {/*    })) : (<p>je hebt nog geen reacties</p>)}*/}
-
-
-                    {/*// <section>*/}
-                    {/*//     <li key={accountsData.id}><p>{accountsData.firstName}</p></li>*/}
-                    {/*//     <li key={accountsData.id}>{accountsData.firstName}</li>*/}
-                    {/*//     <li key={accountsData.data}>{accountsData.id}</li>*/}
-                    {/*//     <li key={accountsData.data}>{accountsData.id}</li>*/}
-                    {/*// </section>) : (<p></p>)}*/}
             </div>
         </main>
         </Screen>

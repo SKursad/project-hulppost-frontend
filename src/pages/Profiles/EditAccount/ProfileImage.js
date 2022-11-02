@@ -4,10 +4,11 @@ import {useNavigate, useParams} from 'react-router-dom';
 import Button from '../../../components/UI/Button/Button';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import Screen from '../../../components/UI/Screen/Screen';
-import './ProfileImage.css';
 import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 import {AuthContext} from '../../../context/auth-context';
 import {FaImages} from 'react-icons/fa';
+import './ProfileImage.css';
+import Input from '../../../components/Input/Input';
 
 
 const ProfileImage = () => {
@@ -67,10 +68,8 @@ const ProfileImage = () => {
 
 
     const onClickSave = async (e) => {
-        console.log();
         const files = e.target.files;
         if (files && files.length > 0) {
-
 
             const reader = new FileReader();
 
@@ -127,34 +126,30 @@ const ProfileImage = () => {
     }
 
     return (
-        <Screen title="Profielfoto" wide={true}>
-            <form className="form-upload" onSubmit={onClickSave}>
+        <Screen title="Profielfoto" wide={false}>
+            <form className="edit-image"  onChange={(e) => {onClickSave(e)}}>
                 <ProfileWithDefaultImage
-                    width="200"
-                    height="200"
+                    id="edit-image__default"
                     onChange={previewFile}
                     alt={`${context.username} profile`}
                     image={userData.image}
                 />
-                <div className="div-profileImage">
+                <div className="edit-image__div">
                     <input
+                        className="edit-image__input"
                         type="file"
                         required={true}
-                        // id="fileInput"
-                        // onChange={previewFile}
-                        onChange={e => {
-                            previewFile(e);
-                            onClickSave(e);
-                        }}
+                        onChange={(e) => {previewFile(e)}}
                     />
                     {error && <strong className="error">ongeldige bestandstype </strong>}
-                    <button
+                    <Button
+                        id="edit-image__button"
                         type="submit"
                         disabled={error}
                         onClick={onClickNavigate}>
                         UPLOADEN<FaImages/>
-                    </button>
-                    <Button onClick={deleteHandler}>FOTO VERWIJDEREN</Button>
+                    </Button>
+                    <Button id="edit-image__button-del"onClick={deleteHandler}>FOTO VERWIJDEREN</Button>
                 </div>
             </form>
         </Screen>

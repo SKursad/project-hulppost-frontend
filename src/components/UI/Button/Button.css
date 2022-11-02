@@ -1,22 +1,33 @@
 .button {
-    background-color: #53b0ae;
+    background-color: rgb(170, 184, 190);
     background-position: center;
     text-decoration: none;
     text-align: center;
     border-radius: 1rem;
-    border-right-color: rgba(0, 0, 0, 0.68);
-    border-left-color: rgb(238, 238, 245);
+    border-right-color: gray(50);
+    border-left-color: gray(90);
     border-top-color: slategrey;
     border-bottom-color: rgb(206, 191, 191);
-    color: #FFFFFF9C;
+    color: rgba(53, 112, 111, 0.5);
     font-size: 1.6rem;
-    padding: 1rem 1rem 1rem 1rem;
+    padding: .5rem .5rem;
     cursor: pointer;
-    margin: 1rem;
+    /*margin: 1rem;*/
     text-transform: uppercase;
-    max-width: 20rem;
+    max-width: 100%;
     /*justify-items: center;*/
 }
+
+/*width: 100%;*/
+/*padding: 1rem 1rem;*/
+/*cursor: pointer;*/
+
+
+/*border-right-color: rgba(0, 0, 0, 0.68);*/
+
+/*border-top-color: slategrey;*/
+
+
 
 .button:hover {
     /*transform: translateY(-2px);*/
@@ -37,10 +48,8 @@
     opacity: 0;
 }
 
-/*@media (min-width: 40rem) {*/
-/*    .button {*/
-/*        display: flex;*/
-/*        flex-direction: row;*/
-/*        position: relative;*/
-/*    }*/
-/*}*/
+@media (min-width: 40rem) {
+    .button {
+        width: 50%;
+    }
+}

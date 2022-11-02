@@ -5,7 +5,8 @@ import api from '../../api/api-calls';
 import {getToken} from '../../helper/AccesToken/GetToken';
 import {useNavigate, useParams} from 'react-router-dom';
 import InputFormTextarea from '../../components/Input/InputFormTextarea';
-import './PostReply.css';
+import './PostEditReply.css'
+import {MdCancel} from 'react-icons/md';
 
 let initialState = {
     text: "",
@@ -69,18 +70,21 @@ const PostReply = () => {
 
     return (
         <Screen title="Reageer" wide={true}>
-            <form className="main-replyForm" onSubmit={handleSubmit}>
-                <p>Reageer</p>
+            <form className="main-form" onSubmit={handleSubmit}>
+                <div className="main-form__div-reply">
+                <p className="main-form__p-reply">REAGEREN</p>
                 <InputFormTextarea
-                    className="main-replyForm__input"
+                    className="main-form__text"
                     id={text.id}
                     name="text"
                     required
                     value={text}
                     onChange={onInputChange}
                 />
-                <Button type="submit">VERZENDEN</Button>
-                {/*<Button type="submit">{"VERZENDEN"}</Button>*/}
+                <Button className="main-form__button-submit-reply" type="submit">VERZENDEN&nbsp;</Button>
+                <Button className="main-form__button-cancel-reply"  onClick={() => navigate(`/request/${id}`)}>
+                    ANNULEREN&nbsp;<MdCancel/></Button>
+                </div>
             </form>
         </Screen>
     );

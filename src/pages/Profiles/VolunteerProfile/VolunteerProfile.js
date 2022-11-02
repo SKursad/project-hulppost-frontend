@@ -10,6 +10,10 @@ import Screen from '../../../components/UI/Screen/Screen';
 import RefreshPage from '../../../helper/RefreshPage/RefreshPage';
 import {FaTrashAlt} from 'react-icons/fa';
 import {TiUserDelete} from 'react-icons/ti';
+import {RiAccountCircleFill} from 'react-icons/ri';
+import {VscAccount} from 'react-icons/vsc';
+import {MdPassword} from 'react-icons/md';
+import '../Profiles.css'
 
 const VolunteerProfile = () => {
     const {id} = useParams();
@@ -95,37 +99,45 @@ const VolunteerProfile = () => {
         <Screen title="Profielpagina" wide={true}>
             <main className="main-profile">
                 <h1>Profielpagina</h1>
-                <section key={userData.username} id="user">
-                    <h2>Gegevens</h2>
-                    <div><strong>Gebruikersnaam:</strong> {userData.username}</div>
-                    {/*<p><strong>Email:</strong> {userData.email}</p>*/}
-                </section>
+
                 <Link to={`/profile-volunteer/${id}`}>
                     <ProfileWithDefaultImage
-                        width="200"
-                        height="200"
+                        width="150"
+                        height="150"
                         alt={`${userData.username} profile`}
                         image={userData.image}
                     />
                 </Link>
-                {context.user.username === userData.username ? (
-                    <div>
-                        <Button type="button" onClick={() => navigate(`/edit-personalData/${id}`)}>EDIT</Button>
-                        <Button type="button" onClick={() => navigate(`/edit-profileData/${id}`)}>EDIT</Button>
-                        <Button type="button" onClick={() => navigate(`/change-password/${id}`)}>PASS</Button>
-                        <Button type="button" onClick={() => navigate(`/put-profileImage/${id}`)}>Image</Button>
-                    </div>) : ("")}
+                {context.user.username === userData.username && (
+                    <div className="main-profile__edit-foto-div">
+
+                        <Button className="main-profile__edit-foto" type="button"
+                                onClick={() => navigate(`/put-profileImage/${id}`)}>
+                            <RiAccountCircleFill/> Profielfoto aanpassen
+                        </Button>
+                    </div>)}
+                <section id="user">
+                    <div><strong>Gebruikersnaam:</strong> {userData.username}
+                        <p><strong>Email: </strong> {userData.email}</p>
+                    </div>
+                </section>
 
 
                 {Object.keys(accountData).length > 0 &&
-                    <section key={accountData.id}>
-                        <p><strong>Naam:</strong>{accountData.firstName}</p>
-                        <p><strong>Achternaam:</strong>{accountData.surname}</p>
-                        <p><strong>Geslacht:</strong>{accountData.gender}</p>
-                        <p><strong>Geboortedatum:</strong>{dateFormatted}</p>
-                        <p><strong>Postcode:</strong>{accountData.zipCode}</p>
+                    <section>
+                        <p><strong>Naam:&nbsp;</strong>{accountData.firstName}</p>
+                        <p><strong>Achternaam:&nbsp;</strong>{accountData.surname}</p>
+                        <p><strong>Geslacht:&nbsp;</strong>{accountData.gender}</p>
+                        <p><strong>Geboortedatum:&nbsp;</strong>{dateFormatted}</p>
+                        <p><strong>Postcode:&nbsp;</strong>{accountData.zipCode}</p>
                     </section>
-                }
+                }{context.user.username === userData.username && (
+                <div className="main-profile__settings">
+                    <p className="main-profile__settings-p">INSTELLINGEN</p>
+                    <Button className="main-profile__edit-personal" type="button" onClick={() => navigate(`/edit-personalData/${id}`)}><VscAccount/>&nbsp;Persoonlijke gegevens</Button>
+                    <Button className="main-profile__edit-profile" type="button" onClick={() => navigate(`/edit-profileData/${id}`)}><VscAccount/>&nbsp;Profielgegevens</Button>
+                    <Button className="main-profile__edit-pass" type="button" onClick={() => navigate(`/change-password/${id}`)}><MdPassword/>&nbsp;Wachtwoord</Button>
+                </div>)}
                 <h2>Reacties op Hulpaanvragen</h2>
 
                 {context.user.username === userData.username ? (
@@ -150,16 +162,16 @@ const VolunteerProfile = () => {
 
                 {context.user.username === userData.username && (
                     <div>
-                        <p>Account verwijderen</p>
-                        <Button id="main-request__button" onClick={deleteAccountHandler}>
+                        <p id="main-profile-del">Account verwijderen</p>
+                        <Button id="main-profile__del-button" onClick={deleteAccountHandler}>
                             VERWIJDER<TiUserDelete/>
                         </Button>
                     </div>)}
 
                 {context.user.roles === "ROLE_ADMIN" && (
                     <div>
-                        <p>Gebruiker verwijderen</p>
-                        <Button id="main-request__button" onClick={deleteUserHandler}>
+                        <p id="main-profile-del">Gebruiker verwijderen</p>
+                        <Button id="main-profile__del-button"  onClick={deleteUserHandler}>
                             VERWIJDER<TiUserDelete/></Button>
                     </div>)}
             </main>

@@ -29,6 +29,9 @@ function NavBar() {
                                 {context.user.roles === 'ROLE_VOLUNTEER' &&
                                 <a aria-label="profile-page" title="profile-page" href={`/profile-volunteer/${user.id}`}
                                       className="nav__profile">PROFIEL </a>}
+                                {context.user.roles === 'ROLE_ADMIN' &&
+                                    <Link aria-label="profiles" title="profiles" to={`/profiles`}
+                                          className="nav__feed">PROFIELEN</Link>}
                                     <Link aria-label="request-feed" title="request-feed" to={`/request-search`}
                                           className="nav__feed">ALLE HULPAANVRAGEN </Link>
                                     <Link aria-label="logout" title="logout" to={`/request-search`} onClick={logout}

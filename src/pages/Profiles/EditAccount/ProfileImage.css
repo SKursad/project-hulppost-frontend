@@ -1,11 +1,58 @@
-.div-profileImage {
+.edit-image {
     display: flex;
     flex-direction: column;
-    max-height: 100vh;
-    margin: 30rem;
+    left: 1rem;
+    margin: auto;
+    padding: 10rem 2rem 2rem 2rem;
+    max-width: 60rem;
+    border: 1px solid black;
+    font-size: 1.6rem;
+    min-height: 100vh;
+    width: 100%;
 }
 
-#form-upload__preview {
-    margin: 10rem;
-
+.edit-image__div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 2rem;
 }
+
+#edit-image__default {
+    align-self: center;
+}
+
+.edit-image__input {
+    margin: 1rem;
+    padding: 1rem;
+    color: #020c15;
+    background-color: #a7b4bb;
+    width: 50%;
+    border-radius: 1rem;
+}
+
+#edit-image__button {
+    margin: 1rem;
+    width: 50%;
+}
+
+#edit-image__button-del {
+    background: none;
+    border: 2px solid white;
+    border-bottom-color: red;
+    margin: 1rem;
+    width: 50%;
+    padding: .8rem 1rem;
+}
+
+#edit-image__button-del:hover {
+    background-color: rgba(205, 92, 92, 0.89);
+}
+
+@media (min-width: 40rem) {
+    #edit-image__button-del {
+        width: 50%;
+    }
+}
+
+

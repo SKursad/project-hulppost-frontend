@@ -6,6 +6,7 @@ import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Screen from '../../../components/UI/Screen/Screen';
 import {AuthContext} from '../../../context/auth-context';
+import '../../../components/Input/InputForm.css'
 // import {format} from 'date-fns';
 
 let initialState = {
@@ -95,8 +96,9 @@ const EditPersonalData = () => {
 
     return (
         <Screen title="Account aanpassen">
-            <form className="main-replyForm" onSubmit={handleSubmit}>
-                <div>
+            <form className="form-container" onSubmit={handleSubmit}>
+                <div className="form-container__input">
+                    <p className="form-__p">Persoonlijke gegevens wijzigen</p>
                     <Input
                         nameRegister="Voornaam"
                         placeholder="voer uw naam in"

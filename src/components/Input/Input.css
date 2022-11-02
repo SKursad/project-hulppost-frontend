@@ -3,13 +3,10 @@ input#username-field.form-control,
 input#firstName-field.form-control,
 input#surname-field.form-control,
 input#birthday-field.form-control,
-/*select#gender-field,*/
 input#zipCode-field.form-control,
 input#posCode-field.form-control,
 input#password-field.form-control,
 input#password-field-repeat.form-control {
-    /*color: rgba(0, 0, 0, 0.44);*/
-
     border-color: #2ddf5c;
 }
 

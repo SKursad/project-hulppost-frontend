@@ -5,6 +5,8 @@ import Button from '../../components/UI/Button/Button';
 import api from '../../api/api-calls';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
+import './PostEditReply.css'
+import {MdCancel, MdUpdate} from 'react-icons/md';
 
 let initialState = {
     text: '',
@@ -58,31 +60,24 @@ const EditReply = () => {
 
     return (
         <Screen title="Reactie Aanpassen" wide={true}>
-            <form className="main-replyForm" onSubmit={handleSubmit}>
-                <p>Reactie aanpassen</p>
+            <form className="main-form-reply" onSubmit={handleSubmit}>
+                <div className="main-form__div-reply">
+
+                <p className="main-form__p-reply">Reactie aanpassen</p>
                 {/*<p>{"Helpen "}</p>*/}
                 <InputFormTextarea
-                    className="main-replyForm__input"
+                    className="main-form__text"
                     id={text.id}
                     name="text"
                     required
                     value={text}
                     onChange={onInputChange}
                 />
-                <Button type="submit">UPDATEN</Button>
-                <Button type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN</Button>
+                <Button className="main-form__button-submit-reply" type="submit">UPDATEN&nbsp;<MdUpdate/></Button>
+                <Button className="main-form__button-cancel-reply" type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN&nbsp;<MdCancel/></Button>
                 {/*<Button type="submit">{"VERZENDEN"}</Button>*/}
+                </div>
             </form>
-
-            {Object.keys(formValue).length > 0 ? (
-                <section className="main-request__info">
-                    {/*<p>{replyData.text}</p>*/}
-                    <h5>Reactie</h5>
-                    <p>{formValue.text}</p>
-                </section>
-            ) : (<p>Er zijn nog geen reacties</p>)}
-
-
         </Screen>
 
     );

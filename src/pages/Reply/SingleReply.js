@@ -83,15 +83,15 @@ const SingleReply = () => {
                                 image={userData.image}/></Link>)}
                 </div>
                 {Object.keys(replyData).length > 0 ? (
-                    <section className="main-request__info">
+                    <article className="article-reply">
                         <p>Geplaatst door</p>
-                        <h5>Gebruikersnaam</h5>
                         <p>{userData.username}</p>
-                        <small>{dateFormatted}</small>
+                        <small className="article-reply__date">{dateFormatted}</small>
                         <p>REACTIE</p>
-                        <Link to={`/request/${replyData.requestId}`}><p>{replyData.text}</p></Link>
-                        <h4>KLIK OP DE REACTIE OM NAAR DE HULPAANVRAAG TE NAVIGEREN</h4>
-                    </section>
+                        <Link to={`/request/${replyData.requestId}`}><p className="article-reply__p">{replyData.text}</p></Link>
+                        <br/>
+                        <h5>KLIK OP DE REACTIE OM NAAR DE HULPAANVRAAG TE NAVIGEREN</h5>
+                    </article>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
                 {context.user.id === replyData.userId ? (<>
@@ -101,7 +101,7 @@ const SingleReply = () => {
                         {/*    <FaCommentDots/> </Button>*/}
                         <Button id="main-request__button" type="button"
                                 onClick={() => navigate(`/edit-reply/${id}`)}>UPDATEN<MdUpdate/></Button>
-                        <Button id="main-request__button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
+                        <Button id="main-profile__del-button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
                     </div>
                 </>) : ('')}
 

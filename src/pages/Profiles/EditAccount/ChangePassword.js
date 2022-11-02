@@ -5,6 +5,7 @@ import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import '../../../components/Input/InputForm.css'
 
 let initialState = {
     email: '',
@@ -68,8 +69,9 @@ const ChangePassword = () => {
 
     return (
         <Screen title="Account aanpassen">
-            <form className="main-replyForm" onSubmit={handleSubmit}>
-                <div>
+            <form className="form-container" onSubmit={handleSubmit}>
+                <div className="form-container__input">
+                    <p className="form-__p">Je wachtwoord wijzigen</p>
                     <Input
                         nameRegister="Email"
                         placeholder="voer uw email in"
@@ -98,7 +100,7 @@ const ChangePassword = () => {
                     />
                     <Input
                         nameRegister="Nieuwe wachtwoord"
-                        placeholder="kies een wachtwoord"
+                        placeholder="kies een nieuwe wachtwoord"
                         label="Password-field"
                         alt="input-password"
                         autoComplete="false"

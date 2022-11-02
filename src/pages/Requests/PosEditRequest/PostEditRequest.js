@@ -6,6 +6,7 @@ import InputFormTextarea from '../../../components/Input/InputFormTextarea';
 import Button from '../../../components/UI/Button/Button';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import './PostEditRequest.css';
+import {MdCancel, MdUpdate} from 'react-icons/md';
 
 let initialState = {
     title: "",
@@ -14,7 +15,7 @@ let initialState = {
     timestamp: new Date(),
 };
 
-const options = ["", "Praktisch", "Sociaal"];
+const options = [ "Praktisch", "Sociaal"];
 
 const PostEditRequest = () => {
 
@@ -88,46 +89,52 @@ const PostEditRequest = () => {
 
     return (
         <Screen title={editMode ? "Hulpvraag aanpassen" : "Nieuwe Hulpvraag"}>
-            <form className="main-editPost" onSubmit={handleSubmit}>
-                <div className="main-editPost__form">
-                <p>{editMode ? "Hulpvraag Aanpassen " : "Hulpvraag"}</p>
+            <form className="main-form" onSubmit={handleSubmit}>
+                <div className="main-form__div">
+                <p className="main-form__p">{editMode ? "Hulpvraag aanpassen " : "Jouw hulpvraag"}</p>
                 <InputFormTextarea
+                    className="main-form__title"
                     label="Onderwerp"
-                    autoFocus="tittle"
                     name="title"
                     id={title.id}
                     placeholder="Tittel van uw hulpvraag"
                     type="Text"
                     value={title || ""}
                     onChange={onInputChange}
+                    autoFocus={true}
                 />
-                <InputFormTextarea
-                    label="Onderwerp"
-                    name="content"
-                    id={content.id}
-                    placeholder="Voer hier uw hulpvraag in"
-                    value={content || ""}
-                    onChange={onInputChange}/>
-
                 <label htmlFor="type-request-field">
-                    <small>Type hulpvraag</small>
                     <select
-                        id="type-request"
+                        className="main-form__select"
                         name="type"
                         value={typeRequest}
                         onChange={onCategoryChange}
                     >
+                        <option
+                            className="main-form__choose"
+                            disabled={true}
+                            value="">kies type</option>
                         {options.map((option, index) => (
-                            <option value={option || ""} key={index}>
+                            <option
+                                value={option || ""} key={index}>
                                 {option}
                             </option>
                         ))}
                     </select>
                     {/*{error && <small className={classes.alert}>{genError}</small>}*/}
                 </label>
+                    <InputFormTextarea
+                        className="main-form__content"
+                        label="Onderwerp"
+                        name="content"
+                        id={content.id}
+                        placeholder="Voer hier uw hulpvraag in"
+                        value={content || ""}
+                        onChange={onInputChange}/>
                 {/*</div>*/}
-                <Button type="submit">{editMode ? "UPDATE" : "VERZENDEN"}</Button>
-                <Button type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN</Button>
+                <Button className="main-form__button-submit" type="submit">{editMode ? "UPDATE" : "VERZENDEN"}<MdUpdate/></Button>
+                    <Button className="main-form__button-cancel"  onClick={() => navigate(`/request/${id}`)}>
+                        ANNULEREN<MdCancel/></Button>
                 </div>
             </form>
 

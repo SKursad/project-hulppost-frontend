@@ -9,7 +9,7 @@ const Home = () => {
     return (
         <Screen title="Welkom!" wide={true}>
             <main className= "app-overview__main">
-                    <div className="background"></div>
+                    <figure className="background"></figure>
                 <section id="app-overview__info">
                     <h1 className= "app-overview__title-h1">Welkom bij HulpPost!</h1>
                     <strong className= "app-overview__subtitle"> Dit is een platform die mensen bij elkaar brengt voor iets goeds</strong>

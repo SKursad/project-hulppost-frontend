@@ -49,9 +49,11 @@ const SearchRequests = () => {
     }, [requests, search]);
 
     return (
-        <Screen title="Alle Hulpaanvragen">
+        <Screen title="Alle Hulpaanvragen" wide={true}>
             <main className="main-searchbar">
+                <figure className="main-searchbar_background"></figure>
                 <form className="main-searchbar__form" onSubmit={(e) => e.preventDefault()}>
+                {/*<div className="main-searchbar__div">*/}
                     <input
                         className="main-searchbar__search"
                         // label="search"
@@ -69,8 +71,7 @@ const SearchRequests = () => {
                         <Feed requests={searchResults}/>
                     ) : (
                         <p style={{marginTop: '2rem'}}>
-                            Geen aanvragen om te laten zien
-                        </p>
+                            Geen aanvragen om te laten zien</p>
                     )}
                     {attachmentImageVisible && (
                         <img
@@ -78,6 +79,7 @@ const SearchRequests = () => {
                             src={`http://localhost:8080/images/attachments/${requests.fileAttachment.name}`}
                         />
                     )}
+                {/*</div>*/}
                 </form>
             </main>
         </Screen>

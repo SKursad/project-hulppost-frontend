@@ -13,6 +13,7 @@ const ProfileWithDefaultImage = props => {
         <img
             className={props.className || "defPicture"}
             alt={`Profile`}
+            id={props.id}
             src={tempImage || imageSource}
             {...props}
             onError={event => {
