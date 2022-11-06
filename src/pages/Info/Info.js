@@ -7,7 +7,7 @@ const Info = () => {
         <Screen title="Informatie" wide={true}>
             <main className="main-info">
                 <div className="main-info__div">
-                <h1 className="main-info__h1">Voorwaarden</h1>
+                <h1 className="main-info__h1">Informatie</h1>
                 <p className="main-info__p">Doel van deze applicatie is om de connectie te bouwen tussen hulp zoekende
                     mensen en/of organisaties
                     en vrijwilligers (tijdelijk) alleen binnen Noord-Holland.
