@@ -73,7 +73,6 @@
 }
 
 .alert-succes {
-    /*color: #234223;*/
     box-shadow: 0 2px 8px rgba(45, 94, 56, 0.26);
     background-color: rgb(215, 251, 252);
     width: 153px;
@@ -83,6 +82,5 @@
     border: 1px solid #234d54;
     padding: 1rem;
     margin: 1px;
-    /*font-family: 'Rowdies', cursive;*/
     font-family: 'Prosto One', cursive;
 }

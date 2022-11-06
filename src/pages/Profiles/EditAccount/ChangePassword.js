@@ -1,13 +1,13 @@
 import React, {useContext, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import {MdCancel} from 'react-icons/md';
-import '../../../components/Input/InputForm.css'
-import './EditData.css'
+import '../../../components/Input/InputForm.css';
+import './EditData.css';
 import DispatchContext from '../../../context/DispatchContext';
 
 let initialState = {
@@ -126,8 +126,11 @@ const ChangePassword = () => {
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
+                            <Button id="edit-data__buttons" type="button"
+                                    onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons" type="button"
+                                     onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
+                            <MdCancel/></Button>)}
                     </div>
                 </div>
             </form>

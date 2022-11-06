@@ -18,7 +18,6 @@ const RequestsFeed = ({request}) => {
                         <h4 className="feed-article__type-request">
                             <p className="feed-article__p">Type aanvraag</p>
                             {(request.typeRequest)}</h4>
-                        {/*<div className="feed-article__div-img">*/}
                         <h4 className="feed-article__type-content">
                             <p className="feed-article__p">Hulpvraag</p>
                             {(request.content).length <= 40
@@ -33,8 +32,6 @@ const RequestsFeed = ({request}) => {
                                 src={`http://localhost:8080/images/attachments/${request.fileAttachment.name}`}
                             />
                         )}
-
-                        {/*</div>*/}
                     </Link>
                 </div>
             </article>

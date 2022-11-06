@@ -50,6 +50,10 @@
     padding: 1rem;
 }
 
+#main-profile__p-0 {
+    margin: 1rem;
+}
+
 .main-profile__edit-personal:active,
 .main-profile__edit-profile:active,
 .main-profile__edit-pass:active,

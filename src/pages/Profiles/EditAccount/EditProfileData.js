@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
 import {getToken} from '../../../helper/AccesToken/GetToken';
@@ -36,7 +36,6 @@ const EditProfileData = () => {
         const userData = await api.get(`/api/v1/users/${id}`, getToken());
         if (userData.status === 200) {
             setFormValue({...userData.data});
-            // setIsLoading(false)
             console.log(userData);
         } else {
             appDispatch({type: "flashMessage", value: "Er ging iets mis"});

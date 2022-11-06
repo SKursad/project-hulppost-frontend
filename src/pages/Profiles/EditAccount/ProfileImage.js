@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../../helper/AccesToken/GetToken';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
 import Button from '../../../components/UI/Button/Button';

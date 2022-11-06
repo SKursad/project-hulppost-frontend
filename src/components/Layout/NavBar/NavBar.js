@@ -1,6 +1,6 @@
 import React, {useContext, useState} from 'react';
 import {Link} from 'react-router-dom';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import {FaBars, FaTimes} from 'react-icons/fa';
 import './Navbar.css';
 

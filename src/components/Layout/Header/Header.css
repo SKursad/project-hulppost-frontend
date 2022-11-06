@@ -13,10 +13,8 @@
 
 .main-header__link {
     position: relative;
-    /*height: 10rem;*/
     left: 1rem;
     top: .6rem;
-    /*z-index: 41;*/
 }
 
 .main-header__link img {

@@ -1,18 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
-import api from '../../api/api-calls';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
+import {AuthContext} from '../../context/AuthContext';
+import DispatchContext from '../../context/DispatchContext';
+import api from '../../api/api-calls';
 import ProfileWithDefaultImage from '../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 import Screen from '../../components/UI/Screen/Screen';
 import Button from '../../components/UI/Button/Button';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdUpdate} from 'react-icons/md';
-import {AuthContext} from '../../context/auth-context';
-import './SingleReply.css'
+import './SingleReply.css';
 
 const SingleReply = () => {
     const {id} = useParams();
     const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
     const [replyData, setReplyData] = useState([]);
     const [userData, setUserData] = useState([]);
     const navigate = useNavigate();
@@ -58,6 +60,7 @@ const SingleReply = () => {
             } catch (e) {
                 navigate(-1);
             }
+            appDispatch({type: "flashMessage", value: "Reactie succesvol verwijderd"});
         }
     }
 

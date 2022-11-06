@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {AuthContext} from '../../context/auth-context';
+import {AuthContext} from '../../context/AuthContext';
 import api from '../../api/api-calls';
 import Input from '../Input/Input';
 import Button from '../UI/Button/Button';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
 let initialState = {
     email: null,
@@ -14,6 +14,7 @@ function SignInForm({apiUrl, source}) {
     const [formValue, setFormValue] = useState(initialState);
     const [error, toggleError] = useState(false);
     const {login} = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -30,6 +31,7 @@ function SignInForm({apiUrl, source}) {
             const result = await api.post(apiUrl, {...formValue});
             console.log(result.data);
             login(result.data.accessToken);
+            navigate(`/request-search`);
 
         } catch (e) {
             console.error(e);

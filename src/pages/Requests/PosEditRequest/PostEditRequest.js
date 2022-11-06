@@ -63,7 +63,7 @@ const PostEditRequest = () => {
                 navigate(`/image/${response.data.id}`);
             } catch (e) {
                 if (e.response) {
-                    setErrors(e.response.data)
+                    setErrors(e.response.data);
                     appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
                     console.log(e.response.data);
                 }
@@ -90,7 +90,6 @@ const PostEditRequest = () => {
         content: contentError,
         typeRequest: typeRequestError,
     } = errors;
-
 
 
     const onInputChange = (e) => {

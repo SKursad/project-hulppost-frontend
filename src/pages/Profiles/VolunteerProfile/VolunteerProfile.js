@@ -3,7 +3,7 @@ import {Link, useNavigate, useParams} from 'react-router-dom';
 import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 import api from '../../../api/api-calls';
 import {getToken} from '../../../helper/AccesToken/GetToken';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import Button from '../../../components/UI/Button/Button';
 import Reply from '../../../components/Replies/Reply';
 import Screen from '../../../components/UI/Screen/Screen';

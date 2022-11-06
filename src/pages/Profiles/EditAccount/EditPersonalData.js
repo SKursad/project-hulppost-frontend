@@ -1,14 +1,14 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../../helper/AccesToken/GetToken';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import api from '../../../api/api-calls';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Screen from '../../../components/UI/Screen/Screen';
 import {MdCancel} from 'react-icons/md';
 import '../../../components/Input/InputForm.css';
-import './EditData.css'
+import './EditData.css';
 import DispatchContext from '../../../context/DispatchContext';
 // import {format} from 'date-fns';
 
@@ -178,8 +178,11 @@ const EditPersonalData = () => {
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
+                            <Button id="edit-data__buttons" type="button"
+                                    onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons" type="button"
+                                     onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
+                            <MdCancel/></Button>)}
                     </div>
                 </div>
             </form>

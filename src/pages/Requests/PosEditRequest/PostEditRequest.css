@@ -10,7 +10,7 @@
 }
 
 .main-form__select:focus,
-.main-form__div textarea:focus  {
+.main-form__div textarea:focus {
     outline: none;
 }
 

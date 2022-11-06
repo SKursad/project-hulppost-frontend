@@ -59,8 +59,8 @@ const PostReply = () => {
             appDispatch({type: "flashMessage", value: "Reactie succesvol geplaatst"});
         } catch (e) {
             if (e.response) {
-            appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
-                setErrors(e.response.data)
+                appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
+                setErrors(e.response.data);
                 console.log(e.response.data);
             }
         }
@@ -83,20 +83,20 @@ const PostReply = () => {
         <Screen title="Reageer" wide={true}>
             <form className="main-form" onSubmit={handleSubmit}>
                 <div className="main-form__div-reply">
-                <p className="main-form__p-reply">Jouw reactie</p>
-                <InputFormTextarea
-                    className="main-form__text"
-                    id={text.id}
-                    name="text"
-                    // required
-                    value={text}
-                    onChange={onInputChange}
-                />
+                    <p className="main-form__p-reply">Jouw reactie</p>
+                    <InputFormTextarea
+                        className="main-form__text"
+                        id={text.id}
+                        name="text"
+                        // required
+                        value={text}
+                        onChange={onInputChange}
+                    />
                     {textError &&
                         <small className="gen-error">{textError}</small>}
-                <Button className="main-form__button-submit-reply" type="submit">VERZENDEN&nbsp;</Button>
-                <Button className="main-form__button-cancel-reply"  onClick={() => navigate(`/request/${id}`)}>
-                    ANNULEREN&nbsp;<MdCancel/></Button>
+                    <Button className="main-form__button-submit-reply" type="submit">VERZENDEN&nbsp;</Button>
+                    <Button className="main-form__button-cancel-reply" onClick={() => navigate(`/request/${id}`)}>
+                        ANNULEREN&nbsp;<MdCancel/></Button>
                 </div>
             </form>
         </Screen>

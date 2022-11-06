@@ -1,9 +1,7 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Feed from '../../../components/Requests/Feed';
 import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
-import {AuthContext} from '../../../context/auth-context';
-import {Link} from 'react-router-dom';
 import './SearchRequests.css';
 
 
@@ -12,7 +10,6 @@ const SearchRequests = () => {
     const [requests, setRequests] = useState([]);
     const [searchResults, setSearchResults] = useState([]);
     const [search, setSearch] = useState('');
-    const context = useContext(AuthContext);
     const attachmentImageVisible =
         requests.fileAttachment && requests.fileAttachment.fileType.startsWith('image');
 
@@ -24,14 +21,14 @@ const SearchRequests = () => {
                 setRequests(response.data);
                 console.log(response);
 
-            } catch (err) {
-                if (err.response) {
+            } catch (e) {
+                if (e.response) {
                     console.log();
                     // not in the 200 response range
-                    console.log(err.response.data);
+                    console.log(e.response.data);
                 } else {
                     // axios documentation
-                    console.log(`Fout: ${err.message}`);
+                    console.log(`Fout: ${e.message}`);
                 }
             }
         };

@@ -1,6 +1,6 @@
 import {Route, Routes} from 'react-router-dom';
 import {useImmerReducer} from 'use-immer';
-import {AuthContext} from './context/auth-context';
+import {AuthContext} from './context/AuthContext';
 import StateContext from './context/StateContext';
 import DispatchContext from './context/DispatchContext';
 import {useContext} from 'react';
@@ -12,7 +12,6 @@ import Home from './pages/Home/Home';
 import SignIn from './pages/SignIn/SignIn';
 import SignUpHelpSeeker from './pages/SignUp/HelpSeeker/SignUpHelpSeeker';
 import SignUpVolunteer from './pages/SignUp/Volunteer/SignUpVolunteer';
-import SignUpAdmin from './pages/SignUp/Admin/SignUpAdmin';
 import Accounts from './pages/Profiles/Accounts';
 import HelpSeekerProfile from './pages/Profiles/HelpSeekerProfile/HelpSeekerProfile';
 import VolunteerProfile from './pages/Profiles/VolunteerProfile/VolunteerProfile';
@@ -56,7 +55,6 @@ function App() {
                         <Route index element={<Home/>}/>
                         <Route path="/register/help-seeker" element={<SignUpHelpSeeker/>}/>
                         <Route path="/register/volunteer" element={<SignUpVolunteer/>}/>
-                        <Route path="/register/admin" element={<SignUpAdmin/>}/>
                         <Route path="/request-search" element={<SearchRequests/>}/>
                         <Route path="/request/:id" element={<RequestWithReplies/>}/>
                         <Route path="/post-request" element={<PostEditRequest/>}/>

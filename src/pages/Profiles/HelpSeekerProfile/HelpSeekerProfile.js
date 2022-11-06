@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import api from '../../../api/api-calls';
-import {AuthContext} from '../../../context/auth-context';
+import {AuthContext} from '../../../context/AuthContext';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import Request from '../../../components/Requests/Request';
@@ -65,7 +65,6 @@ const HelpSeekerProfile = () => {
             setAccountData(accountData.data);
             // console.log(accountData)
         } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
         }
     };
 
@@ -89,7 +88,6 @@ const HelpSeekerProfile = () => {
             setRequestData(response.data);
             console.log(response.data);
         } else if (response.status === 400 || response.status === 500) {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
         }
     };
 
@@ -112,12 +110,12 @@ const HelpSeekerProfile = () => {
 
                         <Button className="main-profile__edit-foto" type="button"
                                 onClick={() => navigate(`/put-profileImage/${id}`)}>
-                           <RiAccountCircleFill/> Profielfoto aanpassen
+                            <RiAccountCircleFill/> Profielfoto aanpassen
                         </Button>
                     </div>)}
                 <section id="user">
                     <div><strong>Gebruikersnaam:</strong> {userData.username}
-                    <p><strong>Email: </strong> {userData.email}</p>
+                        <p><strong>Email: </strong> {userData.email}</p>
                     </div>
                 </section>
 
@@ -133,20 +131,23 @@ const HelpSeekerProfile = () => {
                 }{context.user.username === userData.username && (
                 <div className="main-profile__settings">
                     <p className="main-profile__settings-p">INSTELLINGEN</p>
-                    <Button className="main-profile__edit-personal" type="button" onClick={() => navigate(`/edit-personalData/${id}`)}><VscAccount/>&nbsp;Persoonlijke gegevens</Button>
-                    <Button className="main-profile__edit-profile" type="button" onClick={() => navigate(`/edit-profileData/${id}`)}><VscAccount/>&nbsp;Profielgegevens</Button>
-                    <Button className="main-profile__edit-pass" type="button" onClick={() => navigate(`/change-password/${id}`)}><MdPassword/>&nbsp;Wachtwoord</Button>
+                    <Button className="main-profile__edit-personal" type="button"
+                            onClick={() => navigate(`/edit-personalData/${id}`)}><VscAccount/>&nbsp;Persoonlijke
+                        gegevens</Button>
+                    <Button className="main-profile__edit-profile" type="button"
+                            onClick={() => navigate(`/edit-profileData/${id}`)}><VscAccount/>&nbsp;Profielgegevens</Button>
+                    <Button className="main-profile__edit-pass" type="button"
+                            onClick={() => navigate(`/change-password/${id}`)}><MdPassword/>&nbsp;Wachtwoord</Button>
                 </div>)}
 
 
-                {/*{context.user.roles === 'ROLE_HELP-SEEKER' ? (<>*/}
                 <h2>Hulpvragen</h2>
                 {requestData.length > 0 &&
                     requestData.map(request => {
                         return <Request noAuthor={true} key={request.id} request={request}/>;
                     })}
                 {requestData.length === 0 && context.user.username === userData.username && (
-                    <p className="lead text-muted text-center">
+                    <p id="main-profile__p-0">
                         Je hebt geen hulpvragen. <Link to="/post-request"> Klik hier als je een hulpvraag hebt?</Link>
                     </p>)}
 
