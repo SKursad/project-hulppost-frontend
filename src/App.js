@@ -63,7 +63,7 @@ function App() {
                         <Route path="/edit-reply/:id" element={<EditReply/>}/>
                         <Route path="/reply/:id" element={<SingleReply/>}/>
                         <Route path="/profile/:id/*" element={<HelpSeekerProfile/>}/>
-                        <Route path="/profile-volunteer/:id" logOut={logout} element={<VolunteerProfile/>}/>
+                        <Route path="/profile-volunteer/:id" element={<VolunteerProfile/>}/>
                         <Route path="/edit-personalData/:id" element={<EditPersonalData/>}/>
                         <Route path="/edit-profileData/:id" element={<EditProfileData/>}/>
                         <Route path="/change-password/:id" element={<ChangePassword/>}/>
