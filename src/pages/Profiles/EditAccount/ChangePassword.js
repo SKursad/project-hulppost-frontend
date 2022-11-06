@@ -5,7 +5,10 @@ import api from '../../../api/api-calls';
 import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
+import {MdCancel} from 'react-icons/md';
 import '../../../components/Input/InputForm.css'
+import './EditData.css'
+import DispatchContext from '../../../context/DispatchContext';
 
 let initialState = {
     email: '',
@@ -16,6 +19,7 @@ let initialState = {
 const ChangePassword = () => {
     const {id} = useParams();
     const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
     const {email, oldPassword, newPassword} = formValue;
     const [errors, setErrors] = useState({});
@@ -45,6 +49,7 @@ const ChangePassword = () => {
                     navigate(`/profile/${id}`);
                 }
             }
+            appDispatch({type: "flashMessage", value: "Je wachtwoord is succesvol geüpdatet"});
         } catch (e) {
             // toggleError(false);
             if (e.response.status === 400) {
@@ -68,7 +73,7 @@ const ChangePassword = () => {
 
 
     return (
-        <Screen title="Account aanpassen">
+        <Screen title="Account aanpassen" wide={true}>
             <form className="form-container" onSubmit={handleSubmit}>
                 <div className="form-container__input">
                     <p className="form-__p">Je wachtwoord wijzigen</p>
@@ -111,15 +116,18 @@ const ChangePassword = () => {
                         onChange={onChange}
                         error={newPasswordError}
                     />
-                    <div className="form-container__button">
+                    <div id="edit-data__div-buttons">
                         <Button
+                            id="edit-data__buttons"
                             title="register-button"
                             type="submit"
-                            // onClick={handleSubmit}
                             disabled={!errors}
                         >
                             Updaten
                         </Button>
+                        {context.user.roles === "ROLE_HELP-SEEKER" ? (
+                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
                     </div>
                 </div>
             </form>

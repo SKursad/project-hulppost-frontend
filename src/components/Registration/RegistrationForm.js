@@ -1,9 +1,10 @@
-import Input from '../Input/Input';
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate} from 'react-router-dom';
 import api from '../../api/api-calls';
-import '../Input/InputForm.css';
+import DispatchContext from '../../context/DispatchContext';
+import Input from '../Input/Input';
 import Button from '../UI/Button/Button';
+import '../Input/InputForm.css';
 
 
 let initialState = {
@@ -20,6 +21,7 @@ let initialState = {
 
 const RegistrationForm = ({source, apiUrl}) => {
     const [formValue, setFormValue] = useState(initialState);
+    const appDispatch = useContext(DispatchContext);
     // const [error, toggleError] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, toggleLoading] = useState(false);
@@ -37,20 +39,19 @@ const RegistrationForm = ({source, apiUrl}) => {
         setErrors('');
         // toggleError(false);
         toggleLoading(true);
-
         try {
             const response = await api.post(apiUrl, {...formValue});
-
             console.log(response.data);
-            // navigate(`/profileEdit/${id}`);
-            navigate(`/login`)
+            appDispatch({type: "flashMessage", value: "U heeft zich succesvol geregistreerd"});
+            navigate(`/login`);
         } catch (e) {
             // toggleError(false);
             console.error(e);
             console.log(e.response.data);
-            if (e.response.data) {
-                // toggleError(true);
+            if (e.response) {
+                appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
                 setErrors(e.response.data);
+                console.log(e.response.data);
 
             }
             // toggleError(false);
@@ -92,7 +93,6 @@ const RegistrationForm = ({source, apiUrl}) => {
                     alt="input-email"
                     type="email"
                     id="email-field"
-                    // value={email}
                     name="email"
                     autoFocus={true}
                     onChange={onChange}
@@ -204,6 +204,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                     Registreren
                 </Button>
             </div>
+            <p>Je kunt na het registeren in je profielpagina een profielfoto kiezen indien gewenst</p>
             <p>Heb je al een account? Je kunt je <Link to="/login">hier</Link> inloggen.</p>
             <p>Terug naar <Link to="/">Hoofdpagina</Link></p>
         </main>

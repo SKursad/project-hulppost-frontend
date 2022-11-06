@@ -8,6 +8,7 @@ import Button from '../../components/UI/Button/Button';
 import {FaTrashAlt} from 'react-icons/fa';
 import {MdUpdate} from 'react-icons/md';
 import {AuthContext} from '../../context/auth-context';
+import './SingleReply.css'
 
 const SingleReply = () => {
     const {id} = useParams();
@@ -22,12 +23,8 @@ const SingleReply = () => {
 
     const getReplyById = async (id) => {
         const replyData = await api.get(`/api/v1/replies/${id}`);
-        // const replyData = await api.get(`hulppost/requests?replyId=${id}`);
         if (replyData.status === 200 || replyData.status === 200) {
-            // setRequestData({...requestData.data});
             setReplyData(replyData.data);
-            // const { } = replyData.data[0];
-            // console.log(requestData);
             console.log(replyData.data);
         } else {
         }
@@ -49,7 +46,7 @@ const SingleReply = () => {
 
 
     async function deleteHandler() {
-        const areYouSure = window.confirm("De bericht zal worden verwijderd? ");
+        const areYouSure = window.confirm("Het bericht zal worden verwijderd! ");
         if (areYouSure) {
             try {
                 const response = await api.delete(`/api/v1/replies/${id}`, getToken());
@@ -67,9 +64,9 @@ const SingleReply = () => {
 
     return (
         <Screen title="Reacties">
-            <main className="main-request">
-                <div className="main-request__div-img">
-                    <p className="main-request__p">NAAR DE PROFIEL VAN DE GEBRUIKER</p>
+            <main className="main-reply">
+                <div className="main-reply__div-img">
+                    <p className="main-reply__p">NAAR DE PROFIEL VAN DE GEBRUIKER</p>
                     {userData.id === replyData.userId ? (
                             <Link to={`/profile-volunteer/${userData.id}`}>
                                 <ProfileWithDefaultImage
@@ -83,25 +80,26 @@ const SingleReply = () => {
                                 image={userData.image}/></Link>)}
                 </div>
                 {Object.keys(replyData).length > 0 ? (
-                    <article className="article-reply">
+                    <article id="article-reply">
                         <p>Geplaatst door</p>
                         <p>{userData.username}</p>
-                        <small className="article-reply__date">{dateFormatted}</small>
-                        <p>REACTIE</p>
+                        <small className="article-reply__date">op {dateFormatted}</small>
+                        <p>Bericht:</p>
+                        <br/>
                         <Link to={`/request/${replyData.requestId}`}><p className="article-reply__p">{replyData.text}</p></Link>
                         <br/>
-                        <h5>KLIK OP DE REACTIE OM NAAR DE HULPAANVRAAG TE NAVIGEREN</h5>
+                        <p id="article-reply__p">KLIK OP DE BERICHT OM NAAR DE HULPAANVRAAG TE GAAN</p>
                     </article>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
                 {context.user.id === replyData.userId ? (<>
-                    <div className="main-request__div-button">
+                    <div className="main-reply__div-button">
                         {/*<Button id="main-request__button" type="button"*/}
                         {/*        onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG*/}
                         {/*    <FaCommentDots/> </Button>*/}
-                        <Button id="main-request__button" type="button"
+                        <Button id="main-reply__button" type="button"
                                 onClick={() => navigate(`/edit-reply/${id}`)}>UPDATEN<MdUpdate/></Button>
-                        <Button id="main-profile__del-button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
+                        <Button id="main-reply__del-button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
                     </div>
                 </>) : ('')}
 

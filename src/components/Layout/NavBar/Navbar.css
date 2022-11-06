@@ -1,21 +1,13 @@
-nav {
+.nav {
     height: 2%;
-}
-
-nav.nav {
-    /*display: flex;*/
-    /*height: 10%;*/
-    /*width: 100%;*/
-    /*position: absolute;*/
     position: fixed;
     margin: 3rem;
     font-size: 4rem;
     align-items: center;
-    display: inline-flex;
+    display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    width: calc(100% - 4rem);
-    vertical-align: middle;
+    width: 90%;
     z-index: 42;
 }
 
@@ -32,38 +24,29 @@ nav.nav {
     left: 7rem;
     top: 6.7rem;
     transition: all 0.1ms ease;
-    /*position: absolute;*/
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*flex-direction: column;*/
-    /*bottom: 100%;*/
 }
 
 .nav__mobile-logout {
     position: absolute;
-    top: -5rem;
+    top: -5.1rem;
     left: -7rem;
     width: 100vw;
 }
 
 .nav__mobile-login {
     position: absolute;
-    top: -5rem;
+    top: -5.1rem;
     left: -7rem;
     width: 100vw;
 }
 
 .nav__links {
     display: none;
-    /*height: 100vh;*/
-    /*width: 100vw;*/
     list-style: none;
     margin: 3rem;
     top: 1rem;
     position: relative;
-    justify-content: flex-end;
 }
-
 
 .nav__login,
 .nav__request,
@@ -89,7 +72,6 @@ nav.nav {
     transition: all 0.1s ease-out;
 }
 
-
 .nav__request:hover,
 .nav__feed:hover,
 .nav__profile:hover {
@@ -97,6 +79,7 @@ nav.nav {
     border-color: turquoise;
     color: white;
 }
+
 
 .nav__login:hover {
     background-color: rgb(75, 159, 159);
@@ -108,9 +91,10 @@ nav.nav {
     color: rgba(203, 36, 36, 0.32);
 }
 
+
 .nav__mobile-menu {
     display: flex;
-    margin: 2.5rem 2rem -.3rem 1rem;
+    margin: 2.5rem 1rem -.3rem 1rem;
     padding: .4rem .5rem;
     font-size: 2rem;
     border-radius: .5rem;
@@ -124,12 +108,8 @@ nav.nav {
 
 }
 
-/*.nav__mobile-menu::after {*/
-/*    background-color: rgba(83, 176, 174, 0.53);*/
-/*}*/
 
 .nav__mobile-menu:hover {
-    /*transform: translateY(-2px);*/
     background-color: rgba(70, 134, 129, 0.37);
 }
 
@@ -137,7 +117,6 @@ nav.nav {
 .nav__mobile-menu:active {
     color: #fff;
     transform: translateY(-1px);
-    /*background-color: rgb(53, 112, 111);*/
     border: 1.5px solid rgba(2, 12, 21, 0.36);
 }
 
@@ -147,21 +126,14 @@ nav.nav {
 }
 
 @media (min-width: 47rem ) {
-    /*.logo {*/
-    /*    display: block;*/
-    /*    justify-content: flex-end;*/
-    /*    !*top: 1rem;*!*/
-    /*    !*left: 1rem;*!*/
-    /*    !*vertical-align: middle;*!*/
-    /*}*/
     .nav__links {
         display: inline-flex;
         flex-direction: row;
         justify-content: flex-end;
         flex: 50%;
-        gap: 4rem;
+        /*gap: 4rem; before!*/
         padding: 3rem;
-        margin: 3.5rem 1rem 1.5rem;
+        margin: 3.4rem 1rem 1.5rem;
         border: none;
         cursor: pointer;
         list-style: none;
@@ -176,14 +148,6 @@ nav.nav {
         display: none;
     }
 
-    /*.main-header__logo img {*/
-    /*    position: relative;*/
-    /*    justify-content: center;*/
-    /*    height: 10rem;*/
-    /*    left: 1rem;*/
-    /*    top: .6rem;*/
-    /*    !*transition: all 1s ease-out;*!*/
-    /*}*/
     .nav__mobile-logout {
         position: relative;
         display: inline-flex;
@@ -197,13 +161,14 @@ nav.nav {
     .nav__feed,
     .nav__profile,
     .nav__logout {
-        display: inline-flex;
+        display: flex;
         flex-direction: row;
         position: relative;
         top: -2rem;
         gap: .4rem;
-        left: calc(100% - 53rem);
-        margin: 4.3rem 1rem 0 -8rem;
+        justify-content: right;
+        left: 8rem;
+        margin: 4.3rem 1rem 1rem -1rem;
         border-radius: .5rem;
     }
 
@@ -219,6 +184,7 @@ nav.nav {
         color: rgba(203, 36, 36, 0.32);
     }
 
+
     .nav__mobile-login,
     .nav__login,
     .nav__feed {
@@ -226,7 +192,9 @@ nav.nav {
         flex-direction: row;
         position: relative;
         top: -2rem;
-        left: calc(100% - 20rem);
+        left: 8rem;
+        gap: .4rem;
+        justify-content: right;
         margin: 4rem 2rem 0 0;
         border-radius: .5rem;
     }
@@ -235,21 +203,20 @@ nav.nav {
     .nav__login:active {
         border: rgba(77, 204, 68, 0.78) solid;
         color: rgba(126, 213, 111, 0.8);
-
     }
 
     ul.nav__mobile {
+        display: flex;
+        justify-content: flex-start;
         background-color: transparent;
         border: none;
-        display: flex;
         position: absolute;
         flex-direction: row;
-        margin: -3rem 1rem 1rem 0;
+        margin: -3rem 1rem 1rem -2rem;
         padding: 0 0 0 0;
+        align-content: center;
+        left: -10rem;
         /*padding: 0 0 5 0; before!*/
-        left: calc(100% - 80rem);
-        /*transition: all 1s ease;*/
-
     }
 
     .nav__login,
@@ -259,18 +226,17 @@ nav.nav {
     .nav__logout,
     .nav__mobile {
         display: inline-flex;
-        /*position: relative;*/
+        position: relative;
         flex-direction: row;
         text-decoration: none;
-        justify-content: flex-end;
-        text-align: end;
+        justify-items: center;
         background-color: #53b0ae;
         color: rgba(255, 255, 255, 0.61);
         font-size: 1.6rem;
         left: 2rem;
         right: 10rem;
         padding: 1.6rem 1rem;
-        margin: 2rem .3rem 0 0;
+        margin: 2rem .5rem 0 0;
         border: solid 1px;
         cursor: pointer;
         text-transform: uppercase;
@@ -280,10 +246,9 @@ nav.nav {
         position: relative;
         display: flex;
         flex-direction: row;
-        /*text-align: justify-all;*/
-        bottom: 80%;
+        justify-content: start;
         top: 1.2rem;
-        left: 82%;
-        /*transition: all 1s ease;*/
     }
 }
+
+

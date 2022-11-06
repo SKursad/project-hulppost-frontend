@@ -72,7 +72,7 @@ function SignInForm({apiUrl, source}) {
                 />
             </div>
             {error &&
-                <p className="error">Combinatie van gebruikersnaam of E-mail en wachtwoord is onjuist</p>}
+                <p id="error">Combinatie van gebruikersnaam of E-mail en wachtwoord is onjuist</p>}
             <div className="form-container__button">
 
                 <Button

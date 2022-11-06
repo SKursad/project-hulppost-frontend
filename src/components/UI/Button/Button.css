@@ -10,27 +10,15 @@
     border-bottom-color: rgb(206, 191, 191);
     color: rgba(53, 112, 111, 0.5);
     font-size: 1.6rem;
-    padding: .5rem .5rem;
+    padding: 1rem 0 1rem 0;
     cursor: pointer;
     /*margin: 1rem;*/
     text-transform: uppercase;
-    max-width: 100%;
-    /*justify-items: center;*/
+    width: 50%;
+    align-content: center;
 }
 
-/*width: 100%;*/
-/*padding: 1rem 1rem;*/
-/*cursor: pointer;*/
-
-
-/*border-right-color: rgba(0, 0, 0, 0.68);*/
-
-/*border-top-color: slategrey;*/
-
-
-
 .button:hover {
-    /*transform: translateY(-2px);*/
     background-color: rgb(75, 159, 159);
     color: rgba(255, 255, 255, 0.81);
 }
@@ -39,8 +27,6 @@
 .button:active {
     color: #fff;
     transform: translateY(-1px);
-    /*background-color: rgb(53, 112, 111);*/
-    /*border: 1.5px solid rgba(2, 12, 21, 0.36);*/
 }
 
 .button::after {
@@ -50,6 +36,6 @@
 
 @media (min-width: 40rem) {
     .button {
-        width: 50%;
+        width: 100%;
     }
 }

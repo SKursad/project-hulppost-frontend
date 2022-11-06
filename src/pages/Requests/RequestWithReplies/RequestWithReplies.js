@@ -10,20 +10,20 @@ import Screen from '../../../components/UI/Screen/Screen';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import Reply from '../../../components/Replies/Reply';
 import './RequestWithReplies.css';
-import {FaCommentDots, FaHandsHelping, FaRegFileExcel, FaTrashAlt} from 'react-icons/fa';
-import {MdUpdate} from 'react-icons/md';
+import {FaCommentDots, FaHandsHelping, FaRegFileExcel} from 'react-icons/fa';
+import {MdOutlineImageNotSupported, MdUpdate} from 'react-icons/md';
 import {VscAccount} from 'react-icons/vsc';
-import {TiDocumentDelete} from 'react-icons/ti';
-import {BiImageAlt} from 'react-icons/bi';
+import DispatchContext from '../../../context/DispatchContext';
 
 
 const RequestWithReplies = () => {
     const {id} = useParams();
+    const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
     const [requestData, setRequestData] = useState({});
     const [replyData, setReplyData] = useState({});
     const [userData, setUserData] = useState({});
     const navigate = useNavigate();
-    const context = useContext(AuthContext);
     const date = new Date(requestData.timestamp);
     const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
     const attachmentImageVisible =
@@ -61,7 +61,7 @@ const RequestWithReplies = () => {
 
 
     async function deleteHandler() {
-        const areYouSure = window.confirm("De bericht zal worden verwijderd?");
+        const areYouSure = window.confirm("Het bericht zal worden verwijderd!");
         if (areYouSure) {
             try {
                 const response = await api.delete(`/api/v1/requests/${id}`, getToken());
@@ -73,11 +73,12 @@ const RequestWithReplies = () => {
             } catch (e) {
                 navigate(`/profile/${userData.id}`);
             }
+                    appDispatch({type: "flashMessage", value: "Aanvraag succesvol verwijderd"});
         }
     }
 
     async function deleteImageHandler() {
-        const areYouSure = window.confirm("De afbeelding zal worden verwijderd?");
+        const areYouSure = window.confirm("De afbeelding zal worden verwijderd!");
         if (areYouSure) {
             try {
                 const response = await api.delete(`/api/v1/requests/${id}/deleteImage`, getToken());
@@ -89,6 +90,7 @@ const RequestWithReplies = () => {
             } catch (e) {
                 navigate(`/profile/${userData.id}`);
             }
+            appDispatch({type: "flashMessage", value: "Afbeelding succesvol verwijderd"});
         }
     }
 
@@ -100,6 +102,7 @@ const RequestWithReplies = () => {
                         <p className="main-request__p"></p>
                         <Link to={`/login`}>
                             <ProfileWithDefaultImage
+                                id="main-request__default-img"
                                 alt={`${userData.username} profile`}
                                 image={userData.image}
                             /></Link>
@@ -134,22 +137,20 @@ const RequestWithReplies = () => {
                         </div>
 
 
-                        <div className="main-request__img-div">
                         {attachmentImageVisible && (
-                            // <figure className="main-request__fig">
+                        <div className="main-request__img-div">
                                 <img
                                 className="main-request__img"
                                 alt="attachment"
                                 src={`http://localhost:8080/images/attachments/${requestData.fileAttachment.name}`}
                             />
-                            // </figure>
-                        )}
                         </div>
+                        )}
 
 
                         {context.user &&
-                            (<div className="main-request__div-align-1">
-                                <p className="request-replies">REACTIES OP DE AANVRAAG</p>
+                            (<div>
+                                <p className="request-replies">ANTWOORDEN OP DE AANVRAAG</p>
                                 {replyData.length > 0 ? (
                                     replyData.map(reply => {
                                         return <Reply noAuthor={false} key={reply.id} reply={reply}/>;
@@ -158,16 +159,15 @@ const RequestWithReplies = () => {
                     </section>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
-                {!context.user ? (<div>
-                    Wil je helpen ? {""}
-                    <Button id="main-request__button" type="button" onClick={() => navigate(`/register/volunteer`)}>
+                {!context.user ? (<div className="main-request__visitor-div">
+                    <p id="main-request__visitor">Wil je helpen ?</p>
+                    <Button id="main-request__visitor-button" type="button" onClick={() => navigate(`/register/volunteer`)}>
                         Registreer<VscAccount/></Button>
                 </div>) : (
 
                     <div>
                     {context.user.roles === 'ROLE_HELP-SEEKER' &&
-
-                        <div className="main-request__div-align-2" >
+                        <div>
                         {context.user.id === requestData.userId && (
                             <div className="main-request__div-button">
                                 {replyData.length > 0 ? (
@@ -180,7 +180,7 @@ const RequestWithReplies = () => {
                                         onClick={deleteHandler}>VERWIJDEREN<FaRegFileExcel/></Button>
                                 {requestData.fileAttachment && (
                                     <Button id="main-request__button-deletePic" onClick={deleteImageHandler}>FOTO
-                                        VERWIJDEREN<BiImageAlt/></Button>)}
+                                        VERWIJDEREN<MdOutlineImageNotSupported/></Button>)}
                             </div>)}
                     </div>}
                     {context.user.roles === 'ROLE_VOLUNTEER' && (

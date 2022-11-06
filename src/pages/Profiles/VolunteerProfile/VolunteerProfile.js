@@ -13,7 +13,7 @@ import {TiUserDelete} from 'react-icons/ti';
 import {RiAccountCircleFill} from 'react-icons/ri';
 import {VscAccount} from 'react-icons/vsc';
 import {MdPassword} from 'react-icons/md';
-import '../Profiles.css'
+import '../Accounts.css'
 
 const VolunteerProfile = () => {
     const {id} = useParams();

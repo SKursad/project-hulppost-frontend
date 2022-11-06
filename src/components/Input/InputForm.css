@@ -1,17 +1,10 @@
-
 .form-container {
     display: flex;
     flex-direction: column;
-    /*position: fixed;*/
     padding: 10rem 2rem;
     align-items: center;
     justify-content: center;
-    /*margin: 3rem;*/
-    /*height: 20vh;*/
-    /*text-align: center;*/
-    /*width: 100vw;*/
-    /*border-color: cornflowerblue;*/
-    /*border: lightgray;*/
+    min-height: 100vh;
 }
 
 .form-container__title {
@@ -26,15 +19,14 @@ p.form-container__p {
 
 .form-container__button,
 .form-container p {
-    margin: 2rem ;
+    margin: 2rem;
     font-size: 1.6rem;
 }
+
 
 .form-container__button {
     display: flex;
     justify-content: center;
-    align-self: center;
-    align-content: center;
 }
 
 .form-container label {
@@ -49,11 +41,10 @@ p#option-box {
     justify-content: center;
     width: auto;
     margin: .8rem 0 1rem;
-    /*padding: -7rem 6rem;*/
     vertical-align: middle;
 }
 
-.form-container  input:focus,
+.form-container input:focus,
 .form-container select:focus {
     outline: none;
     background-color: #d8f3df;
@@ -73,32 +64,13 @@ p#option-box {
     border: 1px solid #ccc;
     padding: .4rem .7rem;
     font-size: 1.6rem;
-    /*font: inherit;*/
 }
 
-
-/*.form-container__input {*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    border-style: solid;*/
-/*    padding: 2rem;*/
-/*    margin: 1rem;*/
-/*}*/
-
-
-
-/*.error {*/
-/*    font-size: 1.6rem;*/
-/*    color: #bb0000;*/
-/*}*/
 
 @media (min-width: 40rem) {
     .form-container {
         display: inline-flex;
         flex-direction: column;
-        /*align-items: center;*/
-        /*align-content: center;*/
-        /*justify-content: center;*/
         margin: auto;
         width: 30rem;
         height: 50%;
@@ -109,33 +81,3 @@ p#option-box {
         width: 25rem;
     }
 }
-
-/*@media screen and (min-width: 80rem) {*/
-/*    .form-container {*/
-/*        !*display: inline-flex;*!*/
-/*        margin: 8rem;*/
-/*        padding: 14rem;*/
-/*        !*justify-content: center;*!*/
-/*        width: 25rem;*/
-/*        height: 90vh;*/
-/*    }*/
-/*    .form-container__input {*/
-/*        margin: 1rem;*/
-/*        width: 25rem;*/
-/*    }*/
-/*}*/
-
-/*@media (min-width: 40rem) {*/
-/*    .form-container {*/
-/*        !*display: inline-flex;*!*/
-/*        margin: 10rem;*/
-/*        padding: 1rem;*/
-/*        !*justify-content: center;*!*/
-/*        width: 25rem;*/
-/*        height: 150vh;*/
-/*    }*/
-/*    .form-container__input {*/
-/*        margin: 1rem;*/
-/*        width: 25rem;*/
-/*    }*/
-/*}*/

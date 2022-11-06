@@ -1,8 +1,25 @@
 import React from "react";
-import './Input.css'
+import './Input.css';
 
 
-const Input = ({label, name, accept, placeholder, error, nameRegister,nameLogin, onChange, type, alt, id, value, autoFocus,autoComplete,onBlur,required}) => {
+const Input = ({
+                   label,
+                   name,
+                   accept,
+                   placeholder,
+                   error,
+                   nameRegister,
+                   nameLogin,
+                   onChange,
+                   type,
+                   alt,
+                   id,
+                   value,
+                   autoFocus,
+                   autoComplete,
+                   onBlur,
+                   required
+               }) => {
     const className = error ? "form-control__is-invalid" : "form-control";
     return (
         // <>
@@ -27,7 +44,7 @@ const Input = ({label, name, accept, placeholder, error, nameRegister,nameLogin,
                 required={required}/>
             <small className="form-control__is-invalid">{error}</small>
         </div>
-    // </>
+        // </>
     );
 };
 

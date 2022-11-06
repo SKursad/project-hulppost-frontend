@@ -1,12 +1,15 @@
 import React, {useContext, useEffect, useState} from 'react';
-import api from '../../../api/api-calls';
-import {getToken} from '../../../helper/AccesToken/GetToken';
 import {useNavigate, useParams} from 'react-router-dom';
+import {getToken} from '../../../helper/AccesToken/GetToken';
+import {AuthContext} from '../../../context/auth-context';
+import api from '../../../api/api-calls';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import Screen from '../../../components/UI/Screen/Screen';
-import {AuthContext} from '../../../context/auth-context';
-import '../../../components/Input/InputForm.css'
+import {MdCancel} from 'react-icons/md';
+import '../../../components/Input/InputForm.css';
+import './EditData.css'
+import DispatchContext from '../../../context/DispatchContext';
 // import {format} from 'date-fns';
 
 let initialState = {
@@ -19,8 +22,9 @@ let initialState = {
 
 const EditPersonalData = () => {
     const {id} = useParams();
-    const [formValue, setFormValue] = useState(initialState);
     const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
+    const [formValue, setFormValue] = useState(initialState);
     const {firstName, surname, gender, birthday, zipCode} = formValue;
     const [errors, setErrors] = useState({});
     const [loading, toggleLoading] = useState(false);
@@ -68,10 +72,10 @@ const EditPersonalData = () => {
                     navigate(`/profile/${id}`);
                 }
             }
-            // setFormValue({firstName: '', surname: '', gender: '', birthday: Date, zipCode: ''});
+            appDispatch({type: "flashMessage", value: "Je profiel is succesvol geüpdatet"});
         } catch (e) {
             // toggleError(false);
-            if (e.response.status === 400 ) {
+            if (e.response.status === 400) {
                 setErrors(e.response.data);
             }
         }
@@ -93,9 +97,8 @@ const EditPersonalData = () => {
     };
 
 
-
     return (
-        <Screen title="Account aanpassen">
+        <Screen title="Account aanpassen" wide={true}>
             <form className="form-container" onSubmit={handleSubmit}>
                 <div className="form-container__input">
                     <p className="form-__p">Persoonlijke gegevens wijzigen</p>
@@ -164,8 +167,9 @@ const EditPersonalData = () => {
                         onChange={onInputChange}
                         error={zipCodeError}
                     />
-                    <div className="form-container__button">
+                    <div id="edit-data__div-buttons">
                         <Button
+                            id="edit-data__buttons"
                             title="register-button"
                             type="submit"
                             // onClick={handleSubmit}
@@ -173,6 +177,9 @@ const EditPersonalData = () => {
                         >
                             Updaten
                         </Button>
+                        {context.user.roles === "ROLE_HELP-SEEKER" ? (
+                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
                     </div>
                 </div>
             </form>

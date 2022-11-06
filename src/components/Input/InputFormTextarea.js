@@ -1,6 +1,17 @@
 import React from 'react';
 
-const RequestFormTitle = ({ label, nameRequest, nameReply, id, className, name, value,  placeholder, onChange, autoFocus }) => {
+const RequestFormTitle = ({
+                              label,
+                              nameRequest,
+                              nameReply,
+                              id,
+                              className,
+                              name,
+                              value,
+                              placeholder,
+                              onChange,
+                              autoFocus
+                          }) => {
     return (
         <div>
             <label htmlFor={label}>
@@ -15,7 +26,7 @@ const RequestFormTitle = ({ label, nameRequest, nameReply, id, className, name, 
                 placeholder={placeholder}
                 onChange={onChange}
                 autoFocus={autoFocus}
-                required
+                // required
             />
         </div>
     );

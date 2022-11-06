@@ -1,17 +1,20 @@
 import React, {useContext, useEffect, useState} from 'react';
 import api from '../../api/api-calls';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
-import './Profiles.css';
+import './Accounts.css';
 import Screen from '../../components/UI/Screen/Screen';
 import {AuthContext} from '../../context/auth-context';
 import ProfileWithDefaultImage from '../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
+import Button from '../../components/UI/Button/Button';
+import {MdUpdate} from 'react-icons/md';
 
-const Profiles = () => {
+const Accounts = () => {
     const {id} = useParams();
     const context = useContext(AuthContext);
     const [accountsData, setAccountsData] = useState({});
     const [usersData, setUsersData] = useState([]);
+    const navigate = useNavigate();
     // const [usersData, setUsersData] = useState({});
 
 
@@ -46,7 +49,7 @@ const Profiles = () => {
     }, [id]);
 
     // Object.values(accountsData).map((x) => console.log(x));
-    Object.values(usersData).map((x) => console.log(x));
+    // Object.values(usersData).map((x) => console.log(x));
 
     return (
         <Screen title={"Profielen"}>
@@ -65,8 +68,6 @@ const Profiles = () => {
                                         image={currentUserData.image}
                                     />
                                     <p>{currentUserData.username}</p></Link>
-                                {/*<p>{currentUserData.roles[0].name.toString()}</p>*/}
-                                <p>{currentUserData.image}</p>
                                 <p>{currentUserData.email}</p>
                             </li>
                         ) : (
@@ -78,18 +79,24 @@ const Profiles = () => {
                                         alt={`${currentUserData.username} profile`}
                                         image={currentUserData.image}
                                     />
-                                    <p>{currentUserData.id}</p></Link>
-
-                                {/*<p>{currentUserData.roles[0].name.toString()}</p>*/}
-                                <p>{currentUserData.username}</p>
+                                    <p>{currentUserData.username}</p></Link>
+                                <p>{currentUserData.email}</p>
                             </li>
                         )}
                     </>
                 ))}
+
+                {context.user.roles === "ROLE_ADMIN" && (
+                    <div className="main-profiles__button-div"><p>ADMIN REGISTRATIE</p>
+                    <Button id="main-profiles__button" type="button" onClick={() => navigate('/register/admin')}>REGISTREER<MdUpdate/>
+                    </Button>
+                    </div>)}
+
+
             </div>
         </main>
         </Screen>
     );
 };
 
-export default Profiles;
+export default Accounts;

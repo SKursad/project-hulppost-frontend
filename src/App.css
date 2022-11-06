@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxygen&family=Quicksand&family=Saira+Condensed:wght@200&display=swap');
 /*--
 This global css resets the web
 presets that could be found in
@@ -23,6 +24,7 @@ html {
      That's why is better to specify all the font sizes with rem.
 --*/
 font-size: 62.5%;
+    font-family: 'Oxygen', sans-serif;
 }
 
 body {
@@ -49,11 +51,6 @@ blockquote,
 dl,
 dd {
     margin: 0;
-}
-
-.main-content,footer {
-    height: 100%;
-    width: 100%;
 }
 
 @media (prefers-reduced-motion: reduce) {

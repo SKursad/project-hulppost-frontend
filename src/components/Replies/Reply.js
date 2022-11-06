@@ -1,14 +1,9 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {AuthContext} from '../../context/auth-context';
-import {Link, useParams} from 'react-router-dom';
-import ProfileWithDefaultImage from '../ProfileWithDefaultImage/ProfileWithDefaultImage';
-import './Reply.css'
-import api from '../../api/api-calls';
-import {getToken} from '../../helper/AccesToken/GetToken';
+import React from 'react';
+import {Link} from 'react-router-dom';
+import './Reply.css';
 
 const Reply = (props) => {
     const reply = props.reply;
-    const context = useContext(AuthContext);
     const date = new Date(reply.timestamp);
     const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
 

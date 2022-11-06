@@ -2,13 +2,11 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /*margin: 10rem;*/
     padding: 10rem;
     margin: auto;
     min-height: 100%;
     width: 100%;
     background-color: rgba(238, 238, 245, 0.57);
-    /*margin-bottom: 2rem;*/
 }
 
 .main-form__text {
@@ -59,9 +57,7 @@
     color: #eeeef5;
     background-color: rgba(28, 77, 84, 0.24);
     border-radius: 1rem;
-    /*border-right-color: rgba(0, 0, 0, 0.68);*/
     border-left-color: rgb(238, 238, 245);
-    /*border-top-color: slategrey;*/
     border-bottom-color: rgb(206, 191, 191);
 }
 
@@ -71,7 +67,6 @@
 
 .main-form__button-submit-reply:hover,
 .main-form__button-cancel-reply:hover {
-    /*transform: translateY(-2px);*/
     background-color: rgb(75, 159, 159);
     color: rgba(255, 255, 255, 0.81);
 }
@@ -81,8 +76,6 @@
 .main-form__button-cancel-reply:active {
     color: #fff;
     transform: translateY(-1px);
-    /*background-color: rgb(53, 112, 111);*/
-    /*border: 1.5px solid rgba(2, 12, 21, 0.36);*/
 }
 
 .main-form__button-submit-reply::after,

@@ -1,0 +1,88 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Rowdies&display=swap');*/
+@import url('https://fonts.googleapis.com/css2?family=Prosto+One&display=swap');
+
+.floating-alert {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 38px;
+    left: 50%;
+    transform: translateX(-50%);
+    -moz-animation: floatingAlert ease-in 2s forwards;
+    -webkit-animation: floatingAlert ease-in 2s forwards;
+    -o-animation: floatingAlert ease-in 2s forwards;
+    animation: floatingAlert ease-in 2s forwards;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+}
+
+.floating-alerts .floating-alert:last-of-type {
+    display: block;
+}
+
+@keyframes floatingAlert {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) scale(1.2);
+    }
+
+    9% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) scale(1);
+    }
+
+    91% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+@-webkit-keyframes floatingAlert {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) scale(1.2);
+    }
+
+    9% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) scale(1);
+    }
+
+    91% {
+        opacity: 1;
+        visibility: visible;
+        transform: translateX(-50%) scale(1);
+    }
+
+    100% {
+        opacity: 0;
+        visibility: hidden;
+        transform: translateX(-50%) scale(1.2);
+    }
+}
+
+.alert-succes {
+    /*color: #234223;*/
+    box-shadow: 0 2px 8px rgba(45, 94, 56, 0.26);
+    background-color: rgb(215, 251, 252);
+    width: 153px;
+    text-align: center;
+    border-radius: 2%;
+    font-size: 1.4rem;
+    border: 1px solid #234d54;
+    padding: 1rem;
+    margin: 1px;
+    /*font-family: 'Rowdies', cursive;*/
+    font-family: 'Prosto One', cursive;
+}

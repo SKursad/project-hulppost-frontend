@@ -1,9 +1,9 @@
 import React from 'react';
-import defaultPicture from '../../assets/defaultProfilePic.png'
-import './ProfileWithDefaultPicture.css'
+import defaultPicture from '../../assets/defaultProfilePic.png';
+import './ProfileWithDefaultPicture.css';
 
 const ProfileWithDefaultImage = props => {
-    const { image, tempImage } = props;
+    const {image, tempImage} = props;
 
     let imageSource = defaultPicture;
     if (image) {

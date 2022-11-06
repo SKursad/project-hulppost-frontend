@@ -103,13 +103,14 @@ a {
     color: mediumturquoise;
 }
 
-p {
-    font-size: 1.4rem;
-    font-weight: bold;
+a:hover {
+    color: darkseagreen;
 }
 
-p.error {
+
+#error {
     color: red;
+    font-size: 1.4rem;
 }
 
 .gen-error {

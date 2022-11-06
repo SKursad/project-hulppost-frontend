@@ -5,7 +5,7 @@
     padding: 10rem 2rem 2rem 2rem;
     left: 1rem;
     max-width: 60rem;
-    border: 1px solid black;
+    border: 5px solid rgba(35, 77, 84, 0.08);
     font-size: 1.6rem;
     height: 100%;
     width: 100%;
@@ -19,7 +19,7 @@
 .main-profile__edit-profile,
 .main-profile__edit-pass,
 .main-profile__edit-foto {
-    background: none;
+    background: #d9dfe1;
     border: 1px solid black;
     border-radius: 2rem;
     border-right: none;

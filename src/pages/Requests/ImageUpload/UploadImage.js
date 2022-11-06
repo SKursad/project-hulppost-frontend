@@ -1,22 +1,22 @@
-import React, {useState} from 'react';
-import axios from 'axios';
+import React, {useContext, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
+import DispatchContext from '../../../context/DispatchContext';
+import api from '../../../api/api-calls';
+import {getToken} from '../../../helper/AccesToken/GetToken';
 import Screen from '../../../components/UI/Screen/Screen';
 import Button from '../../../components/UI/Button/Button';
-import './UploadImage.css';
 import Input from '../../../components/Input/Input';
 import {FaImages} from 'react-icons/fa';
 import {MdCancel} from 'react-icons/md';
-import api from '../../../api/api-calls'
-import {getToken} from '../../../helper/AccesToken/GetToken';
-import header from '../../../components/Layout/Header/Header';
+import './UploadImage.css';
 
 
 function ImageRequestPage() {
-    const [file, setFile] = useState([]);
-    const [previewUrl, setPreviewUrl] = useState('');
     const {id} = useParams();
+    const appDispatch = useContext(DispatchContext);
+    const [file, setFile] = useState([]);
     const [error, setError] = useState(false);
+    const [previewUrl, setPreviewUrl] = useState('');
     const navigate = useNavigate();
 
     function handleImageChange(e) {
@@ -48,9 +48,11 @@ function ImageRequestPage() {
             let tokenConfig = getToken();
             delete tokenConfig.headers['Content-Type'];
             const response = await api.post(`/api/v1/requests/${id}/image`, formData, tokenConfig);
+            appDispatch({type: "flashMessage", value: "Afbeelding succesvol geplaatst"});
             navigate(`/request/${id}`);
             console.log(response.data);
         } catch (e) {
+            appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
             console.error(e);
         }
     }
@@ -81,11 +83,13 @@ function ImageRequestPage() {
                         </label>
                     )}
                     <Button
+                        id="form-upload__submit"
                         type="submit"
                         disabled={error}>
                         UPLOADEN<FaImages/>
                     </Button>
                     <Button
+                        id="form-upload__cancel"
                         type="button"
                         onClick={() => navigate(`/request/${id}`)}>
                         ANNULEREN<MdCancel/>

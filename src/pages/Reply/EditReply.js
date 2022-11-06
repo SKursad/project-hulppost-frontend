@@ -1,12 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import Screen from '../../components/UI/Screen/Screen';
-import InputFormTextarea from '../../components/Input/InputFormTextarea';
-import Button from '../../components/UI/Button/Button';
-import api from '../../api/api-calls';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {getToken} from '../../helper/AccesToken/GetToken';
-import './PostEditReply.css'
+import api from '../../api/api-calls';
+import DispatchContext from '../../context/DispatchContext';
+import InputFormTextarea from '../../components/Input/InputFormTextarea';
+import Screen from '../../components/UI/Screen/Screen';
+import Button from '../../components/UI/Button/Button';
 import {MdCancel, MdUpdate} from 'react-icons/md';
+import './PostEditReply.css'
 
 let initialState = {
     text: '',
@@ -16,8 +17,10 @@ let initialState = {
 
 const EditReply = () => {
     const {id} = useParams();
+    const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
     const {text} = formValue;
+    const [errors, setErrors] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,6 +35,7 @@ const EditReply = () => {
             setFormValue({...singleReply.data});
         } else {
             console.log("Er ging iets mis.");
+            appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
         }
     };
 
@@ -45,15 +49,24 @@ const EditReply = () => {
             console.log(response.data);
             if (response.status === 200)
                 setFormValue({text: '', timestamp: new Date()});
+            appDispatch({type: "flashMessage", value: "Reactie succesvol geüpdatet"});
             navigate(`/reply/${id}`);
-            // x
         } catch (e) {
-            // x
+            if (e.response) {
+                appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
+                setErrors(e.response.data)
+                console.log(e.response.data);
+            }
         }
     }
 
+    const {
+        text: textError
+    } = errors;
+
     const onInputChange = (e) => {
         let {name, value} = e.target;
+        setErrors((previousErrors) => ({...previousErrors, [name]: undefined}));
         setFormValue({...formValue, [name]: value});
     };
 
@@ -64,18 +77,18 @@ const EditReply = () => {
                 <div className="main-form__div-reply">
 
                 <p className="main-form__p-reply">Reactie aanpassen</p>
-                {/*<p>{"Helpen "}</p>*/}
                 <InputFormTextarea
                     className="main-form__text"
                     id={text.id}
                     name="text"
-                    required
+                    // required
                     value={text}
                     onChange={onInputChange}
                 />
+                    {textError &&
+                        <small className="gen-error">{textError}</small>}
                 <Button className="main-form__button-submit-reply" type="submit">UPDATEN&nbsp;<MdUpdate/></Button>
                 <Button className="main-form__button-cancel-reply" type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                {/*<Button type="submit">{"VERZENDEN"}</Button>*/}
                 </div>
             </form>
         </Screen>

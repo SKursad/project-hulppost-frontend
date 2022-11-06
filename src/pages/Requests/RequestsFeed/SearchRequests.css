@@ -1,21 +1,25 @@
 .main-searchbar {
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    align-content: center;
+    /*flex-grow: 1;*/
+    /*align-content: center;*/
     position: relative;
     margin: auto;
-    max-height: 100%;
+    height: 100%;
     width: 100%;
     padding: 7rem 5rem 1rem 1rem;
     z-index: 20;
+}
+
+.main-searchbar__div {
+    min-height: 100vh;
 }
 
 .main-searchbar__form:focus,
 .main-searchbar__search:focus {
     outline: none;
     border: 1px solid rgba(0, 0, 0, 0.18);
-   background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
 }
 
 .main-searchbar_background {
@@ -39,18 +43,17 @@ form.main-searchbar__form {
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: -.5rem 1rem 1rem 1rem;
-    width: 65%;
-    padding: 2rem 1rem;
-    z-index: 40;
+    /*margin: 5rem 5rem 1rem 4rem;*/
+    /*width: 100%;*/
+    /*padding: 2rem 1rem;*/
+    /*z-index: 40;*/
 }
 
 .main-searchbar__search {
     display: flex;
     flex-direction: column;
-    justify-self: center;
-    margin: 4rem 0 0 10rem;
-    padding: .4rem .5rem .5rem .5rem ;
+    margin: 5rem 0 2rem 12rem;
+    padding: .4rem .5rem .5rem .5rem;
     font-size: 1.6rem;
 
     border-radius: 2rem;
@@ -68,8 +71,10 @@ form.main-searchbar__form {
 
     .main-searchbar {
         display: flex;
+        flex-direction: column;
+        /*flex-wrap: wrap;*/
         margin: auto;
-        flex-direction: row;
+        /*flex-direction: row;*/
         align-content: center;
         height: 100%;
         padding: 6rem 1rem 1rem 1rem;
@@ -84,7 +89,7 @@ form.main-searchbar__form {
 
     .main-searchbar__search {
         display: flex;
-        flex-direction:column;
+        flex-direction: column;
         position: relative;
         align-self: center;
         max-height: 100vh;
@@ -93,7 +98,6 @@ form.main-searchbar__form {
     }
 
     .main-searchbar__form {
-        alignment: center;
         position: relative;
         margin: 10rem 20rem;
         padding: 1rem;

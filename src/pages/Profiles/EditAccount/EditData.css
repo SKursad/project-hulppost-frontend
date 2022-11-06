@@ -1,0 +1,16 @@
+#edit-data__div-buttons {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 100%;
+}
+
+
+#edit-data__buttons {
+    margin: 1rem;
+    flex-direction: row;
+    position: relative;
+    padding: .5rem 1rem .5rem 1rem;
+    font-size: 1.6rem;
+    width: 100%;
+}

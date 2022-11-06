@@ -1,22 +1,24 @@
 import React, {useContext, useEffect, useState} from 'react';
-import api from '../../../api/api-calls';
 import {useNavigate, useParams} from 'react-router-dom';
-import Button from '../../../components/UI/Button/Button';
 import {getToken} from '../../../helper/AccesToken/GetToken';
+import {AuthContext} from '../../../context/auth-context';
+import DispatchContext from '../../../context/DispatchContext';
+import api from '../../../api/api-calls';
+import Button from '../../../components/UI/Button/Button';
 import Screen from '../../../components/UI/Screen/Screen';
 import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
-import {AuthContext} from '../../../context/auth-context';
-import {FaImages} from 'react-icons/fa';
+import {MdCancel, MdOutlineImageNotSupported} from 'react-icons/md';
+import {RiImageEditFill} from 'react-icons/ri';
 import './ProfileImage.css';
-import Input from '../../../components/Input/Input';
 
 
 const ProfileImage = () => {
     const {id} = useParams();
-    const navigate = useNavigate();
+    const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
     const [error, setError] = useState(false);
     const [userData, setUserData] = useState([]);
-    const context = useContext(AuthContext);
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -49,8 +51,7 @@ const ProfileImage = () => {
             file.type !== "image/jpeg" &&
             file.type !== "image/png" &&
             file.type !== "image/webp" &&
-            file.type !== "image/gif")
-        {
+            file.type !== "image/gif") {
             setError(true);
         } else
             setError(false);
@@ -103,7 +104,7 @@ const ProfileImage = () => {
 
 
     async function deleteHandler() {
-        const areYouSure = window.confirm("Je profielfoto wordt verwijderd?");
+        const areYouSure = window.confirm("Je profielfoto wordt verwijderd!");
         if (areYouSure) {
             try {
                 const response = await api.delete(`/api/v1/users/${id}/deleteImage`, getToken());
@@ -122,12 +123,15 @@ const ProfileImage = () => {
             } catch (e) {
                 navigate(-1);
             }
+            appDispatch({type: "flashMessage", value: "Profielfoto succesvol verwijderd"});
         }
     }
 
     return (
         <Screen title="Profielfoto" wide={false}>
-            <form className="edit-image"  onChange={(e) => {onClickSave(e)}}>
+            <form className="edit-image" onChange={(e) => {
+                onClickSave(e);
+            }}>
                 <ProfileWithDefaultImage
                     id="edit-image__default"
                     onChange={previewFile}
@@ -138,8 +142,10 @@ const ProfileImage = () => {
                     <input
                         className="edit-image__input"
                         type="file"
-                        required={true}
-                        onChange={(e) => {previewFile(e)}}
+                        required
+                        onChange={(e) => {
+                            previewFile(e);
+                        }}
                     />
                     {error && <strong className="error">ongeldige bestandstype </strong>}
                     <Button
@@ -147,9 +153,15 @@ const ProfileImage = () => {
                         type="submit"
                         disabled={error}
                         onClick={onClickNavigate}>
-                        UPLOADEN<FaImages/>
+                        UPLOADEN<RiImageEditFill/>
                     </Button>
-                    <Button id="edit-image__button-del"onClick={deleteHandler}>FOTO VERWIJDEREN</Button>
+                    {context.user.roles === "ROLE_HELP-SEEKER" ? (
+                        <Button id="edit-image__button" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;
+                            <MdCancel/></Button>
+                    ) : (<Button id="edit-image__button"  type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
+                        <MdCancel/></Button>)}
+                    <Button id="edit-image__button-del" onClick={deleteHandler}>FOTO VERWIJDEREN&nbsp;
+                        <MdOutlineImageNotSupported/></Button>
                 </div>
             </form>
         </Screen>

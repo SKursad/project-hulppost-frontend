@@ -7,7 +7,7 @@ import Header from './Header/Header';
 
 const Layout = () => {
     return (
-        <div className="keep-in-place">
+        <div>
             <Header/>
             <NavBar/>
             <Outlet/>

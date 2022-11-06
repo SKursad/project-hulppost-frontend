@@ -6,7 +6,7 @@
     /*align-content: center;*/
     /*position: relative;*/
     /*justify-content: center;*/
-    margin:auto;
+    margin: auto;
     padding: 18.5rem 9rem;
     width: 100%;
     height: 100%;
@@ -34,7 +34,7 @@ button.button:nth-child(3) > svg:nth-child(1) {
     /*align-content: center;*/
     margin: auto;
     /*padding: -20rem;*/
-   /*max-width: 100%;*/
+    /*max-width: 100%;*/
 }
 
 
@@ -86,22 +86,25 @@ button.button:nth-child(3) > svg:nth-child(1) {
     align-content: center;
 }
 
-    #form-upload__id {
-        display: flex;
-        flex-direction: row;
-        margin: 3rem -1rem 1rem 4rem;
-        padding: 1rem 1rem 2rem 4rem;
-        color: cadetblue;
-        font-weight: bold;
-    }
+#form-upload__id {
+    display: flex;
+    flex-direction: row;
+    margin: 3rem -1rem 1rem 4rem;
+    padding: 1rem 1rem 2rem 4rem;
+    color: cadetblue;
+    font-weight: bold;
+}
 
-    /*background-color: cornflowerblue;*/
-    /*justify-content: center;*/
-    /*align-items: center;*/
-    /*align-content: center;*/
+#form-upload__submit {
+    margin: 1rem
+}
+
+/*background-color: cornflowerblue;*/
+/*justify-content: center;*/
+/*align-items: center;*/
+/*align-content: center;*/
 
 /*}*/
-
 
 
 /*.form-upload__label {*/

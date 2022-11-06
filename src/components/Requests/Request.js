@@ -14,7 +14,7 @@ const Request = (props) => {
             <Link onClick={props.onClick} to={`/request/${request.id}`}
                   className="list-group-item list-group-item-action">
                 <div className="article-request__div-title">
-                    <h4 className="article-request__h4-title">Tittel</h4>
+                    <h4 className="article-request__h4-title">Titel</h4>
                     <p className="article-request__p-title"><strong>{request.title}</strong>{" "}</p>
                 </div>
                 <div className="article-request__div-type">

@@ -1,16 +1,21 @@
 import React from 'react';
-import './Footer.css'
+import './Footer.css';
 
 const Footer = () => {
     const today = new Date();
     return (
 
-        <footer id="main-footer">
-            <nav id="main-footer__nav">
+        <footer className="main-footer">
+            <nav>
                 <ul className="main-footer__links">
-                    <li className= "main-footer__link">
-                       <p> Copyright &copy; {today.getFullYear()}</p>
+                    <li className="main-footer__link">
+                        <p> Copyright &copy; {today.getFullYear()}</p>
+                    </li>
+                    <li className="main-footer__link">
                         <a href="/" title="hulppost">HulpPost</a>
+                    </li>
+                    <li className="main-footer__link">
+                        <a href="/info" className="main-footer__link">Info</a>
                     </li>
                 </ul>
             </nav>

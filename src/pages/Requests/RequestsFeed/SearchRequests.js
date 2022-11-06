@@ -51,9 +51,9 @@ const SearchRequests = () => {
     return (
         <Screen title="Alle Hulpaanvragen" wide={true}>
             <main className="main-searchbar">
-                <figure className="main-searchbar_background"></figure>
+                <div className="main-searchbar_background"/>
                 <form className="main-searchbar__form" onSubmit={(e) => e.preventDefault()}>
-                {/*<div className="main-searchbar__div">*/}
+                <div className="main-searchbar__div">
                     <input
                         className="main-searchbar__search"
                         // label="search"
@@ -64,9 +64,6 @@ const SearchRequests = () => {
                         onChange={(e) => setSearch(e.target.value)}
                         // error={error}
                     />
-                    {!context.user && (
-                        <Link to="/register/help-seeker">MAAK EEN ACCOUNT AAN</Link>
-                    )}
                     {requests.length ? (
                         <Feed requests={searchResults}/>
                     ) : (
@@ -79,7 +76,7 @@ const SearchRequests = () => {
                             src={`http://localhost:8080/images/attachments/${requests.fileAttachment.name}`}
                         />
                     )}
-                {/*</div>*/}
+                </div>
                 </form>
             </main>
         </Screen>

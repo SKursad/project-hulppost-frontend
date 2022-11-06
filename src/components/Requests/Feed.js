@@ -6,11 +6,11 @@ import Screen from '../UI/Screen/Screen';
 const Feed = ({requests}) => {
     return (
         <Screen>
-        <div className="feed-article__request">
-            {requests.map(request => (
-                <RequestsFeed key={request.id} request={request}/>
-            ))}
-        </div>
+            <div className="feed-article__request">
+                {requests.map(request => (
+                    <RequestsFeed key={request.id} request={request}/>
+                ))}
+            </div>
         </Screen>
     );
 };

@@ -1,12 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
+import {AuthContext} from '../../../context/auth-context';
+import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import RefreshPage from '../../../helper/RefreshPage/RefreshPage';
-import '../../../components/Input/InputForm.css'
+import '../../../components/Input/InputForm.css';
+import {MdCancel} from 'react-icons/md';
 
 
 let initialState = {
@@ -17,10 +20,11 @@ let initialState = {
 
 const EditProfileData = () => {
     const {id} = useParams();
+    const context = useContext(AuthContext);
+    const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
     const {username, email} = formValue;
     const [errors, setErrors] = useState({});
-    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
 
@@ -35,14 +39,13 @@ const EditProfileData = () => {
             // setIsLoading(false)
             console.log(userData);
         } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+            appDispatch({type: "flashMessage", value: "Er ging iets mis"});
         }
     };
 
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
-        toggleLoading(true);
 
         try {
 
@@ -58,7 +61,7 @@ const EditProfileData = () => {
                 RefreshPage(navigate(`/login`));
             }
         } catch (e) {
-            if (e.response.status === 400 ) {
+            if (e.response.status === 400) {
                 setErrors(e.response.data);
             }
         }
@@ -77,7 +80,6 @@ const EditProfileData = () => {
     };
 
 
-
     return (
         <Screen title="Account aanpassen">
             <form className="form-container" onSubmit={handleSubmit}>
@@ -85,7 +87,6 @@ const EditProfileData = () => {
                     <p className="form-__p">Profiel gegevens wijzigen</p>
                     <Input
                         nameRegister="Gebruikersnaam"
-                        // placeholder="voer uw gebruikersnaam in"
                         label="username-field"
                         alt="input-username"
                         type="text"
@@ -97,8 +98,6 @@ const EditProfileData = () => {
                     />
                     <Input
                         nameRegister="Email"
-                        // placeholder="voer een geldige email in"
-                        // label="email-field"
                         alt="input-email"
                         type="text"
                         id={email.id}
@@ -106,16 +105,19 @@ const EditProfileData = () => {
                         value={email}
                         onChange={onInputChange}
                         error={emailError}
+                        required={true}
                     />
-                    <div className="form-container__button">
-                       <Button
+                    <div id="edit-data__div-buttons">
+                        <Button
+                            id="edit-data__buttons"
                             title="register-button"
                             type="submit"
-                            // onClick={handleSubmit}
-                            disabled={loading}
                         >
                             Updaten
                         </Button>
+                        {context.user.roles === "ROLE_HELP-SEEKER" ? (
+                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
                     </div>
                 </div>
             </form>
