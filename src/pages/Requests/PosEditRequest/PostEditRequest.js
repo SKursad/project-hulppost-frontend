@@ -157,8 +157,10 @@ const PostEditRequest = () => {
                         <small className="gen-error">{contentError}</small>}
                     <Button className="main-form__button-submit"
                             type="submit">{editMode ? "UPDATE" : "VERZENDEN"}<MdUpdate/></Button>
+                    {editMode ?
                     <Button className="main-form__button-cancel" onClick={() => navigate(`/request/${id}`)}>
-                        ANNULEREN<MdCancel/></Button>
+                        ANNULEREN<MdCancel/></Button> : <Button className="main-form__button-cancel" onClick={() => navigate(`/request-search`)}>
+                            ANNULEREN<MdCancel/></Button>}
                 </div>
             </form>
 
