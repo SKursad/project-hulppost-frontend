@@ -8,7 +8,7 @@ const Info = () => {
             <main className="main-info">
                 <div className="main-info__div">
                 <h1 className="main-info__h1">Informatie</h1>
-                <p className="main-info__p">Doel van deze applicatie is om de connectie te bouwen tussen hulp zoekende
+                <h4 className="main-info__p">Doel van deze applicatie is om de connectie te bouwen tussen hulp zoekende
                     mensen en/of organisaties
                     en vrijwilligers (tijdelijk) alleen binnen Noord-Holland.
                     <p className="main-info__p2">
@@ -19,7 +19,7 @@ const Info = () => {
                     met de privacy-gegevens.
                     Omdat de applicatie in de testfase is kunnen geen rechten worden ontleend.
                     Mocht er vragen zijn over de applicatie kunt u mailen naar hulppostAdmin@gmail.com</p>
-                    </p>
+                    </h4>
                 </div>
             </main>
 
