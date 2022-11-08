@@ -19,11 +19,9 @@ const SearchRequests = () => {
             try {
                 const response = await api.get('/api/v1/requests');
                 setRequests(response.data);
-                console.log(response);
-
+                // console.log(response);
             } catch (e) {
                 if (e.response) {
-                    console.log();
                     // not in the 200 response range
                     console.log(e.response.data);
                 } else {

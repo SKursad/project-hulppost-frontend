@@ -31,24 +31,36 @@ const RequestWithReplies = () => {
 
 
     const getRequestById = async (id) => {
-        const requestData = await api.get(`/api/v1/requests/${id}`);
-        const replyData = await api.get(`/api/v1/replies?requestId=${id}`);
-        if (requestData.status === 200 || replyData.status === 200) {
-            setRequestData({...requestData.data});
-            setReplyData(replyData.data);
-            // const { } = replyData.data[0];
-            console.log(requestData.data);
-            // console.log(replyData);
-        } else {
+        try {
+            const requestData = await api.get(`/api/v1/requests/${id}`);
+            const replyData = await api.get(`/api/v1/replies?requestId=${id}`);
+            if (requestData.status === 200 || replyData.status === 200) {
+                setRequestData({...requestData.data});
+                setReplyData(replyData.data);
+                // console.log(requestData.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
     const getUserById = async () => {
-        const userData = await api.get(`/api/v1/users?requestId=${id}`);
-        if (userData.status === 200) {
-            setUserData(userData.data[0]);
-            // console.log(userData);
-        } else {
+        try {
+            const userData = await api.get(`/api/v1/users?requestId=${id}`);
+            if (userData.status === 200) {
+                setUserData(userData.data[0]);
+                // console.log(userData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -56,7 +68,6 @@ const RequestWithReplies = () => {
     useEffect(() => {
         getRequestById(id);
         getUserById(id);
-        // getReplyParamByRequestId(id);
     }, [id]);
 
 
@@ -73,7 +84,7 @@ const RequestWithReplies = () => {
             } catch (e) {
                 navigate(`/profile/${userData.id}`);
             }
-                    appDispatch({type: "flashMessage", value: "Aanvraag succesvol verwijderd"});
+            appDispatch({type: "flashMessage", value: "Aanvraag succesvol verwijderd"});
         }
     }
 
@@ -123,66 +134,63 @@ const RequestWithReplies = () => {
                         <h4 className="main-request__h4-title">Titel</h4>
                         <p className="main-request__title">{requestData.title}</p>
                         <div className="main-request__div-username">
-                        <h4 className="main-request__h4-username">Gebruikersnaam</h4>
-                        <p className="main-request__username">{userData.username}</p>
+                            <h4 className="main-request__h4-username">Gebruikersnaam</h4>
+                            <p className="main-request__username">{userData.username}</p>
                         </div>
                         <div className="main-request__div-type">
-                        <h4 className="main-request__h4-type">Type aanvraag</h4>
-                        <p className="main-request__typeRequest">{requestData.typeRequest}</p>
+                            <h4 className="main-request__h4-type">Type aanvraag</h4>
+                            <p className="main-request__typeRequest">{requestData.typeRequest}</p>
                         </div>
                         <div className="main-request__div-content">
-                        <h4 className="main-request__h4-content">Hulpvraag</h4>
+                            <h4 className="main-request__h4-content">Hulpvraag</h4>
                             <small className="main-request__date">{dateFormatted}</small>
                             <p className="main-request__content">{requestData.content}</p>
                         </div>
 
 
                         {attachmentImageVisible && (
-                        <div className="main-request__img-div">
+                            <div className="main-request__img-div">
                                 <img
-                                className="main-request__img"
-                                alt="attachment"
-                                src={`http://localhost:8080/images/attachments/${requestData.fileAttachment.name}`}
-                            />
-                        </div>
+                                    className="main-request__img"
+                                    alt="attachment"
+                                    src={`http://localhost:8080/images/attachments/${requestData.fileAttachment.name}`}
+                                />
+                            </div>
                         )}
-
 
                         {context.user &&
                             (<div>
                                 <p className="request-replies">ANTWOORDEN OP DE AANVRAAG</p>
                                 {replyData.length > 0 ? (
                                     replyData.map(reply => {
-                                        return <Reply noAuthor={false} key={reply.id} reply={reply}/>;
-                                    })) : (<p className="request-replies" >je hebt nog geen reacties</p>)}
+                                        return <Reply key={reply.id} reply={reply}/>;
+                                    })) : (<p className="request-replies">je hebt nog geen reacties</p>)}
                             </div>)}
-                    </section>
-                ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
+                    </section>) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
                 {!context.user ? (<div className="main-request__visitor-div">
                     <p id="main-request__visitor">Wil je helpen ?</p>
-                    <Button id="main-request__visitor-button" type="button" onClick={() => navigate(`/register/volunteer`)}>
+                    <Button id="main-request__visitor-button" type="button"
+                            onClick={() => navigate(`/register/volunteer`)}>
                         Registreer<VscAccount/></Button>
-                </div>) : (
-
-                    <div>
+                </div>) : (<div>
                     {context.user.roles === 'ROLE_HELP-SEEKER' &&
                         <div>
-                        {context.user.id === requestData.userId && (
-                            <div className="main-request__div-button">
-                                {replyData.length > 0 ? (
-                                    <Button id="main-request__button-react" type="button"
-                                            onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG
-                                        <FaCommentDots/> </Button>) : ("")}
-                                <Button id="main-request__button-update" type="button"
-                                        onClick={() => navigate(`/edit-request/${id}`)}>UPDATEN<MdUpdate/></Button>
-                                <Button id="main-request__button-delete"
-                                        onClick={deleteHandler}>VERWIJDEREN<FaRegFileExcel/></Button>
-                                {requestData.fileAttachment && (
-                                    <Button id="main-request__button-deletePic" onClick={deleteImageHandler}>FOTO
-                                        VERWIJDEREN<MdOutlineImageNotSupported/></Button>)}
-                            </div>)}
-                    </div>}
+                            {context.user.id === requestData.userId && (
+                                <div className="main-request__div-button">
+                                    {replyData.length > 0 ? (
+                                        <Button id="main-request__button-react" type="button"
+                                                onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG
+                                            <FaCommentDots/> </Button>) : ("")}
+                                    <Button id="main-request__button-update" type="button"
+                                            onClick={() => navigate(`/edit-request/${id}`)}>UPDATEN<MdUpdate/></Button>
+                                    <Button id="main-request__button-delete"
+                                            onClick={deleteHandler}>VERWIJDEREN<FaRegFileExcel/></Button>
+                                    {requestData.fileAttachment && (
+                                        <Button id="main-request__button-deletePic" onClick={deleteImageHandler}>FOTO
+                                            VERWIJDEREN<MdOutlineImageNotSupported/></Button>)}
+                                </div>)}
+                        </div>}
                     {context.user.roles === 'ROLE_VOLUNTEER' && (
                         <div className="main-reply__div-button">
                             <Button id="main-reply__button" type="button"

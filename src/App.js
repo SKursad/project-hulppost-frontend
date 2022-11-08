@@ -32,7 +32,7 @@ import FlashMessages from './components/UI/FlashMessages/FlashMessages';
 import Info from './pages/Info/Info';
 
 function App() {
-    const {isAuth, logout} = useContext(AuthContext);
+    const {isAuth} = useContext(AuthContext);
     const initialState = {flashMessages: [],};
     const [state, dispatch] = useImmerReducer(appReducer, initialState);
 

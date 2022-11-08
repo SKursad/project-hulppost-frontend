@@ -22,7 +22,6 @@ let initialState = {
 const RegistrationForm = ({source, apiUrl}) => {
     const [formValue, setFormValue] = useState(initialState);
     const appDispatch = useContext(DispatchContext);
-    // const [error, toggleError] = useState(false);
     const [errors, setErrors] = useState({});
     const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
@@ -37,7 +36,6 @@ const RegistrationForm = ({source, apiUrl}) => {
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
-        // toggleError(false);
         toggleLoading(true);
         try {
             const response = await api.post(apiUrl, {...formValue});
@@ -45,7 +43,6 @@ const RegistrationForm = ({source, apiUrl}) => {
             appDispatch({type: "flashMessage", value: "U heeft zich succesvol geregistreerd"});
             navigate(`/login`);
         } catch (e) {
-            // toggleError(false);
             console.error(e);
             console.log(e.response.data);
             if (e.response) {
@@ -54,7 +51,6 @@ const RegistrationForm = ({source, apiUrl}) => {
                 console.log(e.response.data);
 
             }
-            // toggleError(false);
         }
         toggleLoading(false);
     }

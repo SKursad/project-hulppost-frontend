@@ -36,11 +36,14 @@ const PostReply = () => {
     }, [replyId]);
 
     const getSingleReply = async () => {
-        const singleRequest = await api.get(`/api/v1/replies?requestId=${id}`);
-        if (singleRequest.status === 200) {
-            // setFormValue({...singleRequest.data});
-        } else {
-            console.log("Er ging iets mis.");
+        try {
+            await api.get(`/api/v1/replies?requestId=${id}`);
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 

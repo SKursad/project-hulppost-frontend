@@ -12,12 +12,18 @@ const Accounts = () => {
 
 
     const getUsers = async () => {
-        const usersData = await api.get(`/api/v1/users`, getToken());
-        if (usersData.status === 200) {
-            setUsersData(usersData.data);
-            // console.log(usersData)
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const usersData = await api.get(`/api/v1/users`, getToken());
+            if (usersData.status === 200) {
+                setUsersData(usersData.data);
+                // console.log(usersData)
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -30,12 +36,12 @@ const Accounts = () => {
     // Object.values(usersData).map((x) => console.log(x));
 
     return (
-        <Screen title={"Profielen"}>
+        <Screen title={"ADMIN"}>
 
             <main className="main-profiles">
                 <div className="main-profiles">
-                    {Object.values(usersData).map((currentUserData) => (
-                        <>
+                    {Object.values(usersData).map((currentUserData, index) => (
+                        <React.Fragment key={index}>
                             {currentUserData.roles?.[0]?.name === 'ROLE_HELP-SEEKER' ? (
                                 <li key={currentUserData.id}>{currentUserData.data}
                                     <Link to={`/profile/${currentUserData.id}`}>
@@ -45,8 +51,8 @@ const Accounts = () => {
                                             alt={`${currentUserData.username} profile`}
                                             image={currentUserData.image}
                                         />
-                                        <p>{currentUserData.username}</p></Link>
-                                    <p>{currentUserData.email}</p>
+                                        <p style={{fontSize: "1.6rem"}}>{currentUserData.username}</p></Link>
+                                    <p style={{fontSize: "1.6rem"}}>{currentUserData.email}</p>
                                 </li>
                             ) : (
                                 <li key={currentUserData.id}>{currentUserData.data}
@@ -57,11 +63,11 @@ const Accounts = () => {
                                             alt={`${currentUserData.username} profile`}
                                             image={currentUserData.image}
                                         />
-                                        <p>{currentUserData.username}</p></Link>
-                                    <p>{currentUserData.email}</p>
+                                        <p style={{fontSize: "1.6rem"}}>{currentUserData.username}</p></Link>
+                                    <p style={{fontSize: "1.6rem"}}>{currentUserData.email}</p>
                                 </li>
                             )}
-                        </>
+                        </React.Fragment>
                     ))}
                 </div>
             </main>

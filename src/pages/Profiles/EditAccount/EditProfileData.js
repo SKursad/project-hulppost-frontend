@@ -1,7 +1,6 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import {AuthContext} from '../../../context/AuthContext';
-import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
 import {getToken} from '../../../helper/AccesToken/GetToken';
 import Screen from '../../../components/UI/Screen/Screen';
@@ -21,7 +20,6 @@ let initialState = {
 const EditProfileData = () => {
     const {id} = useParams();
     const context = useContext(AuthContext);
-    const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
     const {username, email} = formValue;
     const [errors, setErrors] = useState({});
@@ -33,12 +31,18 @@ const EditProfileData = () => {
     }, [id]);
 
     const getUserById = async (id) => {
-        const userData = await api.get(`/api/v1/users/${id}`, getToken());
-        if (userData.status === 200) {
-            setFormValue({...userData.data});
-            console.log(userData);
-        } else {
-            appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const userData = await api.get(`/api/v1/users/${id}`, getToken());
+            if (userData.status === 200) {
+                setFormValue({...userData.data});
+                // console.log(userData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -47,11 +51,10 @@ const EditProfileData = () => {
         setErrors('');
 
         try {
-
             const updateAccountData = {...formValue};
             const response = await api.put(`/api/v1/users/${id}`,
                 updateAccountData, getToken());
-            console.log(response.data);
+            // console.log(response.data);
             if (response.status === 200) {
                 setFormValue({
                     username: '',
@@ -80,7 +83,7 @@ const EditProfileData = () => {
 
 
     return (
-        <Screen title="Account aanpassen">
+        <Screen title="Account aanpassen" wide={true}>
             <form className="form-container" onSubmit={handleSubmit}>
                 <div className="form-container__input">
                     <p className="form-__p">Profiel gegevens wijzigen</p>
@@ -108,15 +111,18 @@ const EditProfileData = () => {
                     />
                     <div id="edit-data__div-buttons">
                         <Button
-                            id="edit-data__buttons"
+                            id="edit-data__buttons-3"
                             title="register-button"
                             type="submit"
                         >
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>)}
+                            <Button id="edit-data__buttons-1" type="button"
+                                    onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                        ) : (<Button id="edit-data__buttons-2" type="button"
+                                     onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
+                            <MdCancel/></Button>)}
                     </div>
                 </div>
             </form>

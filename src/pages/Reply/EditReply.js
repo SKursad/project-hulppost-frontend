@@ -7,7 +7,7 @@ import InputFormTextarea from '../../components/Input/InputFormTextarea';
 import Screen from '../../components/UI/Screen/Screen';
 import Button from '../../components/UI/Button/Button';
 import {MdCancel, MdUpdate} from 'react-icons/md';
-import './PostEditReply.css'
+import './PostEditReply.css';
 
 let initialState = {
     text: '',
@@ -30,12 +30,18 @@ const EditReply = () => {
     }, [id]);
 
     const getSingleReply = async () => {
-        const singleReply = await api.get(`/api/v1/replies/${id}`);
-        if (singleReply.status === 200) {
-            setFormValue({...singleReply.data});
-        } else {
-            console.log("Er ging iets mis.");
-            appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
+        try {
+            const singleReply = await api.get(`/api/v1/replies/${id}`);
+            if (singleReply.status === 200) {
+                setFormValue({...singleReply.data});
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+                appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -46,15 +52,16 @@ const EditReply = () => {
             const updateReplyData = {...formValue, timestamp: new Date()};
             const response = await api.put(`/api/v1/replies/${id}`,
                 updateReplyData, getToken());
-            console.log(response.data);
+            console.log("updated");
+            // console.log(response.data);
             if (response.status === 200)
                 setFormValue({text: '', timestamp: new Date()});
             appDispatch({type: "flashMessage", value: "Reactie succesvol geüpdatet"});
-            navigate(`/reply/${id}`);
+            navigate(-1);
         } catch (e) {
             if (e.response) {
                 appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
-                setErrors(e.response.data)
+                setErrors(e.response.data);
                 console.log(e.response.data);
             }
         }
@@ -76,19 +83,20 @@ const EditReply = () => {
             <form className="main-form-reply" onSubmit={handleSubmit}>
                 <div className="main-form__div-reply">
 
-                <p className="main-form__p-reply">Reactie aanpassen</p>
-                <InputFormTextarea
-                    className="main-form__text"
-                    id={text.id}
-                    name="text"
-                    // required
-                    value={text}
-                    onChange={onInputChange}
-                />
+                    <p className="main-form__p-reply">Reactie aanpassen</p>
+                    <InputFormTextarea
+                        className="main-form__text"
+                        id={text.id}
+                        name="text"
+                        // required
+                        value={text}
+                        onChange={onInputChange}
+                    />
                     {textError &&
                         <small className="gen-error">{textError}</small>}
-                <Button className="main-form__button-submit-reply" type="submit">UPDATEN&nbsp;<MdUpdate/></Button>
-                <Button className="main-form__button-cancel-reply" type="button" onClick={() => navigate(`/request-search`)}>ANNULEREN&nbsp;<MdCancel/></Button>
+                    <Button className="main-form__button-submit-reply" type="submit">UPDATEN&nbsp;<MdUpdate/></Button>
+                    <Button className="main-form__button-cancel-reply" type="button"
+                            onClick={() => navigate(`/request-search`)}>ANNULEREN&nbsp;<MdCancel/></Button>
                 </div>
             </form>
         </Screen>

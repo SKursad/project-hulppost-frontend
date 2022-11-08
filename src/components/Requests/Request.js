@@ -1,11 +1,9 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {Link} from 'react-router-dom';
-import {AuthContext} from '../../context/AuthContext';
 import './Request.css';
 
 const Request = (props) => {
     const request = props.request;
-    const context = useContext(AuthContext);
     const date = new Date(request.timestamp);
     const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
 
@@ -26,8 +24,6 @@ const Request = (props) => {
                     <small className="article-request__date">{dateFormatted}{" "}</small>
                     <p className="article-request__p-content"><strong>{request.content}</strong>{" "}</p>
                 </div>
-                <span className="text-muted small">
-        {!props.noAuthor && <> {context.username}</>} </span>
             </Link>
         </article>
 

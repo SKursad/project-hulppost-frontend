@@ -12,8 +12,6 @@ const Reply = (props) => {
             <Link onClick={props.onClick} to={`/reply/${reply.id}`}>
                 <small className="article-reply__date">{dateFormatted}{" "}</small>
                 <p className="article-reply__p"><strong>{reply.text}</strong>{" "}</p>
-                <span className="text-muted small">
-        {!props.noAuthor && <> {props.username}</>} </span>
             </Link>
         </article>
     );

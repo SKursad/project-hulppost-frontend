@@ -16,7 +16,7 @@
         flex-direction: unset;
         margin: 5rem 1rem 1rem;
         justify-items: start;
-        align-items: start;
+        align-items: flex-start;
     }
 
 }

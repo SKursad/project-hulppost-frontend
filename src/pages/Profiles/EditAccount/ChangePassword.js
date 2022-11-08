@@ -31,11 +31,10 @@ const ChangePassword = () => {
         setErrors('');
 
         try {
-
             const changePassword = {...formValue};
             const response = await api.post(`/api/v1/auth/changePassword`,
                 changePassword,);
-            console.log(response.data);
+            // console.log(response.data);
             if (response.status === 200) {
                 setFormValue({
                     email: '',
@@ -51,7 +50,6 @@ const ChangePassword = () => {
             }
             appDispatch({type: "flashMessage", value: "Je wachtwoord is succesvol geüpdatet"});
         } catch (e) {
-            // toggleError(false);
             if (e.response.status === 400) {
                 setErrors(e.response.data);
             }
@@ -118,7 +116,7 @@ const ChangePassword = () => {
                     />
                     <div id="edit-data__div-buttons">
                         <Button
-                            id="edit-data__buttons"
+                            id="edit-data__buttons-3"
                             title="register-button"
                             type="submit"
                             disabled={!errors}
@@ -126,9 +124,9 @@ const ChangePassword = () => {
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons" type="button"
+                            <Button id="edit-data__buttons-1" type="button"
                                     onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons" type="button"
+                        ) : (<Button id="edit-data__buttons-2" type="button"
                                      onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
                             <MdCancel/></Button>)}
                     </div>

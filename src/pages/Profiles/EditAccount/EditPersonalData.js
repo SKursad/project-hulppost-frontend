@@ -27,7 +27,6 @@ const EditPersonalData = () => {
     const [formValue, setFormValue] = useState(initialState);
     const {firstName, surname, gender, birthday, zipCode} = formValue;
     const [errors, setErrors] = useState({});
-    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
 
@@ -36,27 +35,32 @@ const EditPersonalData = () => {
     }, [id]);
 
     const getAccountById = async (id) => {
-        const accountData = await api.get(`/api/v1/accounts/${id}`, getToken());
-        if (accountData.status === 200) {
-            setFormValue({...accountData.data});
-            // setIsLoading(false)
-            console.log(accountData);
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const accountData = await api.get(`/api/v1/accounts/${id}`, getToken());
+            if (accountData.status === 200) {
+                setFormValue({...accountData.data});
+                // setIsLoading(false)
+                // console.log(accountData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
-        toggleLoading(true);
 
         try {
 
             const updateAccountData = {...formValue};
             const response = await api.put(`/api/v1/accounts/${id}`,
                 updateAccountData, getToken());
-            console.log(response.data);
+            // console.log(response.data);
             if (response.status === 200) {
                 setFormValue({
                     firstName: "",
@@ -74,7 +78,6 @@ const EditPersonalData = () => {
             }
             appDispatch({type: "flashMessage", value: "Je profiel is succesvol geüpdatet"});
         } catch (e) {
-            // toggleError(false);
             if (e.response.status === 400) {
                 setErrors(e.response.data);
             }
@@ -169,18 +172,16 @@ const EditPersonalData = () => {
                     />
                     <div id="edit-data__div-buttons">
                         <Button
-                            id="edit-data__buttons"
+                            id="edit-data__buttons-3"
                             title="register-button"
                             type="submit"
-                            // onClick={handleSubmit}
-                            disabled={loading}
                         >
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons" type="button"
+                            <Button id="edit-data__buttons-1" type="button"
                                     onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons" type="button"
+                        ) : (<Button id="edit-data__buttons-2" type="button"
                                      onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
                             <MdCancel/></Button>)}
                     </div>

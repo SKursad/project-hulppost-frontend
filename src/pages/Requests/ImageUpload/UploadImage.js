@@ -22,7 +22,7 @@ function ImageRequestPage() {
     function handleImageChange(e) {
         // Sla het gekozen bestand op
         const uploadedFile = e.target.files[0];
-        console.log(uploadedFile);
+        // console.log(uploadedFile);
         setError(false);
         if (
             uploadedFile.type !== "image/jpeg" &&
@@ -43,7 +43,6 @@ function ImageRequestPage() {
         const formData = new FormData();
 
         formData.append("file", file);
-
         try {
             let tokenConfig = getToken();
             delete tokenConfig.headers['Content-Type'];

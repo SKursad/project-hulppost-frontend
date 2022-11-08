@@ -22,22 +22,35 @@ const SingleReply = () => {
     const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
 
 
-
     const getReplyById = async (id) => {
-        const replyData = await api.get(`/api/v1/replies/${id}`);
-        if (replyData.status === 200 || replyData.status === 200) {
-            setReplyData(replyData.data);
-            console.log(replyData.data);
-        } else {
+        try {
+            const replyData = await api.get(`/api/v1/replies/${id}`);
+            if (replyData.status === 200) {
+                setReplyData(replyData.data);
+                // console.log(replyData.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
     const getUserById = async () => {
-        const userData = await api.get(`/api/v1/users?replyId=${id}`, getToken());
-        if (userData.status === 200) {
-            setUserData(userData.data[0]);
-            // console.log(userData);
-        } else {
+        try {
+            const userData = await api.get(`/api/v1/users?replyId=${id}`, getToken());
+            if (userData.status === 200) {
+                setUserData(userData.data[0]);
+                // console.log(userData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -53,7 +66,6 @@ const SingleReply = () => {
             try {
                 const response = await api.delete(`/api/v1/replies/${id}`, getToken());
                 if (response.status === 200) {
-                    // navigate(`/profile/${user.id}`)
                     const repliesList = replyData.filter(reply => reply.id !== id);
                     setReplyData(repliesList);
                 }
@@ -86,9 +98,10 @@ const SingleReply = () => {
                     <article id="article-reply">
                         <p>Geplaatst door</p>
                         <p>{userData.username}</p>
-                        <small className="article-reply__date">op {dateFormatted}</small>
+                        <small className="article-reply__date">{dateFormatted}</small>
                         <p>Bericht:</p>
-                        <Link to={`/request/${replyData.requestId}`}><p className="article-reply__p">{replyData.text}</p></Link>
+                        <Link to={`/request/${replyData.requestId}`}><p
+                            className="article-reply__p">{replyData.text}</p></Link>
                         <br/>
                         <p id="article-reply__p">KLIK OP HET BERICHT OM NAAR DE HULPAANVRAAG TE GAAN</p>
                     </article>
@@ -101,8 +114,6 @@ const SingleReply = () => {
                         <Button id="main-reply__del-button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>
                     </div>
                 </>) : ('')}
-
-
             </main>
         </Screen>
     );

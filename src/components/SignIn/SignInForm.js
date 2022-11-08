@@ -29,12 +29,16 @@ function SignInForm({apiUrl, source}) {
 
         try {
             const result = await api.post(apiUrl, {...formValue});
-            console.log(result.data);
+            // console.log(result.data);
             login(result.data.accessToken);
             navigate(`/request-search`);
 
         } catch (e) {
-            console.error(e);
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
             toggleError(true);
         }
     }

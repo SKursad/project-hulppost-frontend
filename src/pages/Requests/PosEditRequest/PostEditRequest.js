@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useNavigate, useParams} from 'react-router-dom';
 import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
+
 import Screen from '../../../components/UI/Screen/Screen';
 import InputFormTextarea from '../../../components/Input/InputFormTextarea';
 import Button from '../../../components/UI/Button/Button';
@@ -40,12 +41,18 @@ const PostEditRequest = () => {
     }, [id]);
 
     const getSingleRequest = async (id) => {
-        const singleRequest = await api.get(`/api/v1/requests/${id}`);
-        if (singleRequest.status === 200) {
-            setFormValue({...singleRequest.data});
-            console.log(singleRequest.data);
-        } else {
-            console.log("Er ging iets mis.");
+        try {
+            const singleRequest = await api.get(`/api/v1/requests/${id}`);
+            if (singleRequest.status === 200) {
+                setFormValue({...singleRequest.data});
+                // console.log(singleRequest.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -58,7 +65,8 @@ const PostEditRequest = () => {
                 const createdRequestData = {...formValue, timestamp: new Date()};
                 const response = await api.post(`/api/v1/requests`,
                     createdRequestData, getToken());
-                console.log(response.data);
+                console.log("created");
+                // console.log(response.data);
                 appDispatch({type: "flashMessage", value: "Hulpvraag verzonden"});
                 navigate(`/image/${response.data.id}`);
             } catch (e) {
@@ -72,14 +80,13 @@ const PostEditRequest = () => {
             const updatedRequestData = {...formValue, timestamp: new Date()};
             const response = await api.put(`/api/v1/requests/${id}`,
                 updatedRequestData, getToken());
-            console.log(response.data);
+            console.log("updated");
+            // console.log(response.data);
             if (response.status === 200) {
                 appDispatch({type: "flashMessage", value: "Hulpvraag geüpdatet"});
             } else {
                 appDispatch({type: "flashMessage", value: "Er ging iets mis"});
             }
-
-
             setFormValue({title: "", content: "", typeRequest: "", timestamp: new Date()});
             navigate(`/image/${response.data.id}`);
         }
@@ -158,8 +165,9 @@ const PostEditRequest = () => {
                     <Button className="main-form__button-submit"
                             type="submit">{editMode ? "UPDATE" : "VERZENDEN"}<MdUpdate/></Button>
                     {editMode ?
-                    <Button className="main-form__button-cancel" onClick={() => navigate(`/request/${id}`)}>
-                        ANNULEREN<MdCancel/></Button> : <Button className="main-form__button-cancel" onClick={() => navigate(`/request-search`)}>
+                        <Button className="main-form__button-cancel" onClick={() => navigate(`/request/${id}`)}>
+                            ANNULEREN<MdCancel/></Button> :
+                        <Button className="main-form__button-cancel" onClick={() => navigate(`/request-search`)}>
                             ANNULEREN<MdCancel/></Button>}
                 </div>
             </form>

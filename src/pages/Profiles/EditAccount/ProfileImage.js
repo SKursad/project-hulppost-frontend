@@ -26,13 +26,18 @@ const ProfileImage = () => {
     }, [id]);
 
     const getUserById = async (id) => {
-        const userData = await api.get(`/api/v1/users/${id}`);
-        if (userData.status === 200) {
-            setUserData({...userData.data});
-            console.log(userData.status);
-            // setFormValueUser({...userData.data});
-        } else {
-            console.log("Er ging iets mis");
+        try {
+            const userData = await api.get(`/api/v1/users/${id}`);
+            if (userData.status === 200) {
+                setUserData({...userData.data});
+                console.log(userData.status);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -43,8 +48,8 @@ const ProfileImage = () => {
         const file = document.querySelector('input[type=file]').files[0];
         const reader = new FileReader();
 
-        console.log(preview);
-        console.log(file);
+        // console.log(preview);
+        // console.log(file);
         console.log(reader);
         setError(false);
         if (
@@ -79,7 +84,7 @@ const ProfileImage = () => {
                 const response = await api.put(`/api/v1/users/${id}/image`, {image: imageBase64}, getToken())
                     .then(files);
                 console.log(response);
-                console.log(files);
+                // console.log(files);
 
             };
 
@@ -156,9 +161,11 @@ const ProfileImage = () => {
                         UPLOADEN<RiImageEditFill/>
                     </Button>
                     {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                        <Button id="edit-image__button" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;
+                        <Button id="edit-image__button" type="button"
+                                onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;
                             <MdCancel/></Button>
-                    ) : (<Button id="edit-image__button"  type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
+                    ) : (<Button id="edit-image__button" type="button"
+                                 onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
                         <MdCancel/></Button>)}
                     <Button id="edit-image__button-del" onClick={deleteHandler}>FOTO VERWIJDEREN&nbsp;
                         <MdOutlineImageNotSupported/></Button>

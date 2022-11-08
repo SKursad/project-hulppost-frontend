@@ -5,12 +5,13 @@
     width: 100%;
 }
 
-
-#edit-data__buttons {
-    margin: 1rem;
+#edit-data__buttons-1,
+#edit-data__buttons-2,
+#edit-data__buttons-3 {
+    margin: 0 0 1rem;
     flex-direction: row;
     position: relative;
-    padding: .5rem 1rem .5rem 1rem;
+    padding: .6rem 1rem .6rem 1rem;
     font-size: 1.6rem;
     width: 100%;
 }

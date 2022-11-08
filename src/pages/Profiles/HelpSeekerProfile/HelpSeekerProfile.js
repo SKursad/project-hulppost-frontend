@@ -22,7 +22,6 @@ const HelpSeekerProfile = () => {
     const [accountData, setAccountData] = useState({});
     const [userData, setUserData] = useState({});
     const [requestData, setRequestData] = useState([]);
-    // const appDispatch = useContext(DispatchContext);
     const date = new Date(accountData.birthday);
     const navigate = useNavigate();
     const dateFormatted = `${date.getDate() + 1}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -37,12 +36,18 @@ const HelpSeekerProfile = () => {
     }, [id]);
 
     const getUserById = async () => {
-        const userData = await api.get(`/api/v1/users/${userId}`, getToken());
-        if (userData.status === 200) {
-            setUserData(userData.data);
-            // console.log(userData);
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const userData = await api.get(`/api/v1/users/${userId}`, getToken());
+            if (userData.status === 200) {
+                setUserData(userData.data);
+                // console.log(userData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -55,16 +60,28 @@ const HelpSeekerProfile = () => {
                     RefreshPage(navigate(`/`));
                 }
             } catch (e) {
+                if (e.response) {
+                    console.log(e.response.data);
+                } else {
+                    console.log(`Fout: ${e.message}`);
+                }
             }
         }
     }
 
     const getAccountById = async () => {
-        const accountData = await api.get(`/api/v1/accounts/${accountId}`, getToken());
-        if (accountData.status === 200) {
-            setAccountData(accountData.data);
-            // console.log(accountData)
-        } else {
+        try {
+            const accountData = await api.get(`/api/v1/accounts/${accountId}`, getToken());
+            if (accountData.status === 200) {
+                setAccountData(accountData.data);
+                // console.log(accountData)
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -83,11 +100,18 @@ const HelpSeekerProfile = () => {
 
 
     const getRequestParamByUserId = async () => {
-        const response = await api.get(`/api/v1/requests?userId=${userId}`);
-        if (response.status === 200) {
-            setRequestData(response.data);
-            console.log(response.data);
-        } else if (response.status === 400 || response.status === 500) {
+        try {
+            const response = await api.get(`/api/v1/requests?userId=${userId}`);
+            if (response.status === 200) {
+                setRequestData(response.data);
+                // console.log(response.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -144,7 +168,7 @@ const HelpSeekerProfile = () => {
                 <h2>Hulpvragen</h2>
                 {requestData.length > 0 &&
                     requestData.map(request => {
-                        return <Request noAuthor={true} key={request.id} request={request}/>;
+                        return <Request key={request.id} request={request}/>;
                     })}
                 {requestData.length === 0 && context.user.username === userData.username && (
                     <p id="main-profile__p-0">
@@ -152,7 +176,7 @@ const HelpSeekerProfile = () => {
                     </p>)}
 
                 {requestData.length === 0 && context.user.username !== userData.username &&
-                    <p className="lead text-muted text-center">{userData.username} heeft geen aanvragen.</p>}
+                    <p className="main-profile__p">{userData.username} heeft geen aanvragen.</p>}
 
                 {context.user.username === userData.username && (
                     <div>

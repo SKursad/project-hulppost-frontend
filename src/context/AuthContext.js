@@ -58,7 +58,7 @@ function AuthContextProvider ({ children }) {
                 },
 
             });
-            console.log(result.data)
+            // console.log(result.data)
 
             toggleIsAuth({
                 ...isAuth,
@@ -67,12 +67,10 @@ function AuthContextProvider ({ children }) {
                     id: result.data?.id,
                     username: result.data?.username,
                     email: result.data?.email,
-                    // roles: result.data?.roles?.[0]?.name
                     roles: result.data?.roles?.[0]?.name
                 },
                 status: 'done',
             });
-                console.log(result.data?.id)
 
         } catch (e) {
             console.error(e);

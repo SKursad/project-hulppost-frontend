@@ -1,19 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
-import api from '../../../api/api-calls';
-import {getToken} from '../../../helper/AccesToken/GetToken';
 import {AuthContext} from '../../../context/AuthContext';
+import {getToken} from '../../../helper/AccesToken/GetToken';
+import api from '../../../api/api-calls';
+import ProfileWithDefaultImage from '../../../components/ProfileWithDefaultImage/ProfileWithDefaultImage';
 import Button from '../../../components/UI/Button/Button';
 import Reply from '../../../components/Replies/Reply';
 import Screen from '../../../components/UI/Screen/Screen';
 import RefreshPage from '../../../helper/RefreshPage/RefreshPage';
-import {FaTrashAlt} from 'react-icons/fa';
 import {TiUserDelete} from 'react-icons/ti';
 import {RiAccountCircleFill} from 'react-icons/ri';
 import {VscAccount} from 'react-icons/vsc';
 import {MdPassword} from 'react-icons/md';
-import '../Accounts.css'
+import '../Accounts.css';
 
 const VolunteerProfile = () => {
     const {id} = useParams();
@@ -36,12 +35,18 @@ const VolunteerProfile = () => {
     }, [id]);
 
     const getUserById = async () => {
-        const userData = await api.get(`/api/v1/users/${userId}`);
-        if (userData.status === 200) {
-            setUserData(userData.data);
-            console.log(userData);
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const userData = await api.get(`/api/v1/users/${userId}`);
+            if (userData.status === 200) {
+                setUserData(userData.data);
+                // console.log(userData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -49,23 +54,31 @@ const VolunteerProfile = () => {
         const areYouSure = window.confirm("ADMIN");
         if (areYouSure) {
             try {
-                const response = await api.delete(`/api/v1/users/${id}`, getToken());
-                if (response.status === 200) {
+                const result = await api.delete(`/api/v1/users/${id}`, getToken());
+                if (result.status === 200) {
                     RefreshPage(navigate(`/`));
                 }
             } catch (e) {
+                if (e.response) {
+                    console.log(e.response.data);
+                } else {
+                    console.log(`Fout: ${e.message}`);
+                }
             }
         }
     }
 
     const getAccountById = async () => {
-        const accountData = await api.get(`/api/v1/accounts/${accountId}`, getToken());
-        if (accountData.status === 200) {
-            setAccountData(accountData.data);
-            // setIsLoading(false)
-            console.log(accountData);
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const accountData = await api.get(`/api/v1/accounts/${accountId}`, getToken());
+            if (accountData.status === 200) {
+                setAccountData(accountData.data);
+                // console.log(accountData);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -78,19 +91,29 @@ const VolunteerProfile = () => {
                     RefreshPage(navigate(`/`));
                 }
             } catch (e) {
+                if (e.response) {
+                    console.log(e.response.data);
+                } else {
+                    console.log(`Fout: ${e.message}`);
+                }
             }
         }
     }
 
 
     const getReplyParamByUserId = async () => {
-        const replyData = await api.get(`/api/v1/replies?userId=${userId}`, getToken());
-        if (replyData.status === 200) {
-            setReplyData(replyData.data);
-            // setRequestData({...requestData.data[1]});
-            console.log(replyData.data);
-        } else {
-            // appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+        try {
+            const replyData = await api.get(`/api/v1/replies?userId=${userId}`, getToken());
+            if (replyData.status === 200) {
+                setReplyData(replyData.data);
+                // console.log(replyData.data);
+            }
+        } catch (e) {
+            if (e.response) {
+                console.log(e.response.data);
+            } else {
+                console.log(`Fout: ${e.message}`);
+            }
         }
     };
 
@@ -134,30 +157,34 @@ const VolunteerProfile = () => {
                 }{context.user.username === userData.username && (
                 <div className="main-profile__settings">
                     <p className="main-profile__settings-p">INSTELLINGEN</p>
-                    <Button className="main-profile__edit-personal" type="button" onClick={() => navigate(`/edit-personalData/${id}`)}><VscAccount/>&nbsp;Persoonlijke gegevens</Button>
-                    <Button className="main-profile__edit-profile" type="button" onClick={() => navigate(`/edit-profileData/${id}`)}><VscAccount/>&nbsp;Profielgegevens</Button>
-                    <Button className="main-profile__edit-pass" type="button" onClick={() => navigate(`/change-password/${id}`)}><MdPassword/>&nbsp;Wachtwoord</Button>
+                    <Button className="main-profile__edit-personal" type="button"
+                            onClick={() => navigate(`/edit-personalData/${id}`)}><VscAccount/>&nbsp;Persoonlijke
+                        gegevens</Button>
+                    <Button className="main-profile__edit-profile" type="button"
+                            onClick={() => navigate(`/edit-profileData/${id}`)}><VscAccount/>&nbsp;Profielgegevens</Button>
+                    <Button className="main-profile__edit-pass" type="button"
+                            onClick={() => navigate(`/change-password/${id}`)}><MdPassword/>&nbsp;Wachtwoord</Button>
                 </div>)}
                 <h2>Reacties op Hulpaanvragen</h2>
 
                 {context.user.username === userData.username ? (
-                        <p>je hebt totaal {userData.replyId} reactie(s) op hulpaanvragen</p>)
+                        <p className="main-profile__p">je hebt totaal {userData.replyId} reactie(s) op hulpaanvragen.</p>)
                     :
                     (context.user.username !== userData.username &&
-                        <p>Heeft {userData.replyId} reactie(s) op hulpaanvragen</p>)}
+                        <p className="main-profile__p">Heeft {userData.replyId} reactie(s) op hulpaanvragen.</p>)}
 
 
                 {replyData.length > 0 ? (
                     replyData.map(reply => {
-                        return <Reply noAuthor={true} key={reply.id} reply={reply}/>;
+                        return <Reply key={reply.id} reply={reply}/>;
                     })) : (<p></p>)}
 
 
                 {replyData.length === 0 && context.user.username === userData.username ? (
-                    <p className="lead text-muted text-center">
-                        Je hebt nog geen reacties op hulpaanvragen. <Link to="/createRequest"> Hulp nodig?</Link>
+                    <p className="main-profile__p">Je hebt nog niet gereageerd op een hulpvraag,<Link
+                        to="/request-search"> bekijk alle aanvragen.</Link>
                     </p>) : (replyData.length === 0 && context.user.username !== userData.username &&
-                    <p className="lead text-muted text-center">{userData.username} heeft nog geen reacties op
+                    <p>{userData.username} heeft nog geen reacties op
                         hulpaanvragen.</p>)}
 
                 {context.user.username === userData.username && (
@@ -171,7 +198,7 @@ const VolunteerProfile = () => {
                 {context.user.roles === "ROLE_ADMIN" && (
                     <div>
                         <p id="main-profile-del">Gebruiker verwijderen</p>
-                        <Button id="main-profile__del-button"  onClick={deleteUserHandler}>
+                        <Button id="main-profile__del-button" onClick={deleteUserHandler}>
                             VERWIJDER<TiUserDelete/></Button>
                     </div>)}
             </main>

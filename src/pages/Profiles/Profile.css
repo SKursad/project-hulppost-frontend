@@ -50,6 +50,10 @@
     padding: 1rem;
 }
 
+.main-profile__p {
+    margin: 1rem;
+}
+
 #main-profile__p-0 {
     margin: 1rem;
 }
@@ -83,7 +87,7 @@
 }
 
 #main-profile-del {
-    margin: 0 2rem 0;
+    margin: 1rem 2rem 0;
 }
 
 #main-profile__del-button {
