@@ -88,18 +88,14 @@ const SingleReply = () => {
                         <p>{userData.username}</p>
                         <small className="article-reply__date">op {dateFormatted}</small>
                         <p>Bericht:</p>
-                        <br/>
                         <Link to={`/request/${replyData.requestId}`}><p className="article-reply__p">{replyData.text}</p></Link>
                         <br/>
-                        <p id="article-reply__p">KLIK OP DE BERICHT OM NAAR DE HULPAANVRAAG TE GAAN</p>
+                        <p id="article-reply__p">KLIK OP HET BERICHT OM NAAR DE HULPAANVRAAG TE GAAN</p>
                     </article>
                 ) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
                 {context.user.id === replyData.userId ? (<>
                     <div className="main-reply__div-button">
-                        {/*<Button id="main-request__button" type="button"*/}
-                        {/*        onClick={() => navigate(`/post-reply/${id}`)}>REAGEER TERUG*/}
-                        {/*    <FaCommentDots/> </Button>*/}
                         <Button id="main-reply__button" type="button"
                                 onClick={() => navigate(`/edit-reply/${id}`)}>UPDATEN<MdUpdate/></Button>
                         <Button id="main-reply__del-button" onClick={deleteHandler}> VERWIJDEREN<FaTrashAlt/></Button>

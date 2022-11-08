@@ -53,13 +53,11 @@ const SearchRequests = () => {
                 <div className="main-searchbar__div">
                     <input
                         className="main-searchbar__search"
-                        // label="search"
                         id="search"
                         type="text"
-                        placeholder="Zoek in hulpvragen"
+                        placeholder="zoek in hulpvragen"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        // error={error}
                     />
                     {requests.length ? (
                         <Feed requests={searchResults}/>
