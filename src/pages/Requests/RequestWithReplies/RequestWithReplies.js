@@ -164,7 +164,7 @@ const RequestWithReplies = () => {
                                 {replyData.length > 0 ? (
                                     replyData.map(reply => {
                                         return <Reply key={reply.id} reply={reply}/>;
-                                    })) : (<p className="request-replies">je hebt nog geen reacties</p>)}
+                                    })) : (<p className="request-replies">er zijn nog geen reacties</p>)}
                             </div>)}
                     </section>) : (<p>Er zijn nog geen hulpaanvragen</p>)}
 
