@@ -34,7 +34,7 @@ const ChangePassword = () => {
             const changePassword = {...formValue};
             const response = await api.post(`/api/v1/auth/changePassword`,
                 changePassword,);
-            // console.log(response.data);
+            console.log(response.data);
             if (response.status === 200) {
                 setFormValue({
                     email: '',
@@ -52,6 +52,10 @@ const ChangePassword = () => {
         } catch (e) {
             if (e.response.status === 400) {
                 setErrors(e.response.data);
+            }
+            if (e.response.status === 401) {
+                appDispatch({type: "flashMessage", value: "Het ingevoerde oude wachtwoord komt niet overeen"});
+                console.log(e.response.data);
             }
         }
     }
@@ -120,7 +124,6 @@ const ChangePassword = () => {
                             id="edit-data__buttons-3"
                             title="register-button"
                             type="submit"
-                            disabled={!errors}
                         >
                             Updaten
                         </Button>
