@@ -17,6 +17,12 @@
     align-content: center;
 }
 
+.button:disabled:hover,
+.button:disabled {
+    color: dimgray;
+    background-color: rgba(255, 0, 0, 0.37);
+}
+
 .button:hover {
     background-color: rgb(75, 159, 159);
     color: rgba(255, 255, 255, 0.81);

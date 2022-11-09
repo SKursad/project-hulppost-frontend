@@ -23,7 +23,6 @@ const RegistrationForm = ({source, apiUrl}) => {
     const [formValue, setFormValue] = useState(initialState);
     const appDispatch = useContext(DispatchContext);
     const [errors, setErrors] = useState({});
-    const [loading, toggleLoading] = useState(false);
     const navigate = useNavigate();
 
 
@@ -36,7 +35,6 @@ const RegistrationForm = ({source, apiUrl}) => {
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
-        toggleLoading(true);
         try {
             const response = await api.post(apiUrl, {...formValue});
             console.log(response.data);
@@ -51,7 +49,6 @@ const RegistrationForm = ({source, apiUrl}) => {
                 console.log(e.response.data);
             }
         }
-        toggleLoading(false);
     }
 
 
@@ -194,7 +191,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                 <Button
                     title="register-button"
                     onClick={handleSubmit}
-                    disabled={loading}
+                    disabled={passwordRepeatError}
                 >
                     Registreren
                 </Button>
