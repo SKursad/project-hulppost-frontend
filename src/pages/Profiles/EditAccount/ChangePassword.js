@@ -91,6 +91,7 @@ const ChangePassword = () => {
                         onChange={onChange}
                         error={emailError}
                         autoFocus={true}
+                        required={true}
                     />
                     <Input
                         nameRegister="Oude wachtwoord"
