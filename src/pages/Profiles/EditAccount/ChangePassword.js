@@ -99,6 +99,7 @@ const ChangePassword = () => {
                         name="oldPassword"
                         value={oldPassword}
                         onChange={onChange}
+                        required={true}
                         error={oldPasswordError}
                     />
                     <Input

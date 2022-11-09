@@ -49,7 +49,6 @@ const RegistrationForm = ({source, apiUrl}) => {
                 appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
                 setErrors(e.response.data);
                 console.log(e.response.data);
-
             }
         }
         toggleLoading(false);
