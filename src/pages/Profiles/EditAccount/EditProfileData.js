@@ -1,30 +1,27 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
-import {AuthContext} from '../../../context/AuthContext';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContext';
 import api from '../../../api/api-calls';
-import {getToken} from '../../../helper/AccesToken/GetToken';
+import { getToken } from '../../../helper/AccesToken/GetToken';
 import Screen from '../../../components/UI/Screen/Screen';
 import Input from '../../../components/Input/Input';
 import Button from '../../../components/UI/Button/Button';
 import RefreshPage from '../../../helper/RefreshPage/RefreshPage';
 import '../../../components/Input/InputForm.css';
-import {MdCancel} from 'react-icons/md';
+import { MdCancel } from 'react-icons/md';
 
-
-let initialState = {
+const initialState = {
     username: '',
     email: '',
 };
 
-
 const EditProfileData = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const context = useContext(AuthContext);
     const [formValue, setFormValue] = useState(initialState);
-    const {username, email} = formValue;
+    const { username, email } = formValue;
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
 
     useEffect(() => {
         getUserById(id);
@@ -34,8 +31,7 @@ const EditProfileData = () => {
         try {
             const userData = await api.get(`/api/v1/users/${id}`, getToken());
             if (userData.status === 200) {
-                setFormValue({...userData.data});
-                // console.log(userData);
+                setFormValue({ ...userData.data });
             }
         } catch (e) {
             if (e.response) {
@@ -46,15 +42,14 @@ const EditProfileData = () => {
         }
     };
 
-    async function handleSubmit(e) {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setErrors('');
 
         try {
-            const updateAccountData = {...formValue};
-            const response = await api.put(`/api/v1/users/${id}`,
-                updateAccountData, getToken());
-            // console.log(response.data);
+            const updateAccountData = { ...formValue };
+            const response = await api.put(`/api/v1/users/${id}`, updateAccountData, getToken());
+
             if (response.status === 200) {
                 setFormValue({
                     username: '',
@@ -63,24 +58,19 @@ const EditProfileData = () => {
                 RefreshPage(navigate(`/login`));
             }
         } catch (e) {
-            if (e.response.status === 400) {
+            if (e.response && e.response.status === 400) {
                 setErrors(e.response.data);
             }
         }
-    }
-
-
-    const {
-        username: usernameError,
-        email: emailError
-    } = errors;
-
-    const onInputChange = (e) => {
-        let {name, value} = e.target;
-        setErrors((previousErrors) => ({...previousErrors, [name]: undefined}));
-        setFormValue({...formValue, [name]: value});
     };
 
+    const { username: usernameError, email: emailError } = errors;
+
+    const onInputChange = (e) => {
+        const { name, value } = e.target;
+        setErrors((previousErrors) => ({ ...previousErrors, [name]: undefined }));
+        setFormValue({ ...formValue, [name]: value });
+    };
 
     return (
         <Screen title="Account aanpassen" wide={true}>
@@ -92,7 +82,7 @@ const EditProfileData = () => {
                         label="username-field"
                         alt="input-username"
                         type="text"
-                        id={username.id}
+                        id="username-field"
                         name="username"
                         value={username}
                         onChange={onInputChange}
@@ -102,7 +92,7 @@ const EditProfileData = () => {
                         nameRegister="Email"
                         alt="input-email"
                         type="text"
-                        id={email.id}
+                        id="email-field"
                         name="email"
                         value={email}
                         onChange={onInputChange}
@@ -118,11 +108,16 @@ const EditProfileData = () => {
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons-1" type="button"
-                                    onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons-2" type="button"
-                                     onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
-                            <MdCancel/></Button>)}
+                            <Button id="edit-data__buttons-1" type="button" onClick={() => navigate(`/profile/${id}`)}>
+                                ANNULEREN&nbsp;
+                                <MdCancel />
+                            </Button>
+                        ) : (
+                            <Button id="edit-data__buttons-2" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>
+                                ANNULEREN&nbsp;
+                                <MdCancel />
+                            </Button>
+                        )}
                     </div>
                 </div>
             </form>

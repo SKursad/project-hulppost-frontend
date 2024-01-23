@@ -1,16 +1,16 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Request.css';
+import { format } from 'date-fns';
 
 const Request = (props) => {
     const request = props.request;
     const date = new Date(request.timestamp);
-    const dateFormatted = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes().toLocaleString().padStart(2, "0")}`;
+    const dateFormatted = format(date, 'dd/MM/yyyy HH:mm');
 
     return (
         <article className="article-request">
-            <Link onClick={props.onClick} to={`/request/${request.id}`}
-                  className="list-group-item list-group-item-action">
+            <Link onClick={props.onClick} to={`/request/${request.id}`} className="list-group-item list-group-item-action">
                 <div className="article-request__div-title">
                     <h4 className="article-request__h4-title">Titel</h4>
                     <p className="article-request__p-title"><strong>{request.title}</strong>{" "}</p>
@@ -26,7 +26,6 @@ const Request = (props) => {
                 </div>
             </Link>
         </article>
-
     );
 };
 

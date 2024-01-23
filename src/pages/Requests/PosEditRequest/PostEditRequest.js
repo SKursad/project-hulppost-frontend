@@ -1,13 +1,12 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import DispatchContext from '../../../context/DispatchContext';
 import api from '../../../api/api-calls';
-
 import Screen from '../../../components/UI/Screen/Screen';
 import InputFormTextarea from '../../../components/Input/InputFormTextarea';
 import Button from '../../../components/UI/Button/Button';
-import {getToken} from '../../../helper/AccesToken/GetToken';
-import {MdCancel, MdUpdate} from 'react-icons/md';
+import { getToken } from '../../../helper/AccesToken/GetToken';
+import { MdCancel, MdUpdate } from 'react-icons/md';
 import './PostEditRequest.css';
 
 let initialState = {
@@ -21,14 +20,13 @@ const options = ["Praktisch", "Sociaal"];
 
 const PostEditRequest = () => {
 
-    const {id} = useParams();
+    const { id } = useParams();
     const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
     const [editMode, setEditMode] = useState(false);
-    const {title, content, typeRequest} = formValue;
+    const { title, content, typeRequest } = formValue;
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
 
     useEffect(() => {
         if (id) {
@@ -36,7 +34,7 @@ const PostEditRequest = () => {
             getSingleRequest(id);
         } else {
             setEditMode(false);
-            setFormValue({...initialState});
+            setFormValue({ ...initialState });
         }
     }, [id]);
 
@@ -44,8 +42,7 @@ const PostEditRequest = () => {
         try {
             const singleRequest = await api.get(`/api/v1/requests/${id}`);
             if (singleRequest.status === 200) {
-                setFormValue({...singleRequest.data});
-                // console.log(singleRequest.data);
+                setFormValue({ ...singleRequest.data });
             }
         } catch (e) {
             if (e.response) {
@@ -56,38 +53,33 @@ const PostEditRequest = () => {
         }
     };
 
-
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
         if (!editMode) {
             try {
-                const createdRequestData = {...formValue, timestamp: new Date()};
+                const createdRequestData = { ...formValue, timestamp: new Date() };
                 const response = await api.post(`/api/v1/requests`,
                     createdRequestData, getToken());
-                console.log("created");
-                // console.log(response.data);
-                appDispatch({type: "flashMessage", value: "Hulpvraag verzonden"});
+                appDispatch({ type: "flashMessage", value: "Hulpvraag verzonden" });
                 navigate(`/image/${response.data.id}`);
             } catch (e) {
                 if (e.response) {
                     setErrors(e.response.data);
-                    appDispatch({type: "flashMessage", value: "Er gaat iets mis"});
+                    appDispatch({ type: "flashMessage", value: "Er gaat iets mis" });
                     console.log(e.response.data);
                 }
             }
         } else {
-            const updatedRequestData = {...formValue, timestamp: new Date()};
+            const updatedRequestData = { ...formValue, timestamp: new Date() };
             const response = await api.put(`/api/v1/requests/${id}`,
                 updatedRequestData, getToken());
-            console.log("updated");
-            // console.log(response.data);
             if (response.status === 200) {
-                appDispatch({type: "flashMessage", value: "Hulpvraag geüpdatet"});
+                appDispatch({ type: "flashMessage", value: "Hulpvraag geüpdatet" });
             } else {
-                appDispatch({type: "flashMessage", value: "Er ging iets mis"});
+                appDispatch({ type: "flashMessage", value: "Er ging iets mis" });
             }
-            setFormValue({title: "", content: "", typeRequest: "", timestamp: new Date()});
+            setFormValue({ title: "", content: "", typeRequest: "", timestamp: new Date() });
             navigate(`/image/${response.data.id}`);
         }
     }
@@ -98,18 +90,16 @@ const PostEditRequest = () => {
         typeRequest: typeRequestError,
     } = errors;
 
-
     const onInputChange = (e) => {
-        let {name, value} = e.target;
-        setErrors((previousErrors) => ({...previousErrors, [name]: undefined}));
-        setFormValue({...formValue, [name]: value});
+        let { name, value } = e.target;
+        setErrors((previousErrors) => ({ ...previousErrors, [name]: undefined }));
+        setFormValue({ ...formValue, [name]: value });
     };
 
     const onCategoryChange = (e) => {
-        setErrors((previousErrors) => ({...previousErrors, typeRequest: undefined}));
-        setFormValue({...formValue, typeRequest: e.target.value});
+        setErrors((previousErrors) => ({ ...previousErrors, typeRequest: undefined }));
+        setFormValue({ ...formValue, typeRequest: e.target.value });
     };
-
 
     return (
         <Screen title={editMode ? "Hulpvraag aanpassen" : "Nieuwe Hulpvraag"}>
@@ -127,12 +117,11 @@ const PostEditRequest = () => {
                         onChange={onInputChange}
                         autoFocus={true}
                     />
-                    {titleError &&
-                        <small className="gen-error">{titleError}</small>}
+                    {titleError && <small className="gen-error">{titleError}</small>}
                     <label htmlFor="type-request-field">
                         <select
                             className="main-form__select"
-                            name="type"
+                            name="typeRequest"
                             value={typeRequest}
                             onChange={onCategoryChange}
                         >
@@ -148,8 +137,7 @@ const PostEditRequest = () => {
                                 </option>
                             ))}
                         </select>
-                        {typeRequestError &&
-                            <small className="gen-error">{typeRequestError}</small>}
+                        {typeRequestError && <small className="gen-error">{typeRequestError}</small>}
                     </label>
                     <InputFormTextarea
                         className="main-form__content"
@@ -160,22 +148,17 @@ const PostEditRequest = () => {
                         value={content || ""}
                         onChange={onInputChange}
                     />
-                    {contentError &&
-                        <small className="gen-error">{contentError}</small>}
+                    {contentError && <small className="gen-error">{contentError}</small>}
                     <Button className="main-form__button-submit"
-                            type="submit">{editMode ? "UPDATE" : "VERZENDEN"}<MdUpdate/></Button>
+                        type="submit">{editMode ? "UPDATE" : "VERZENDEN"}<MdUpdate /></Button>
                     {editMode ?
                         <Button className="main-form__button-cancel" onClick={() => navigate(`/request/${id}`)}>
-                            ANNULEREN<MdCancel/></Button> :
+                            ANNULEREN<MdCancel /></Button> :
                         <Button className="main-form__button-cancel" onClick={() => navigate(`/request-search`)}>
-                            ANNULEREN<MdCancel/></Button>}
+                            ANNULEREN<MdCancel /></Button>}
                 </div>
             </form>
-
-            {/*)}*/}
-
         </Screen>
-
     );
 };
 

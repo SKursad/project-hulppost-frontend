@@ -1,12 +1,12 @@
-import React, {createContext, useEffect, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
+import React, { createContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import api from '../api/api-calls';
 
 export const AuthContext = createContext({});
 
-function AuthContextProvider ({ children }) {
-    const [isAuth, toggleIsAuth] = useState({
+function AuthContextProvider({ children }) {
+    const [authState, setAuthState] = useState({
         isAuth: false,
         user: null,
         status: 'pending',
@@ -14,14 +14,13 @@ function AuthContextProvider ({ children }) {
     const navigate = useNavigate();
 
     useEffect(() => {
-
         const token = localStorage.getItem('token');
 
         if (token) {
             const decoded = jwt_decode(token);
             fetchUserData(decoded.sub, token);
         } else {
-            toggleIsAuth({
+            setAuthState({
                 isAuth: false,
                 user: null,
                 status: 'done',
@@ -29,23 +28,22 @@ function AuthContextProvider ({ children }) {
         }
     }, []);
 
-
     function login(JWT) {
         localStorage.setItem('token', JWT);
         const decoded = jwt_decode(JWT);
 
-        fetchUserData(decoded.sub, JWT, `/`);
+        fetchUserData(decoded.sub, JWT, '/');
     }
 
     function logout() {
         localStorage.clear();
-        toggleIsAuth({
+        setAuthState({
             isAuth: false,
             user: null,
             status: 'done',
         });
 
-        console.log('Gebruiker is uitgelogd!');
+        console.log('User logged out!');
         navigate('/');
     }
 
@@ -53,28 +51,25 @@ function AuthContextProvider ({ children }) {
         try {
             const result = await api.get(`/api/v1/auth/${userId}`, {
                 headers: {
-                    "Content-Type": "application/json",
+                    'Content-Type': 'application/json',
                     Authorization: `Bearer ${token}`,
                 },
-
             });
-            // console.log(result.data)
 
-            toggleIsAuth({
-                ...isAuth,
+            setAuthState({
+                ...authState,
                 isAuth: true,
                 user: {
                     id: result.data?.id,
                     username: result.data?.username,
                     email: result.data?.email,
-                    roles: result.data?.roles?.[0]?.name
+                    roles: result.data?.roles?.[0]?.name,
                 },
                 status: 'done',
             });
-
         } catch (e) {
             console.error(e);
-            toggleIsAuth({
+            setAuthState({
                 isAuth: false,
                 user: null,
                 status: 'done',
@@ -83,15 +78,15 @@ function AuthContextProvider ({ children }) {
     }
 
     const contextData = {
-        isAuth: isAuth.isAuth,
-        user: isAuth.user,
+        isAuth: authState.isAuth,
+        user: authState.user,
         login: login,
         logout: logout,
     };
 
     return (
         <AuthContext.Provider value={contextData}>
-            {isAuth.status === 'done' ? children : <p>Loading...</p>}
+            {authState.status === 'done' ? children : <p>Loading...</p>}
         </AuthContext.Provider>
     );
 }

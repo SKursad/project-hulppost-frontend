@@ -10,52 +10,51 @@ import '../../../components/Input/InputForm.css';
 import './EditData.css';
 import DispatchContext from '../../../context/DispatchContext';
 
+// ... (existing imports)
+
 let initialState = {
-    email: '',
+    email: '', 
     oldPassword: '',
     newPassword: ''
 };
 
 const ChangePassword = () => {
-    const {id} = useParams();
+    const { id } = useParams();
     const context = useContext(AuthContext);
     const appDispatch = useContext(DispatchContext);
     const [formValue, setFormValue] = useState(initialState);
-    const {email, oldPassword, newPassword} = formValue;
+    const { email, oldPassword, newPassword } = formValue;
     const [errors, setErrors] = useState({});
     const navigate = useNavigate();
-
 
     async function handleSubmit(e) {
         e.preventDefault();
         setErrors('');
 
         try {
-            const changePassword = {...formValue};
-            const response = await api.post(`/api/v1/auth/changePassword`,
-                changePassword,);
-            console.log(response.data);
+            const changePassword = { ...formValue };
+            const response = await api.post(`/api/v1/auth/changePassword`, changePassword);
+
             if (response.status === 200) {
                 setFormValue({
                     email: '',
                     oldPassword: '',
                     newPassword: ''
                 });
-                if (context.user.roles === "ROLE_VOLUNTEER") {
-                    navigate(`/profile-volunteer/${id}`);
-                }
-                if (context.user.roles === "ROLE_HELP-SEEKER") {
-                    navigate(`/profile/${id}`);
-                }
+
+                const profilePath = context.user.roles === "ROLE_VOLUNTEER" ? `/profile-volunteer/${id}` : `/profile/${id}`;
+                navigate(profilePath);
+
+                appDispatch({ type: "flashMessage", value: "Je wachtwoord is succesvol geüpdatet" });
             }
-            appDispatch({type: "flashMessage", value: "Je wachtwoord is succesvol geüpdatet"});
         } catch (e) {
-            if (e.response.status === 400) {
+            if (e.response && e.response.status === 400) {
                 setErrors(e.response.data);
-            }
-            if (e.response.status === 401) {
-                appDispatch({type: "flashMessage", value: "Het ingevoerde oude wachtwoord komt niet overeen"});
-                console.log(e.response.data);
+            } else if (e.response && e.response.status === 401) {
+                appDispatch({ type: "flashMessage", value: "Het ingevoerde oude wachtwoord komt niet overeen" });
+            } else {
+                console.error("Unexpected error:", e);
+                appDispatch({ type: "flashMessage", value: "Er is een onverwachte fout opgetreden" });
             }
         }
     }
@@ -66,13 +65,11 @@ const ChangePassword = () => {
         newPassword: newPasswordError
     } = errors;
 
-
     const onChange = (e) => {
-        let {name, value} = e.target;
-        setErrors((previousErrors) => ({...previousErrors, [name]: undefined}));
-        setFormValue({...formValue, [name]: value});
+        let { name, value } = e.target;
+        setErrors((previousErrors) => ({ ...previousErrors, [name]: undefined }));
+        setFormValue({ ...formValue, [name]: value });
     };
-
 
     return (
         <Screen title="Account aanpassen" wide={true}>
@@ -129,11 +126,10 @@ const ChangePassword = () => {
                             Updaten
                         </Button>
                         {context.user.roles === "ROLE_HELP-SEEKER" ? (
-                            <Button id="edit-data__buttons-1" type="button"
-                                    onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel/></Button>
-                        ) : (<Button id="edit-data__buttons-2" type="button"
-                                     onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;
-                            <MdCancel/></Button>)}
+                            <Button id="edit-data__buttons-1" type="button" onClick={() => navigate(`/profile/${id}`)}>ANNULEREN&nbsp;<MdCancel /></Button>
+                        ) : (
+                            <Button id="edit-data__buttons-2" type="button" onClick={() => navigate(`/profile-volunteer/${id}`)}>ANNULEREN&nbsp;<MdCancel /></Button>
+                        )}
                     </div>
                 </div>
             </form>

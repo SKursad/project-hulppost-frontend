@@ -138,15 +138,13 @@ const RegistrationForm = ({source, apiUrl}) => {
                 <label htmlFor="gender-field">
                     <p id="option-box">Ik ben:</p>
                     <select
-
-                        id="gender-field"
-                        name="gender"
-                        // value={gender}
-                        onChange={onChange}
+                    id="gender-field"
+                    name="gender"
+                    onChange={onChange}
                     >
-                        <option value=""/>
-                        <option value="M"> Man</option>
-                        <option value="V"> Vrouw</option>
+                    <option value="">Selecteer</option>
+                    <option value="M">Man</option>
+                    <option value="V">Vrouw</option>
                     </select>
                     {genError &&
                         <small className="gen-error">{genError}</small>}
@@ -167,7 +165,7 @@ const RegistrationForm = ({source, apiUrl}) => {
                     placeholder="kies een wachtwoord"
                     label="Password-field"
                     alt="input-password"
-                    autoComplete="false"
+                    autoComplete="off" 
                     type="password"
                     id="password-field"
                     name="password"
